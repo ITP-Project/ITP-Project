@@ -15,10 +15,11 @@
   <title>Volunteer Scheduling Application</title>
 </head>
 <body>
+  <div class="container">
+    <img src="img/MatchIt_Logo.jpeg" alt="Match It" style="padding-left:15%;"/>
+  </div>
  <div class="container">
   <div class="row">
-    <img src="img/MatchIt_Logo.jpeg" alt="Match It"/>
-
     <h3>Volunteer Scheduling Application</h3>
     <ul class="nav nav-pills">
       <li class="active"><a data-toggle="pill" href="#home">Home</a></li>
