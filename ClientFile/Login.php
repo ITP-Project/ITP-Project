@@ -17,7 +17,9 @@
 </head>
 <body>
 	<div class="container">
-		<img src="img/MatchIt_Logo.jpeg" alt="Match It" style="padding-left:35%; height:119px;"/>
+		<div class="imageClassLogin">
+			<img src="img/MatchIt_Logo.jpeg" alt="Match It"/>
+		</div>
 	</div>
 	<!-- Login -->
 	<div class="container">

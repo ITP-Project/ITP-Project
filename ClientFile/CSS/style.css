@@ -38,6 +38,32 @@
     margin: 0;
   }
 
+  .imageClassLogin {
+    text-align: center;
+  }
+
+  .imageClassLogin img {
+    max-width: 100%;
+    height: auto;
+    width: auto;
+  }
+
+  .imageClassHome {
+    text-align: center;
+  }
+
+  .imageClassHome img {
+    max-width: 100%;
+    height: auto;
+    width: auto;
+  }
+
+  .tabDiv {
+    max-width: 100%;
+    height: auto;
+    width: auto;
+  }
+
   .login-box {
     background-color: white !important;
     max-width: 340px !important;
@@ -121,14 +147,6 @@
   .login-box {
     -webkit-animation-duration: 1s;
     -webkit-animation-delay: 1s;
-  }
-
-  .modal-dialog {
-    width: 25% !important;
-  }
-
-  .modal-header {
-    height: 10% !important;
   }
 
   #sendBtn {

@@ -16,10 +16,12 @@
 </head>
 <body>
   <div class="container">
-    <img src="img/MatchIt_Logo.jpeg" alt="Match It" style="padding-left:15%;"/>
+    <div class="imageClassHome">
+      <img src="img/MatchIt_Logo.jpeg" alt="Match It"/>
+    </div>
   </div>
  <div class="container">
-  <div class="row">
+  <div class="tabDiv">
     <h3>Volunteer Scheduling Application</h3>
     <ul class="nav nav-pills">
       <li class="active"><a data-toggle="pill" href="#home">Home</a></li>
