@@ -122,7 +122,7 @@
 				<div class="modal-body">
 					<p>You have successfully register an account</p>
 					<br>
-					<button type="button" class="btn btn-primary" id="signUpBtn" data-dismiss="modal" onclick="Home.php">Close</button>
+					<button type="button" class="btn btn-primary" id="signUpBtn" data-dismiss="modal" onclick="signedIn();">Close</button>
 				</div>
 			</div>
 		</div>
