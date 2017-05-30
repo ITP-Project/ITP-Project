@@ -22,6 +22,55 @@
 		</div>
 	</div>
 	<!-- Login -->
+
+<?php
+session_start();
+
+if (isset($_POST['volunemail'])){
+        // removes backslashes
+
+	$volunemail=$_POST['volunemail'];
+    $volunpassword=$_POST['volunpassword'];
+	
+	$servername = "localhost";
+	$username = "root";  //your user name for php my admin if in local most probaly it will be "root"
+	$password = "";  //password probably it will be empty
+	$databasename = "matchit"; //Your db nane
+	// Create connection
+	$conn = new mysqli($servername, $username, $password,$databasename);
+	// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+	$volunemail = mysqli_real_escape_string($conn,$volunemail);
+    $volunpassword = mysqli_real_escape_string($conn,$volunpassword);
+
+ 
+
+
+    $query = "SELECT * FROM acc_volunteer WHERE email='$volunemail'
+AND password='$volunpassword'";
+
+	$result = mysqli_query($conn,$query) or die(mysql_error());
+	$rows = mysqli_num_rows($result);
+        if($rows == true){
+	    //$_SESSION['volunemail'] = $volunemail;
+	setcookie("volunemail", $volunemail, time()+7200);
+    $_SESSION['volunemail'] = $volunemail;
+    $_SESSION['start'] = time();
+    $_SESSION['expire'] = $_SESSION['start'] + (60 * 60 * 60);
+    header("Location: Home.php");
+    exit();
+            // Redirect user to index.php
+         }else{
+	echo "<div class='form'>
+<h3>Username/password is incorrect.</h3>
+<br/>Click here to <a href='Login.php'>Login</a></div>";
+	}
+   }
+?>
+<form action ="" method="post" name="login">
 	<div class="container">
 		<!--<img src="img/MatchIt_Logo.jpeg" alt="Match It">-->
 		<div class="login-box animated fadeInUp">
@@ -30,18 +79,19 @@
 			</div>
 			<label for="username">Username</label>
 			<br/>
-			<input type="text" id="username">
+			<input type="text" id="username" name="volunemail" placeholder="Username" required/>
 			<br/>
 			<label for="password">Password</label>
 			<br/>
-			<input type="password" id="password">
+			<input type="password" id="password" name="volunpassword" placeholder="Password" required/>
 			<br/>
-			<button type="submit" id="signIn" onclick="signedIn();">Sign In</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<button type="submit" id="signIn" name="submit">Sign In</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			<button type="button" data-toggle="modal" data-target="#myModalReg">Sign Up</button>
 			<br/>
 			<a href="#" data-toggle="modal" data-target="#myModal"><p class="small">Forgot your password?</p></a>
 		</div>
 	</div>
+	</form>
 
 	<!-- Modal for password-->
 	<div id="myModal" class="modal fade" role="dialog">
