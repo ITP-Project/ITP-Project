@@ -188,7 +188,6 @@ $name = $email = $gender = $age = $nric = "";
 					<button type="submit" name="submit" class="btn btn-primary" id="signUpBtn" data-dismiss="modal" data-toggle="modal" data-target="#myModalSuccess">Sign Up</button>
 					</form>
 				</div>
-=======
 <!-- Modal for registeration -->
 <div id="myModalReg" class="modal fade" role="dialog">
 	<div class="modal-dialog">
