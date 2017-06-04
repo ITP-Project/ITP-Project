@@ -1,4 +1,13 @@
 
+<?php
+include_once 'dconfig.php';
+
+//define variables and set to empty values
+$nameErr = $emailErr = $genderErr = $ageErr = $nricErr = ""; 
+$name = $email = $gender = $age = $nric = ""; 
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -68,6 +77,27 @@
 		</div>
 	</div>
 
+	<!--PHP to insert into acc_volunteer table -->
+	<?php 
+			$name = trim($_POST['name']);
+
+			$sql_insert = "INSERT INTO acc_volunteer (CIP,email,name) VALUES ('10','rew','$name')"; 
+
+			if($conn->query($sql_insert) == TRUE)
+			{
+				echo "New record created successfully";
+			}
+			else
+			{
+				echo "Error";
+				echo "<br>";
+				echo "name" + $name; 
+			}
+
+		$conn -> close(); 
+
+	?>
+
 	<!-- Modal for registeration -->
 	<div id="myModalReg" class="modal fade" role="dialog">
 		<div class="modal-dialog">
@@ -78,10 +108,11 @@
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 				</div>
 				<div class="modal-body">
+				<form method="post" action = "Login.php">
 					<table>
 						<tr>
 							<td>Name</td>
-							<td>&nbsp;<input type="text" id="name"></td>
+							<td>&nbsp;<input type="text" id="name" name="name" value = "<?php echo $name; ?> " </td>
 						</tr>
 						<tr>
 							<td>Gender</td>
@@ -92,18 +123,19 @@
 						</tr>
 						<tr>
 							<td>Age</td>
-							<td>&nbsp;<input type="text" id="age"></td>
+							<td>&nbsp;<input type="text" id="age" value=" <?php echo $age ?> "></td>
 						</tr>
 						<tr>
 							<td>NRIC</td>
-							<td>&nbsp;<input type="text" id="nric"></td>
+							<td>&nbsp;<input type="text" id="nric" value= "<?php echo $nric ?> "></td>
 						</tr>
 						<tr>
 							<td>Email</td>
-							<td>&nbsp;<input type="text" id="email"></td>
+							<td>&nbsp;<input type="text" id="email" value=" <?php echo $email ?> "></td>
 						</tr>
 					</table><br>
-					<button type="button" class="btn btn-primary" id="signUpBtn" data-dismiss="modal" data-toggle="modal" data-target="#myModalSuccess">Sign Up</button>
+					<button type="submit" name="submit" class="btn btn-primary" id="signUpBtn" data-dismiss="modal" data-toggle="modal" data-target="#myModalSuccess">Sign Up</button>
+					</form>
 				</div>
 			</div>
 		</div>
