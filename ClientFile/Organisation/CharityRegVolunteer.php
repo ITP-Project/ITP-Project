@@ -8,27 +8,45 @@
 
     <!-- Setting -->
     <div class="w3-container" id="contact" style="margin-top:75px">
-      <h1 class="w3-xxxlarge w3-text-red"><b>Registered Volunteers</b></h1>
+      <h1 class="w3-xxxlarge w3-text-red"><b>Volunteers</b></h1>
       <hr style="width:50px;border:5px solid red" class="w3-round">
-      <p>All registered volunteers are here!</p>
-      <form action="Home2.php" target="_blank">
-        <div class="w3-section">
-          <label>Current Password</label>
-          <input class="w3-input w3-border" type="text" name="cPassword" required>
-        </div>
-        <div class="w3-section">
-          <label>New Password</label>
-          <input class="w3-input w3-border" type="password" name="nPassword" required>
-        </div>
-        <button type="submit" class="w3-button w3-block w3-padding-large w3-red w3-margin-bottom">Save</button>
-      </form>  
-    </div>
+      <form action="" class="navbar-form navbar-left">
+       <div class="input-group">
+         <input type="Search" placeholder="Search by name" class="form-control" />
+         <div class="input-group-btn">
+          <button class="btn btn-danger">
+           <span class="glyphicon glyphicon-search"></span>
+         </button>
+       </div>
+     </div>
+   </form>
+   <div class="w3-section">
+    <table class="table table-hover table-responsive tab-pane fade in active" id="grp1">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Race</th>
+          <th>Nationality</th>
+          <th>Date of Birth</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>John Doe</td>
+          <td>Chinese</td>
+          <td>Singaporean</td>
+          <td>18/02/1989</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>  
+</div>
 
-    <!-- End page content -->
-  </div>
+<!-- End page content -->
+</div>
 
-  <!-- W3.CSS Container -->
-  <div class="w3-light-grey w3-container w3-padding-32" style="margin-top:75px;padding-right:58px"></div>
+<!-- W3.CSS Container -->
+<div class="w3-light-grey w3-container w3-padding-32" style="margin-top:75px;padding-right:58px"></div>
 
 </body>
 </html>

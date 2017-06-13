@@ -1,8 +1,12 @@
 <!DOCTYPE html>
 <html>
-<?php include '../header.php' ?>
+<?php 
+include '../header.php';
+include 'navbar.php';
+include '../dconfig.php'; 
+?>
+
 <body>
-  <?php include 'navbar.php' ?>
   <!-- !PAGE CONTENT! -->
   <div class="w3-main" style="margin-left:340px;margin-right:40px">
 
@@ -15,6 +19,19 @@
     <!-- Photo grid (modal) -->
     <div class="w3-row-padding">
       <div class="w3-half">
+	  
+		<?php
+			$id=$_GET['id'];
+			$sql = "select * from event where eventID=$id";//prepare for SQL query statement
+			$result = mysql_query($sql);
+			//execute the SQL query to read out the data set from database table
+			$num=mysql_numrows($result);//get the number of rows of the database table							
+			$row = mysql_fetch_array($result);
+			
+			echo "<div class='container'";
+			echo "";
+			echo "</div>";
+		?>
         <img src="../img/charityEvent_1.jpeg" style="width:100%" onclick="onClick(this)" alt="Charity Event 1">
         <img src="../img/charityEvent_3.jpeg" style="width:100%" onclick="onClick(this)" alt="Charity Event 3">
       </div>

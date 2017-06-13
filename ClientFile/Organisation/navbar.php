@@ -8,9 +8,8 @@
 		</div>
 		<div class="w3-bar-block">
 			<a href="CharityHome.php" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Home</a> 
-			<a href="CharityRegVolunteer.php" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Registered Volunteers</a> 
-			<a href="#bookVolunteer" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Book Volunteers</a> 
-			<a href="#" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Create Event</a> 
+			<a href="CharityRegVolunteer.php" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Volunteers</a> 
+			<a href="CharityEvent.php" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Events Management</a> 
 			<a href="CharitySetting.php" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Setting</a><br>
 			<a href="../Login.php" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Log Out</a>
 		</div>

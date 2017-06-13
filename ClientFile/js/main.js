@@ -43,19 +43,17 @@ $(function () {
 
 // For Dropdown
 function dropdown(val) {
-  var y = document.getElementsByClassName('btn btn-danger dropdown-toggle');
+	var y = document.getElementsByClassName('btn btn-danger dropdown-toggle');
   //var aNode = y[0].innerHTML = val + ' <span class="caret"></span>'; // Append 
 }
 
+// CharityCreate
+function create() {
+	location.href="CharityEventCreate.php";
+}
 
-/* Currently no need */
-/*$(document).ready(function() {
-  $('body').addClass('js');
-  var $menu = $('#menu'),
-    $menulink = $('.menu-link');
-  
-$menulink.click(function() {
-  $menulink.toggleClass('active');
-  $menu.toggleClass('active');
-  return false;
-});});*/
+// Confirmation popup
+function created() {
+	alert('Event created successfully!');
+	window.location.href="CharityEvent.php";
+}
