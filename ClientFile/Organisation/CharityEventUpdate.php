@@ -70,7 +70,7 @@
 			  <div class="form-group">
 				<label for="eventSession">Event Session/s</label>
 			  </div>
-			  <button class="add_field_button btn btn-info">Add More Fields</button>
+			  <button class="add_field_button btn btn-danger">Add More Fields</button>
 			  <div class="form-group input_fields_wrap">
 				  <div>
 					  <div class="row">
