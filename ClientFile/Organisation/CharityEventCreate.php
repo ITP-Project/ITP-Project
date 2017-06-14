@@ -22,20 +22,11 @@ include 'CharityEventCreate_process.php';
 		  
 		  <div class="w3-section">
 			<form action="<?php echo htmlentities($_SERVER["PHP_SELF"]); ?>" method="POST" enctype="multipart/form-data">
-			  <!--<div class="form-group">
-				<label for="eventHost">Event Host</label>
-				<div class="row">
-					<div class='col-md-6'>
-						<input type="text" class="form-control" name="eventHost">
-					</div>
-				</div>
-			  </div>-->
 			  <div class="form-group">
 				<label for="eventName">Event Name</label>
 				<div class="row">
 					<div class='col-md-6'>
 						<input type="text" class="form-control" name="eventName" >
-						<span class="error"><?php echo $eventNameErr;?></span>
 					</div>
 				</div>
 			  </div>
@@ -44,7 +35,6 @@ include 'CharityEventCreate_process.php';
 				<div class="row">
 					<div class="col-md-6">
 						<input type="text" class="form-control" name="eventLocation" >
-						<span class="error"><?php echo $eventLocationErr;?></span>
 					</div>
 				</div>
 			  </div>
@@ -59,7 +49,6 @@ include 'CharityEventCreate_process.php';
 								</span>
 							</span>
 						</div>
-						<span class="error"><?php echo $eventNameErr;?></span>
 					</div>
 				</div>
 			  </div>
@@ -92,7 +81,6 @@ include 'CharityEventCreate_process.php';
 				<div class="row">
 					<div class="col-md-6">
 						<input type="text" class="form-control" name="max_participants" >
-						<span class="error"><?php echo $max_participantErr;?></span>
 					</div>
 				</div>
 			  </div>
@@ -112,7 +100,6 @@ include 'CharityEventCreate_process.php';
 				<div class="row">
 					<div class="col-md-6">
 						<textarea class="form-control" rows="5" name="eventDesc"></textarea>
-						<span class="error"><?php echo $eventDescErr;?></span>
 					</div>
 				</div>
 			  </div>
