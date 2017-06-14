@@ -7,7 +7,6 @@
 	include '../dconfig.php';
 	include 'CharityEventUpdate_process.php';
 	?>
-	<script type="text/javascript" src="org.js"></script>
 </head>
 <body>
 	<!-- !PAGE CONTENT! -->
@@ -19,30 +18,30 @@
 			<hr style="width:50px;border:5px solid red" class="w3-round">
 			
 			<?php
+				//for event
 				$id=$_GET['id'];
 				$sql = "select * from created_event where EID=$id";//prepare for SQL query statement
 				$result = mysql_query($sql);
 				//execute the SQL query to read out the data set from database table
-				$num=mysql_numrows($result);//get the number of rows of the database table							
+				$num = mysql_numrows($result);//get the number of rows of the database table							
 				$row = mysql_fetch_array($result);
+				
+				//for session
+				$sqli = "SELECT * FROM event_shift WHERE EID=$id";
+				$resulti = mysql_query($sqli);
+				//execute the SQL query to read out the data set from database table
+				$numi = mysql_numrows($resulti);//get the number of rows of the database table							
+				$rowi = mysql_fetch_array($resulti);
 			?>
 			
 			<div class="w3-section">
 				<form action="<?php echo htmlentities($_SERVER["PHP_SELF"]); ?>" method="POST" enctype="multipart/form-data">
 			  <div class="form-group">
-				<label for="eventHost">Event Host</label>
-				<div class="row">
-					<div class='col-md-6'>
-						<input type="hidden" name="eID" value="<?php echo $id?>">
-						<input type="text" class="form-control" name="eventHost" value="<?php echo $row['eventHost'] ?>">
-					</div>
-			  </div>
-			  </div>
-			  <div class="form-group">
 				<label for="eventName">Event Name</label>
 				<div class="row">
 					<div class='col-md-6'>
-						<input type="text" class="form-control" name="eventName" value="<?php echo $row['eventName'] ?>">
+						<input type="hidden" name="EID" value="<?php echo $id?>">
+						<input type="text" class="form-control" name="eventName" value="<?php echo $row['event_name'] ?>">
 					</div>
 				</div>
 			  </div>
@@ -50,45 +49,53 @@
 				<label for="eventLocation">Event Location</label>
 				<div class="row">
 					<div class="col-md-6">
-						<input type="text" class="form-control" name="eventLocation" value="<?php echo $row['eventLocation'] ?>">
+						<input type="text" class="form-control" name="eventLocation" value="<?php echo $row['event_location'] ?>">
+					</div>
+				</div>
+			  </div>
+			  <div class="form-group">
+				<label for="eventDate">Event Date</label>
+				<div class="row">
+					<div class="col-md-6">
+						<div class='input-group date' id='datetimepicker1'>
+							<input type='text' class="form-control" name="eventDate" value="<?php echo $row['event_date'] ?>"/>
+							<span class="input-group-addon">
+								<span class="glyphicon glyphicon-calendar">
+								</span>
+							</span>
+						</div>
 					</div>
 				</div>
 			  </div>
 			  <div class="form-group">
 				<label for="eventSession">Event Session/s</label>
 			  </div>
-			  <div class="form-group">
-				<label for="sessionOne">Session 1</label>
-				<div class="row">
-					<div class='col-sm-6'>
-						<input type='text' class="form-control" id='datetimepicker4' name="sessionOne" value="<?php echo $row['eventSession1'] ?>"/>
-					</div>
-				</div>
-			  </div>
-			  <div class="form-group">
-				<label for="sessionTwo">Session 2</label>
-				<div class="row">
-					<div class="col-md-6">
-						<input type="text" class="form-control" name="sessionTwo" value="<?php echo $row['eventSession2'] ?>">
-					</div>
-				</div>
+			  <button class="add_field_button btn btn-info">Add More Fields</button>
+			  <div class="form-group input_fields_wrap">
+				  <div>
+					  <div class="row">
+						<div class="col-sm-3">
+							<label for="sessionOne">Session Start Date</label>
+						</div>
+						<div class="col-sm-3">
+							<label for="sessionOne">Session End Date</label>
+						</div>
+					  </div>
+					  <div class="row">
+						<div class='col-sm-3'>
+							<input type='text' class="form-control" name="sessionOneStart" placeholder="Eg. 1300 pm"/>
+						</div>
+						<div class='col-sm-3'>
+							<input type='text' class="form-control" name="sessionOneEnd" placeholder="Eg. 1400 pm"/>
+						</div>
+					  </div>
+				  </div>
 			  </div>
 			  <div class="form-group">
 				<label for="volunteerNum">Volunteer Number</label>
 				<div class="row">
 					<div class="col-md-6">
-						<input type="text" class="form-control" name="volunteerNum" value="<?php echo $row['volNum'] ?>">
-					</div>
-				</div>
-			  </div>
-			  <div class="form-group">
-				<label for="eventPic">Event Image</label>
-				<div class="row">
-					<div class="col-md-6">
-						<div id="filediv">
-							<input name="files_P" type="file" id="file" onchange="setfilename(this.value);"/>
-							<input type="hidden" name="filename" id="filename" />
-						</div>
+						<input type="text" class="form-control" name="max_participants" value="<?php echo $row['max_participants'] ?>">
 					</div>
 				</div>
 			  </div>
@@ -96,7 +103,7 @@
 				<label for="eventDesc">Event Description</label>
 				<div class="row">
 					<div class="col-md-6">
-						<textarea class="form-control" rows="5" name="eventDesc"><?php echo $row['eventDesc'] ?></textarea>
+						<textarea class="form-control" rows="5" name="eventDesc"><?php echo $row['event_desc'] ?></textarea>
 					</div>
 				</div>
 			  </div>

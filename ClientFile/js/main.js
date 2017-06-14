@@ -26,34 +26,3 @@ function onClick(element) {
 	var captionText = document.getElementById("caption");
 	captionText.innerHTML = element.alt;
 }
-
-// For date
-$(function () {
-	$('#datetimepicker6').datetimepicker();
-	$('#datetimepicker7').datetimepicker({
-            useCurrent: false //Important! See issue #1075
-        });
-	$("#datetimepicker6").on("dp.change", function (e) {
-		$('#datetimepicker7').data("DateTimePicker").minDate(e.date);
-	});
-	$("#datetimepicker7").on("dp.change", function (e) {
-		$('#datetimepicker6').data("DateTimePicker").maxDate(e.date);
-	});
-});
-
-// For Dropdown
-function dropdown(val) {
-	var y = document.getElementsByClassName('btn btn-danger dropdown-toggle');
-  //var aNode = y[0].innerHTML = val + ' <span class="caret"></span>'; // Append 
-}
-
-// CharityCreate
-function create() {
-	location.href="CharityEventCreate.php";
-}
-
-// Confirmation popup
-function created() {
-	alert('Event created successfully!');
-	window.location.href="CharityEvent.php";
-}

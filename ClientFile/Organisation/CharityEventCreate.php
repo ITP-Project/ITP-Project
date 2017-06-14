@@ -7,19 +7,6 @@ include '../dconfig.php';
 include 'navbar.php';
 include 'CharityEventCreate_process.php';
 ?>
-<script type="text/javascript" src="org.js"></script>
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<link rel="stylesheet" href="/resources/demos/style.css">
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script>
-$( function() {
-  $( "#datepicker" ).datepicker({
-	  dateFormat: "yy-dd-mm"
-  });
-} );
-
-</script>
 </head>
 <body>
   <!-- !PAGE CONTENT! -->
@@ -32,19 +19,19 @@ $( function() {
 		  
 		  <div class="w3-section">
 			<form action="<?php echo htmlentities($_SERVER["PHP_SELF"]); ?>" method="POST" enctype="multipart/form-data">
-			  <div class="form-group">
+			  <!--<div class="form-group">
 				<label for="eventHost">Event Host</label>
 				<div class="row">
 					<div class='col-md-6'>
 						<input type="text" class="form-control" name="eventHost">
 					</div>
 				</div>
-			  </div>
+			  </div>-->
 			  <div class="form-group">
 				<label for="eventName">Event Name</label>
 				<div class="row">
 					<div class='col-md-6'>
-						<input type="text" class="form-control" name="eventName">
+						<input type="text" class="form-control" name="eventName" >
 					</div>
 				</div>
 			  </div>
@@ -60,28 +47,39 @@ $( function() {
 				<label for="eventDate">Event Date</label>
 				<div class="row">
 					<div class="col-md-6">
-						<input type="text" class="form-control" name="eventDate" id="datepicker">
+						<div class='input-group date' id='datetimepicker1'>
+							<input type='text' class="form-control" name="eventDate"/>
+							<span class="input-group-addon">
+								<span class="glyphicon glyphicon-calendar">
+								</span>
+							</span>
+						</div>
 					</div>
 				</div>
 			  </div>
 			  <div class="form-group">
 				<label for="eventSession">Event Session/s</label>
 			  </div>
-			  <div class="form-group">
-				<label for="sessionOne">Session 1</label>
-				<div class="row">
-					<div class='col-sm-6'>
-						<input type="text" class="form-control" name="sessionOne" placeholder="E.g. 1-12 pm">
-					</div>
-				</div>
-			  </div>
-			  <div class="form-group">
-				<label for="sessionTwo">Session 2</label>
-				<div class="row">
-					<div class="col-md-6">
-						<input type="text" class="form-control" name="sessionTwo" placeholder="E.g. 1-12 pm">
-					</div>
-				</div>
+			  <button class="add_field_button btn btn-info">Add More Fields</button>
+			  <div class="form-group input_fields_wrap">
+				  <div>
+					  <div class="row">
+						<div class="col-sm-3">
+							<label for="sessionOne">Session Start Date</label>
+						</div>
+						<div class="col-sm-3">
+							<label for="sessionOne">Session End Date</label>
+						</div>
+					  </div>
+					  <div class="row">
+						<div class='col-sm-3'>
+							<input type='text' class="form-control" name="sessionOneStart" placeholder="Eg. 1300 pm"/>
+						</div>
+						<div class='col-sm-3'>
+							<input type='text' class="form-control" name="sessionOneEnd" placeholder="Eg. 1400 pm"/>
+						</div>
+					  </div>
+				  </div>
 			  </div>
 			  <div class="form-group">
 				<label for="volunteerNum">Max Volunteer Number</label>

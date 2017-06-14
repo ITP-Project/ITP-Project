@@ -28,7 +28,7 @@ include '../dconfig.php';
 			$num=mysql_numrows($result);//get the number of rows of the database table							
 			$row = mysql_fetch_array($result);
 			
-			echo "<div class='container'";
+			echo "<div class='container'>";
 			echo "";
 			echo "</div>";
 		?>

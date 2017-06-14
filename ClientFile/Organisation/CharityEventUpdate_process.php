@@ -2,19 +2,17 @@
 	$eventNameErr = null;
 	$eventLocationErr = null;
 	$eventDescErr = null;
-	$sessionOneErr = null;
-	$sessionTwoErr = null;
-	$volunteerNumErr = null;
+	$eventDateErr = null;
+	$max_participantErr = null;
 	
 	if (isset($_POST['update']) && !empty($_POST['update'])) {
 		$errMsg="";
-		$eventID = trim($_POST['eID']);
+		$eventID = trim($_POST['EID']);
 		$eventName = trim($_POST['eventName']);
 		$eventLocation = trim($_POST['eventLocation']);
 		$eventDesc = trim($_POST['eventDesc']);
-		$sessionOne = trim($_POST['sessionOne']);
-		$sessionTwo = trim($_POST['sessionTwo']);
-		$volunteerNum = trim($_POST['volunteerNum']);
+		$eventDate = trim($_POST['eventDate']);
+		$max_participants = trim($_POST['max_participants']);
 
 		if (empty($eventName)) {
 			$eventNameErr = 'Event name required';
@@ -32,12 +30,13 @@
 			$errMsg="Please fill in the blanks!";
 			$error=true;
 		}
-		if (empty($sessionOne)) {
-			$sessionOneErr = 'Choose your session dates';
+		if (empty($eventDate)) {
+			$eventDateErr = 'Enter your date';
+			$errMsg="Please fill in the blanks!";
 			$error=true;
 		}
-		if (empty($volunteerNum)) {
-			$volunteerNumErr = 'Enter number of volunteers';
+		if (empty($max_participants)) {
+			$max_participantErr = 'Enter max number of participants';
 			$errMsg="Please fill in the blanks!";
 			$error=true;
 		}
@@ -45,11 +44,10 @@
 			$eventName = trim($_POST['eventName']);
 			$eventLocation = trim($_POST['eventLocation']);
 			$eventDesc = trim($_POST['eventDesc']);
-			$sessionOne = trim($_POST['sessionOne']);
-			$sessionTwo = trim($_POST['sessionTwo']);
-			$volunteerNum = trim($_POST['volunteerNum']);
-			$sqli="UPDATE event set eventName='$eventName', eventLocation='$eventLocation', eventSession1='$sessionOne', eventSession2='$sessionTwo'
-				, volNum=$volunteerNum, eventDesc='$eventDesc' WHERE eventID='$eventID'";
+			$eventDate = trim($_POST['eventDate']);
+			$max_participants = trim($_POST['max_participants']);
+			$sqli="UPDATE created_event set event_name='$eventName', event_location='$eventLocation'
+				, max_participants=$max_participants, event_desc='$eventDesc', event_date='$eventDate' WHERE EID='$eventID'";
 			if (mysql_query($sqli)) {
 				echo '<script>';
 				echo 'alert("Event successfully updated!");';
@@ -59,7 +57,6 @@
 				echo "Error: " . $sqli . "<br>" . mysql_error($con);
 			}
 			
-			include 'upload.php';
 		}
 	}
 ?>
