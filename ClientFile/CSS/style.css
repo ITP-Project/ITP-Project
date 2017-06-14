@@ -308,7 +308,7 @@ body {
     to {top: 0; opacity: 1}
 } 
 
-/* Image CSS */
+.error {color: #FF0000;}
 
 
 /* New Layout */

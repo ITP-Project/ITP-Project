@@ -7,6 +7,9 @@ include '../dconfig.php';
 include 'navbar.php';
 include 'CharityEventCreate_process.php';
 ?>
+<style>
+.error {color: #FF0000;}
+</style>
 </head>
 <body>
   <!-- !PAGE CONTENT! -->
@@ -32,6 +35,7 @@ include 'CharityEventCreate_process.php';
 				<div class="row">
 					<div class='col-md-6'>
 						<input type="text" class="form-control" name="eventName" >
+						<span class="error"><?php echo $eventNameErr;?></span>
 					</div>
 				</div>
 			  </div>
@@ -40,6 +44,7 @@ include 'CharityEventCreate_process.php';
 				<div class="row">
 					<div class="col-md-6">
 						<input type="text" class="form-control" name="eventLocation" >
+						<span class="error"><?php echo $eventLocationErr;?></span>
 					</div>
 				</div>
 			  </div>
@@ -54,6 +59,7 @@ include 'CharityEventCreate_process.php';
 								</span>
 							</span>
 						</div>
+						<span class="error"><?php echo $eventNameErr;?></span>
 					</div>
 				</div>
 			  </div>
@@ -86,6 +92,7 @@ include 'CharityEventCreate_process.php';
 				<div class="row">
 					<div class="col-md-6">
 						<input type="text" class="form-control" name="max_participants" >
+						<span class="error"><?php echo $max_participantErr;?></span>
 					</div>
 				</div>
 			  </div>
@@ -105,6 +112,7 @@ include 'CharityEventCreate_process.php';
 				<div class="row">
 					<div class="col-md-6">
 						<textarea class="form-control" rows="5" name="eventDesc"></textarea>
+						<span class="error"><?php echo $eventDescErr;?></span>
 					</div>
 				</div>
 			  </div>

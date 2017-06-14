@@ -43,6 +43,7 @@
 						<input type="hidden" name="EID" value="<?php echo $id?>">
 						<input type="text" class="form-control" name="eventName" value="<?php echo $row['event_name'] ?>">
 					</div>
+					<span class="error"><?php echo $eventNameErr;?></span>
 				</div>
 			  </div>
 			  <div class="form-group">
@@ -50,6 +51,7 @@
 				<div class="row">
 					<div class="col-md-6">
 						<input type="text" class="form-control" name="eventLocation" value="<?php echo $row['event_location'] ?>">
+						<span class="error"><?php echo $eventLocationErr;?></span>
 					</div>
 				</div>
 			  </div>
@@ -65,12 +67,13 @@
 							</span>
 						</div>
 					</div>
+					<span class="error"><?php echo $eventDateErr;?></span>
 				</div>
 			  </div>
 			  <div class="form-group">
 				<label for="eventSession">Event Session/s</label>
 			  </div>
-			  <button class="add_field_button btn btn-danger">Add More Fields</button>
+			  <button class="add_field_button btn btn-danger">Add More Sessions</button>
 			  <div class="form-group input_fields_wrap">
 				  <div>
 					  <div class="row">
@@ -96,6 +99,7 @@
 				<div class="row">
 					<div class="col-md-6">
 						<input type="text" class="form-control" name="max_participants" value="<?php echo $row['max_participants'] ?>">
+						<span class="error"><?php echo $max_participantErr;?></span>
 					</div>
 				</div>
 			  </div>
@@ -104,6 +108,7 @@
 				<div class="row">
 					<div class="col-md-6">
 						<textarea class="form-control" rows="5" name="eventDesc"><?php echo $row['event_desc'] ?></textarea>
+						<span class="error"><?php echo $eventDescErr;?></span>
 					</div>
 				</div>
 			  </div>

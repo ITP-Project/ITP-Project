@@ -20,23 +20,23 @@
 			$error=true;
 		}
 		if (empty($eventLocation)) {
-			$eventLocationErr = 'Enter your location';
+			$eventLocationErr = 'Event location required';
 			$errMsg="Please fill in the blanks!";
 			$error=true;
 		}
 
 		if (empty($eventDesc)) {
-			$eventDescErr = 'Enter your event description';
+			$eventDescErr = 'Event description required';
 			$errMsg="Please fill in the blanks!";
 			$error=true;
 		}
 		if (empty($eventDate)) {
-			$eventDateErr = 'Enter your date';
+			$eventDateErr = 'Event date required';
 			$errMsg="Please fill in the blanks!";
 			$error=true;
 		}
 		if (empty($max_participants)) {
-			$max_participantErr = 'Enter max number of participants';
+			$max_participantErr = 'Max number of participants required';
 			$errMsg="Please fill in the blanks!";
 			$error=true;
 		}
