@@ -10,7 +10,6 @@
     <div class="w3-container" id="contact" style="margin-top:75px">
       <h1 class="w3-xxxlarge w3-text-red"><b>Setting</b></h1>
       <hr style="width:50px;border:5px solid red" class="w3-round">
-      <p>Change your Password here!</p>
       <form action="Home2.php" target="_blank">
         <div class="w3-section">
           <label>Current Password</label>
