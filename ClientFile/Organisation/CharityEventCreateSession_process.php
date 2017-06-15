@@ -40,7 +40,7 @@
 			$error=true;
 		}*/
 		else{
-			$sessionOneStart = trim($_POST['sessionOneStart']);
+			$sessionOneStart = trim($_POST['sessionOneStart1']);
 			$sessionOneEnd = trim($_POST['sessionOneEnd']);
 			/*$sessionTwoStart = trim($_POST['sessionTwoStart']);
 			$sessionTwoEnd = trim($_POST['sessionTwoEnd']);

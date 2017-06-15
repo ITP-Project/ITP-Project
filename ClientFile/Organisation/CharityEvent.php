@@ -24,9 +24,8 @@
 				$per_page = 5;
 				
 								// figure out the total pages in the database
-				$result = mysqli_query($conn, "SELECT * FROM created_event");
-				$total_results = mysqli_num_rows($result);
-				$row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+				$result = mysql_query("SELECT * FROM created_event");
+				$total_results = mysql_num_rows($result);
 				$total_pages = ceil($total_results / $per_page);
 
 								// check if the 'page' variable is set in the URL (ex: view-paginated.php?page=1)
@@ -68,36 +67,33 @@
 				echo "<tr><th hidden></th><th>Event Name</th><th>Event Location</th><th>Event Date</th><th>Volunteer Number</th><th></th></tr>";
 
 								// loop through results of database query, displaying them in the table	
-				
-					for ($i = $start; $i < $end; $i++)
-					{
-						while($row = mysqli_fetch_array($result, MYSQLI_ASSOC) )
+				for ($i = $start; $i < $end; $i++)
 				{
 									// make sure that PHP doesn't try to show results that don't exist
-						if ($i == $total_results) { break; }
-													// echo out the contents of each row into a table
-						echo "<tr>";
-						echo '<td hidden>' . $row['EID'] . '</td>';
-						echo '<td style="width: 300px; height:50px;">' . $row['event_name'] . '</td>';
-						echo '<td style="width: 300px;">' . $row['event_location'] . '</td>';
-						echo '<td style="width: 200px;">' . $row['event_date'] . '</td>';
-						echo '<td style="width: 200px;">' . $row['max_participants'] . '</td>';
-						echo '<td style="width: 200px;">
-						<a class="btn btn-danger" href="CharityEventUpdate.php?id=' . $row['EID'] . '">Update</a>
-						<a class="btn btn-danger" href="CharityEventDelete_process.php?id=' . $row['EID'] . '">Delete</a>
+					if ($i == $total_results) { break; }
+					
+									// echo out the contents of each row into a table
+					echo "<tr>";
+					echo '<td hidden>' . mysql_result($result, $i, 'EID') . '</td>';
+					echo '<td style="width: 300px; height:50px;">' . mysql_result($result, $i, 'event_name') . '</td>';
+					echo '<td style="width: 300px;">' . mysql_result($result, $i, 'event_location') . '</td>';
+					//echo '<td style="width: 500px;">' . mysql_result($result, $i, 'eventSession1') . '</td>';
+					//echo '<td style="width: 400px;">' . mysql_result($result, $i, 'eventSession2') . '</td>';
+					echo '<td style="width: 200px;">' . mysql_result($result, $i, 'event_date') . '</td>';
+					echo '<td style="width: 200px;">' . mysql_result($result, $i, 'max_participants') . '</td>';
+					echo '<td style="width: 200px;">
+					<a class="btn btn-danger" href="CharityEventUpdate.php?id=' . mysql_result($result, $i, 'EID') . '">Update</a>
+					<a class="btn btn-danger" href="CharityEventDelete_process.php?id=' . mysql_result($result, $i, 'EID') . '">Delete</a>
 					</td>';
 					echo "</tr>"; 
 				}
-
-			}
-			
 								// close table>
-			echo "</table>"; 
-			?>
+				echo "</table>"; 
+				?>
+			</div>
 		</div>
+	  <!-- End page content -->
 	</div>
-	<!-- End page content -->
-</div>
 
 <!-- W3.CSS Container -->
 <div class="w3-light-grey w3-container w3-padding-32" style="margin-top:75px;padding-right:58px"></div>

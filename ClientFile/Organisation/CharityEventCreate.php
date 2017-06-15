@@ -84,17 +84,6 @@ include 'CharityEventCreate_process.php';
 					</div>
 				</div>
 			  </div>
-			  <!--<div class="form-group">
-				<label for="eventPic">Event Image</label>
-				<div class="row">
-					<div class="col-md-6">
-						<div id="filediv">
-							<input name="files_P" type="file" id="file" onchange="setfilename(this.value);"/>
-							<input type="hidden" name="filename" id="filename" />
-						</div>
-					</div>
-				</div>
-			  </div>-->
 			  <div class="form-group">
 				<label for="eventDesc">Event Description</label>
 				<div class="row">
