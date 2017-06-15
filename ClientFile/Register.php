@@ -44,21 +44,6 @@ include_once 'dconfig.php';
 		return $data;
 	}
 
-//TODO: validation for same user
-
-		// $sqlDisplay = "SELECT email FROM acc_organization WHERE email = '$email' "; 
-		// $result = $conn -> query($sqlDisplay); 
-
-		// if($result->num_rows > 0)
-		// {
-		// 	echo "user exists";
-		// }
-	
-
-
-	// while ($row = $result->fetch_assoc()) {
-	// 	echo print_r($row)."<br>";
-	// }
 	
 	if(!empty($_POST))
 	{
@@ -78,7 +63,7 @@ include_once 'dconfig.php';
 
 	<div class="container">
 		<div class="imageClassLogin">
-			<img src="img/MatchIt_Logo.jpeg" alt="Match It"/>
+			<img src="images/MatchIt_Logo.jpeg" alt="Match It"/>
 		</div>
 	</div>
 	<div class="container">

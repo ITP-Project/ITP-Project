@@ -24,7 +24,7 @@ include_once 'dconfig.php';
 <body>
 	<div class="container">
 		<div class="imageClassLogin">
-			<img src="img/MatchIt_Logo.jpeg" alt="Match It"/>
+			<img src="images/MatchIt_Logo.jpeg" alt="Match It"/>
 		</div>
 	</div>
 	<!-- Login -->
@@ -86,11 +86,11 @@ include_once 'dconfig.php';
 					</div>
 				</div>
 				<div class="row">
-				<div class="col-sm-12 form-group">
-				<label for="password">Password</label>
-				<input type="password" id="password" name="adminPass" placeholder="Enter your Password" required/>
-				<div class="help-block with-errors"></div>
-				</div>
+					<div class="col-sm-12 form-group">
+						<label for="password">Password</label>
+						<input type="password" id="password" name="adminPass" placeholder="Enter your Password" required/>
+						<div class="help-block with-errors"></div>
+					</div>
 				</div>
 				<?php echo $error; ?>
 				<a href="#" data-toggle="modal" data-target="#myModal"><p class="small">Forgot your password?</p></a>
