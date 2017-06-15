@@ -1,10 +1,6 @@
 
 <?php
-//include_once 'dconfig.php';
-
-//define variables and set to empty values
-$nameErr = $emailErr = $genderErr = $ageErr = $nricErr = ""; 
-$name = $email = $gender = $age = $nric = ""; 
+include_once 'dconfig.php';
 
 ?>
 
@@ -20,6 +16,7 @@ $name = $email = $gender = $age = $nric = "";
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 	<script src="bootstrap-4.0.0-alpha.6-dist/js/bootstrap.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.5/validator.min.js"></script>
 	<script src="js/main.js"></script>
 
 	<title>Volunteer Scheduling Application</title>
@@ -33,219 +30,107 @@ $name = $email = $gender = $age = $nric = "";
 	<!-- Login -->
 
 	<?php
+	//start sessoin 
 	session_start();
 
-	if (isset($_POST['volunemail'])){
-        // removes backslashes
+	//define variables 
+	$adminUsername = $adminPass = $error = ""; 
+	if($_SERVER["REQUEST_METHOD"] == "POST")
+	{
+		$adminUsername = test_input($_POST["adminUsername"]);
+		$adminPass = test_input($_POST["adminPass"]); 
+		$admin_encryptedPass = sha1($adminPass);
 
-		$volunemail=$_POST['volunemail'];
-		$volunpassword=$_POST['volunpassword'];
+		$sql = "SELECT AID FROM acc_organization WHERE email = '$adminUsername' AND encrypted_password = '$admin_encryptedPass'"; 
 
-		$servername = "localhost";
-	$username = "root";  //your user name for php my admin if in local most probaly it will be "root"
-	$password = "";  //password probably it will be empty
-	$databasename = "matchit"; //Your db nane
-	// Create connection
-	$conn = new mysqli($servername, $username, $password,$databasename);
-	// Check connection
-	if ($conn->connect_error) {
-		die("Connection failed: " . $conn->connect_error);
+		$result = mysqli_query($conn,$sql);
+		$row = mysqli_fetch_array($result, MYSQLI_ASSOC); 
+		$active = $row['active']; 
+
+		$count = mysqli_num_rows($result); 
+
+		if($count == 1)
+		{
+			$_SESSION['USERNAME'] = $adminUsername; 
+			header("location: Organisation/CharityHome.php");
+		} 
+		else{
+			$error = "Invalid Username and Password";
+		}
+
 	}
 
-	$volunemail = mysqli_real_escape_string($conn,$volunemail);
-	$volunpassword = mysqli_real_escape_string($conn,$volunpassword);
 
-
-
-
-	$query = "SELECT * FROM acc_volunteer WHERE email='$volunemail'
-	AND password='$volunpassword'";
-
-	$result = mysqli_query($conn,$query) or die(mysql_error());
-	$rows = mysqli_num_rows($result);
-	if($rows == true){
-	    //$_SESSION['volunemail'] = $volunemail;
-		setcookie("volunemail", $volunemail, time()+7200);
-		$_SESSION['volunemail'] = $volunemail;
-		$_SESSION['start'] = time();
-		$_SESSION['expire'] = $_SESSION['start'] + (60 * 60 * 60);
-		header("Location: Volunteer/Home.php");
-		exit();
-            // Redirect user to index.php
-	}else{
-		echo "<div class='form'>
-		<h3>Username/password is incorrect.</h3>
-		<br/>Click here to <a href='Login.php'>Login</a></div>";
+//method to test the input
+	function test_input($data)
+	{
+		$data = trim($data);
+		$data = stripslashes($data);
+		$data = htmlspecialchars($data);
+		return $data;
 	}
-}
-?>
-<form action ="" method="post" name="login">
-	<div class="container">
-		<!--<img src="img/MatchIt_Logo.jpeg" alt="Match It">-->
-		<div class="login-box animated fadeInUp">
-			<div class="box-header">
-				<h2>Log In</h2>
-			</div>
-			<label for="username">Username</label>
-			<br/>
-			<input type="text" id="username" name="volunemail" placeholder="Username" required/>
-			<br/>
-			<label for="password">Password</label>
-			<br/>
-			<input type="password" id="password" name="volunpassword" placeholder="Password" required/>
-			<br/>
-			<button type="submit" id="signIn" name="submit">Sign In</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<button type="button" data-toggle="modal" data-target="#myModalReg">Sign Up</button>
-			<br/>
-			<a href="#" data-toggle="modal" data-target="#myModal"><p class="small">Forgot your password?</p></a>
-		</div>
-	</div>
-</form>
 
-<!-- Modal for password-->
-<div id="myModal" class="modal fade" role="dialog">
-	<div class="modal-dialog">
-
-		<!-- Modal content-->
-		<div class="modal-content">
-			<div class="modal-header">
-				<h4 class="modal-title">Forgot your password?</h4>
-				<button type="button" class="close" data-dismiss="modal">&times;</button>
-			</div>
-			<div class="modal-body">
-				<table>
-					<tr>
-						<td>Enter Email</td>
-						<td>&nbsp;<input type="text" id="username"></td>
-					</tr>
-				</table></br>
-				<button type="button" class="btn btn-primary" data-dismiss="modal" id="sendBtn">Send</button>
-			</div>
-
-		</div>
-
-	</div>
-</div>
-
-<<<<<<< HEAD
-	<!--PHP to insert into acc_volunteer table -->
-	<?php 
-			$name = trim($_POST['name']);
-
-			$sql_insert = "INSERT INTO acc_volunteer (CIP,email,name) VALUES ('10','rew','$name')"; 
-
-			if($conn->query($sql_insert) == TRUE)
-			{
-				echo "New record created successfully";
-			}
-			else
-			{
-				echo "Error";
-				echo "<br>";
-				echo "name" + $name; 
-			}
-
-		$conn -> close(); 
 
 	?>
+	<form action ="" method="post" role="form" data-toggle= "validator" name="login" >
+		<div class="container">
+			<div class="login-box animated fadeInUp">
+				<div class="box-header">
+					<h2>Log In</h2>
+				</div>
+				<div class="row">
+					<div class="col-sm-12 form-group">
+						<label for="username">Username</label>
+						<input type="text" id="username" name="adminUsername" placeholder="Enter your Username" required/>
+						<div class="help-block with-errors"></div>
+					</div>
+				</div>
+				<div class="row">
+				<div class="col-sm-12 form-group">
+				<label for="password">Password</label>
+				<input type="password" id="password" name="adminPass" placeholder="Enter your Password" required/>
+				<div class="help-block with-errors"></div>
+				</div>
+				</div>
+				<?php echo $error; ?>
+				<a href="#" data-toggle="modal" data-target="#myModal"><p class="small">Forgot your password?</p></a>
+				<br/>
+				<button type="submit" id="signIn" >Sign In</button>
 
-	<!-- Modal for registeration -->
-	<div id="myModalReg" class="modal fade" role="dialog">
+				<p class="small">Dont have an Account? <a href="Register.php">Register Here</a></p>
+
+				<br/>
+
+			</div>
+		</div>
+	</form>
+
+
+
+	<!-- Modal for password-->
+	<div id="myModal" class="modal fade" role="dialog">
 		<div class="modal-dialog">
+
 			<!-- Modal content-->
 			<div class="modal-content">
 				<div class="modal-header">
-					<h4 class="modal-title">Sign Up</h4>
+					<h4 class="modal-title">Forgot your password?</h4>
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 				</div>
 				<div class="modal-body">
-				<form method="post" action = "Login.php">
 					<table>
 						<tr>
-							<td>Name</td>
-							<td>&nbsp;<input type="text" id="name" name="name" value = "<?php echo $name; ?> " </td>
+							<td>Enter Email</td>
+							<td>&nbsp;<input type="text" id="username"></td>
 						</tr>
-						<tr>
-							<td>Gender</td>
-							<td>&nbsp;
-								<label class="radio-inline"><input type="radio" name="optradio" id="male"> Male</label>&nbsp;
-								<label class="radio-inline"><input type="radio" name="optradio" id="female"> Female</label>
-							</td>
-						</tr>
-						<tr>
-							<td>Age</td>
-							<td>&nbsp;<input type="text" id="age" value=" <?php echo $age ?> "></td>
-						</tr>
-						<tr>
-							<td>NRIC</td>
-							<td>&nbsp;<input type="text" id="nric" value= "<?php echo $nric ?> "></td>
-						</tr>
-						<tr>
-							<td>Email</td>
-							<td>&nbsp;<input type="text" id="email" value=" <?php echo $email ?> "></td>
-						</tr>
-					</table><br>
-					<button type="submit" name="submit" class="btn btn-primary" id="signUpBtn" data-dismiss="modal" data-toggle="modal" data-target="#myModalSuccess">Sign Up</button>
-					</form>
+					</table></br>
+					<button type="button" class="btn btn-primary" data-dismiss="modal" id="sendBtn">Send</button>
 				</div>
-<!-- Modal for registeration -->
-<div id="myModalReg" class="modal fade" role="dialog">
-	<div class="modal-dialog">
-		<!-- Modal content-->
-		<div class="modal-content">
-			<div class="modal-header">
-				<h4 class="modal-title">Sign Up</h4>
-				<button type="button" class="close" data-dismiss="modal">&times;</button>
+
 			</div>
-			<div class="modal-body">
-				<table>
-					<tr>
-						<td>Name</td>
-						<td>&nbsp;<input type="text" id="name"></td>
-					</tr>
-					<tr>
-						<td>Gender</td>
-						<td>&nbsp;
-							<label class="radio-inline"><input type="radio" name="optradio" id="male"> Male</label>&nbsp;
-							<label class="radio-inline"><input type="radio" name="optradio" id="female"> Female</label>
-						</td>
-					</tr>
-					<tr>
-						<td>Age</td>
-						<td>&nbsp;<input type="text" id="age"></td>
-					</tr>
-					<tr>
-						<td>NRIC</td>
-						<td>&nbsp;<input type="text" id="nric"></td>
-					</tr>
-					<tr>
-						<td>Email</td>
-						<td>&nbsp;<input type="text" id="email"></td>
-					</tr>
-				</table><br>
-				<button type="button" class="btn btn-primary" id="signUpBtn" data-dismiss="modal" data-toggle="modal" data-target="#myModalSuccess">Sign Up</button>
-			</div>
+
 		</div>
 	</div>
-</div>
 
-<!-- Modal for success message -->
-<div id="myModalSuccess" class="modal fade" role="dialog">
-	<div class="modal-dialog">
-
-		<!-- Modal content-->
-		<div class="modal-content">
-			<div class="modal-header">
-				<h4 class="modal-title">Sign Up Success</h4>
-				<button type="button" class="close" data-dismiss="modal">&times;</button>
-			</div>
-			<div class="modal-body">
-				<p>You have successfully register an account</p>
-				<br>
-				<button type="button" class="btn btn-primary" id="signUpBtn" data-dismiss="modal" onclick="signedIn();">Close</button>
-			</div>
-		</div>
-	</div>
-</div>
 </body>
 </html>
