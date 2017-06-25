@@ -1,63 +1,36 @@
 <?php
-	$eventNameErr = null;
-	$eventLocationErr = null;
-	$eventDescErr = null;
-	$eventDateErr = null;
-	$max_participantErr = null;
+	//define variables 
+	$eventName = $eventLocation = $eventDesc = $eventStartDate = $eventEndDate = $eventDesc = $eventCategory = "";
 	
 	if (isset($_POST['create']) && !empty($_POST['create'])) {
-		$errMsg="";
-		$eventName = trim($_POST['eventName']);
-		$eventLocation = trim($_POST['eventLocation']);
-		$eventDesc = trim($_POST['eventDesc']);
-		$eventDate = trim($_POST['eventDate']);
-		$max_participants = trim($_POST['max_participants']);
+		// get the form data
+		$eventName = trim($_POST["eventName"]);
+		$eventLocation = trim($_POST["eventLocation"]);
+		$eventDesc = trim($_POST["eventDesc"]);
+		$eventStartDate = trim($_POST["eventStartDate"]);
+		$eventEndDate = trim($_POST["eventEndDate"]);
+		$eventCategory = trim($_POST["eventCategory"]);
+		//$sessionStart = trim($_POST["sessionStart"]);
 		
-		if (empty($eventName)) {
-			$eventNameErr = 'Event name required';
-			$errMsg="Please fill in the blanks!";
-			$error=true;
-		}
-		if (empty($eventLocation)) {
-			$eventLocationErr = 'Event location required';
-			$errMsg="Please fill in the blanks!";
-			$error=true;
-		}
-
-		if (empty($eventDesc)) {
-			$eventDescErr = 'Event description is required';
-			$errMsg="Please fill in the blanks!";
-			$error=true;
-		}
-		if (empty($eventDate)) {
-			$eventDateErr = 'Event date required';
-			$errMsg="Please fill in the blanks!";
-			$error=true;
-		}
-		if (empty($max_participants)) {
-			$max_participantErr = 'Max number of participants required';
-			$errMsg="Please fill in the blanks!";
-			$error=true;
+		// Perform insert queries
+		$insert_rows = $conn->query("INSERT INTO created_event (event_name, event_desc, event_location, event_startDate, event_endDate, event_category) VALUES 
+		('$eventName','$eventDesc','$eventLocation','$eventStartDate','$eventEndDate','$eventCategory')");
+		
+		if($insert_rows)
+		{
+			echo '<script>';
+			echo 'alert("Event successfully created!");';
+			echo 'window.location.href="CharityEvent.php";';
+			echo '</script>';
 		}
 		else{
-			$eventName = trim($_POST['eventName']);
-			$eventLocation = trim($_POST['eventLocation']);
-			$eventDesc = trim($_POST['eventDesc']);
-			$eventDate = trim($_POST['eventDate']);
-			$max_participants = trim($_POST['max_participants']);
-			$sqli="INSERT INTO created_event(event_name, event_date, max_participants, event_desc, event_location) VALUES ('$eventName', '$eventDate', '$max_participants', '$eventDesc'
-			, '$eventLocation')";
-			if (mysql_query($sqli)) {
-				echo '<script>';
-				echo 'alert("Event successfully created!");';
-				echo 'window.location.href="CharityEvent.php";';
-				echo '</script>';
-			} else {
-				echo "Error: " . $sqli . "<br>" . mysql_error($con);
-			}
-			
-			include 'CharityEventCreateSession_process.php';
-			include 'upload.php';
+			echo '<script>';
+			echo 'alert("Event already exist!");';
+			echo 'window.location.href="CharityEvent.php";';
+			echo '</script>';
+			die('Error : ('. $conn->errno .') '. $conn->error);
 		}
+		
+		include 'CharityEventCreateSession_process.php';
 	}
 ?>

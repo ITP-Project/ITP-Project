@@ -8,7 +8,7 @@
 	$id = $_GET['id'];
 	 
 	// delete the entry
-	$result = mysql_query("DELETE FROM created_event WHERE EID=$id")
+	$result = mysqli_query($conn, "DELETE FROM created_event WHERE EID=$id")
 	or die(mysql_error()); 
 	 
 	// redirect back to the view page
