@@ -257,19 +257,57 @@ $(function() {
 					<div class="col-md-3">
 						<select class="form-control" name="eventCategory">
 						  <option value="select" selected="disabled">Please select category</option>
-						  <!--<option value="Adhoc">Adhoc</option>
-						  <option value="Team">Team</option>-->
 						  <?php
 							$sqli = mysqli_query($conn, "SELECT event_category FROM created_event WHERE EID=$id");
 							$rowi = mysqli_num_rows($sqli);
 							while ($rowi = mysqli_fetch_array($sqli)){
-								if($rowi['event_category'] == "Team"){
-									echo "<option value='Team' selected>Team</option>";
-									echo "<option value='Adhoc'>Adhoc</option>";
+								if($rowi['event_category'] == "Animals"){
+									echo '<option value="Animals" selected>Animals</option>
+										  <option value="Environmental">Environmental</option>
+										  <option value="Disabled">Disabled</option>
+										  <option value="Community">Community</option>
+										  <option value="Educational">Educational</option>
+										  <option value="Arts and Culture">Arts and Culture</option>';
 								}
-								else if($rowi['event_category'] == "Adhoc"){
-									echo "<option value='Team'>Team</option>";
-									echo "<option value='Adhoc' selected>Adhoc</option>";
+								else if($rowi['event_category'] == "Environmental"){
+									echo '<option value="Animals">Animals</option>
+										  <option value="Environmental" selected>Environmental</option>
+										  <option value="Disabled">Disabled</option>
+										  <option value="Community">Community</option>
+										  <option value="Educational">Educational</option>
+										  <option value="Arts and Culture">Arts and Culture</option>';
+								}
+								else if($rowi['event_category'] == "Disabled"){
+									echo '<option value="Animals">Animals</option>
+										  <option value="Environmental">Environmental</option>
+										  <option value="Disabled" selected>Disabled</option>
+										  <option value="Community">Community</option>
+										  <option value="Educational">Educational</option>
+										  <option value="Arts and Culture">Arts and Culture</option>';
+								}
+								else if($rowi['event_category'] == "Community"){
+									echo '<option value="Animals">Animals</option>
+										  <option value="Environmental">Environmental</option>
+										  <option value="Disabled">Disabled</option>
+										  <option value="Community" selected>Community</option>
+										  <option value="Educational">Educational</option>
+										  <option value="Arts and Culture">Arts and Culture</option>';
+								}
+								else if($rowi['event_category'] == "Educational"){
+									echo '<option value="Animals">Animals</option>
+										  <option value="Environmental">Environmental</option>
+										  <option value="Disabled">Disabled</option>
+										  <option value="Community">Community</option>
+										  <option value="Educational" selected>Educational</option>
+										  <option value="Arts and Culture">Arts and Culture</option>';
+								}
+								else if($rowi['event_category'] == "Arts and Culture"){
+									echo '<option value="Animals">Animals</option>
+										  <option value="Environmental">Environmental</option>
+										  <option value="Disabled">Disabled</option>
+										  <option value="Community">Community</option>
+										  <option value="Educational">Educational</option>
+										  <option value="Arts and Culture" selected>Arts and Culture</option>';
 								}
 							}
 						  ?>

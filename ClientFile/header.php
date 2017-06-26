@@ -10,8 +10,8 @@
 	<link rel="stylesheet" type="text/css" href="../CSS/style.css">
 	<link rel="stylesheet" href="../bootstrap-3.3.7/dist/css/bootstrap.min.css">
 	<script src="../js/main.js"></script>
-	<script src="jquery.js" type="text/javascript"></script>
-	<script src="js-script.js" type="text/javascript"></script>
+	<!--<script src="jquery.js" type="text/javascript"></script>
+	<script src="js-script.js" type="text/javascript"></script>-->
 	<style>
 	body,h1,h2,h3,h4,h5 {font-family: "Poppins", sans-serif}
 	</style>

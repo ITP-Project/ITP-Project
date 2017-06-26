@@ -151,8 +151,12 @@ $(function() {
 					<div class="col-md-3">
 						<select class="form-control" name="eventCategory">
 						  <option value="select" selected="disabled">Please select category</option>
-						  <option value="Adhoc">Adhoc</option>
-						  <option value="Team">Team</option>
+						  <option value="Animals">Animals</option>
+						  <option value="Environmental">Environmental</option>
+						  <option value="Disabled">Disabled</option>
+						  <option value="Community">Community</option>
+						  <option value="Educational">Educational</option>
+						  <option value="Arts and Culture">Arts and Culture</option>
 						</select>
 					</div>
 				</div>

@@ -6,10 +6,13 @@ include 'navbar.php';
 include '../dconfig.php';
 ?>
 <!-- Table Data -->
-
-<script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>  
-<script src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js"></script>            
+           
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css" />
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.js"></script>
 
 <body>
 	<!-- !PAGE CONTENT! -->
@@ -23,7 +26,25 @@ include '../dconfig.php';
 				$result = $conn->query("SELECT * FROM acc_volunteer");
 				$count = $result->num_rows;
 			?>
-			
+			<div class="w3-container">
+				<div class="input-daterange">
+					<!--<div class="col-md-3">
+						<select class="form-control">
+							<option>Organisation Name</option>
+						</select>
+					</div>-->
+					<div class="col-md-3">
+						<input type="text" name="start_date" id="start_date" class="form-control" />
+					</div>
+					<div class="col-md-3">
+						<input type="text" name="end_date" id="end_date" class="form-control" />
+					</div>
+				</div>
+				<div class="col-md-3">
+					<input type="button" name="search" id="search" value="Search" class="btn btn-danger" />
+				</div>
+			</div>
+			<hr>
 			<div class="table-responsive">
 				<table id="volunteer_data" class="table table-striped table-bordered">  
                     <thead>  
@@ -35,7 +56,6 @@ include '../dconfig.php';
                             <td>Organisation Name</td>  
                             <td>UEN</td>
 							<td>Nationality</td>
-							<td></td>
                         </tr>  
                     </thead>  
 					<?php
@@ -51,8 +71,7 @@ include '../dconfig.php';
 										<td>'.$row["nric"].'</td>  
 										<td>'.$row["org_name"].'</td>  
 										<td>'.$row["uen"].'</td>
-										<td>'.$row["nationality"].'</td>
-										<td><input type="checkbox" name="chk[]" class="chk-box" value="'.$row['AID'].'"  /></td>	
+										<td>'.$row["nationality"].'</td>	
 								   </tr>  
 								   ';  
 							}
@@ -67,11 +86,6 @@ include '../dconfig.php';
                 </table>
 			</div>
 			<hr>
-			<?php
-				if($count > 0){
-					echo '<input type="checkbox" class="select-all" />';
-				}
-			?>
 			<button type="button" class="btn btn-danger" id="bookBtn" onclick="book()">Book Volunteer/s</button>
 		</div>
     <!-- End page content -->
@@ -85,5 +99,47 @@ include '../dconfig.php';
 <script>  
  $(document).ready(function(){  
       $('#volunteer_data').DataTable();  
- });  
+ });
+ 
+$(document).ready(function(){
+ 
+ $('.input-daterange').datepicker({
+  todayBtn:'linked',
+  format: "yyyy-mm-dd",
+  autoclose: true
+ });
+
+ fetch_data('no');
+
+ function fetch_data(is_date_search, start_date='', end_date='')
+ {
+  var dataTable = $('#order_data').DataTable({
+   "processing" : true,
+   "serverSide" : true,
+   "order" : [],
+   "ajax" : {
+    url:"fetch.php",
+    type:"POST",
+    data:{
+     is_date_search:is_date_search, start_date:start_date, end_date:end_date
+    }
+   }
+  });
+ }
+
+ $('#search').click(function(){
+  var start_date = $('#start_date').val();
+  var end_date = $('#end_date').val();
+  if(start_date != '' && end_date !='')
+  {
+   $('#order_data').DataTable().destroy();
+   fetch_data('yes', start_date, end_date);
+  }
+  else
+  {
+   alert("Both Date is Required");
+  }
+ }); 
+ 
+});
  </script>

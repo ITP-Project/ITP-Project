@@ -7,7 +7,7 @@
 	include '../dconfig.php';
 	?>
 	<!-- Table Data -->
-	<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>-->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>  
     <script src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js"></script>            
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css" />
@@ -55,7 +55,7 @@ function create(){
 							while($row = mysqli_fetch_array($result))  
 							{  
 								echo '  
-									<tr>
+									<tr id="'.$row["EID"].'">
 										<td class="hidden">'.$row["EID"].'</td> 
 										<td>'.$row["event_name"].'</td>  
 										<td>'.$row["event_startDate"].'</td>  
@@ -63,8 +63,11 @@ function create(){
 										<td>'.$row["event_location"].'</td>  
 										<td>'.$row["event_desc"].'</td>
 										<td>'.$row["event_category"].'</td>
-										<td><a href="CharityEventUpdate.php?id=' . $row["EID"] . '"><span class="glyphicon glyphicon-pencil"></span></a>&nbsp;
-											<a id="remove_btn" href="CharityEventDelete_process.php?id=' . $row["EID"] . '"><span class="glyphicon glyphicon-remove"></span></a></td>
+										<td>
+											<a href="CharityEventUpdate.php?id=' . $row["EID"] . '"><span class="glyphicon glyphicon-pencil"></span></a>&nbsp;
+											<a id="remove_btn" href="CharityEventDelete_process.php?id=' . $row["EID"] . '"><span class="glyphicon glyphicon-remove"></span></a>&nbsp;
+											<input type="checkbox" name="event_id[]" class="delete_customer" value="'.$row["EID"].'" />
+										</td>
 								   </tr>  
 								   ';  
 							}
@@ -77,6 +80,8 @@ function create(){
                     ?>  
                 </table>
 			</div>
+			<hr>
+			<button type="button" name="btn_delete" id="btn_delete" class="btn btn-danger">Delete</button>
 		</div>
 	  <!-- End page content -->
 	</div>
@@ -91,4 +96,47 @@ function create(){
  $(document).ready(function(){  
       $('#event_data').DataTable();  
  });  
+ 
+$(document).ready(function(){
+ 
+ $('#btn_delete').click(function(){
+  
+  if(confirm("Are you sure you want to delete this?"))
+  {
+   var id = [];
+   
+   $(':checkbox:checked').each(function(i){
+    id[i] = $(this).val();
+   });
+   
+   if(id.length === 0) //tell you if the array is empty
+   {
+    alert("Please Select atleast one checkbox");
+   }
+   else
+   {
+    $.ajax({
+     url:'CharityEventDelete_process.php',
+     method:'POST',
+     data:{id:id},
+     success:function()
+     {
+      for(var i=0; i<id.length; i++)
+      {
+       $('tr#'+id[i]+'').css('background-color', '#ccc');
+       $('tr#'+id[i]+'').fadeOut('slow');
+      }
+     }
+     
+    });
+   }
+   
+  }
+  else
+  {
+   return false;
+  }
+ });
+ 
+});
  </script>
