@@ -1,73 +1,49 @@
 <?php
-//fetch.php
-$connect = mysqli_connect("localhost", "root", "", "testing");
-$columns = array('order_id', 'order_customer_name', 'order_item', 'order_value', 'order_date');
+//Include database configuration file
+include('../dconfig.php');
 
-$query = "SELECT * FROM tbl_order WHERE ";
-
-if($_POST["is_date_search"] == "yes")
-{
- $query .= 'order_date BETWEEN "'.$_POST["start_date"].'" AND "'.$_POST["end_date"].'" AND ';
+if(isset($_POST["EID"]) && !empty($_POST["EID"])){
+    //Get all state data
+    $query = $conn->query("SELECT * FROM event_shift WHERE EID = ".$_POST['EID']."");
+    
+    //Count total number of rows
+    $rowCount = $query->num_rows;
+    
+    //Display states list
+    if($rowCount > 0){
+        //echo '<option value="">Select Session</option>';
+        while($row = $query->fetch_assoc()){ 
+            //echo '<option value="'.$row['SID'].'">'.$row['event_date'].'</option>';
+			
+			echo '
+				<tr>
+					<td hidden>'.$row['SID'].'</td>
+					<td>'.$row['event_date'].'</td>
+					<td>'.$row['event_startTime'].'</td>
+					<td>'.$row['event_endTime'].'</td>
+					<td><input type="checkbox" name="chk[]"></td>
+				</tr>';
+        }
+    }else{
+        echo '<option value="">Session not available</option>';
+    }
 }
 
-if(isset($_POST["search"]["value"]))
-{
- $query .= '
-  (order_id LIKE "%'.$_POST["search"]["value"].'%" 
-  OR order_customer_name LIKE "%'.$_POST["search"]["value"].'%" 
-  OR order_item LIKE "%'.$_POST["search"]["value"].'%" 
-  OR order_value LIKE "%'.$_POST["search"]["value"].'%")
- ';
-}
-
-if(isset($_POST["order"]))
-{
- $query .= 'ORDER BY '.$columns[$_POST['order']['0']['column']].' '.$_POST['order']['0']['dir'].' 
- ';
-}
-else
-{
- $query .= 'ORDER BY order_id DESC ';
-}
-
-$query1 = '';
-
-if($_POST["length"] != -1)
-{
- $query1 = 'LIMIT ' . $_POST['start'] . ', ' . $_POST['length'];
-}
-
-$number_filter_row = mysqli_num_rows(mysqli_query($connect, $query));
-
-$result = mysqli_query($connect, $query . $query1);
-
-$data = array();
-
-while($row = mysqli_fetch_array($result))
-{
- $sub_array = array();
- $sub_array[] = $row["order_id"];
- $sub_array[] = $row["order_customer_name"];
- $sub_array[] = $row["order_item"];
- $sub_array[] = $row["order_value"];
- $sub_array[] = $row["order_date"];
- $data[] = $sub_array;
-}
-
-function get_all_data($connect)
-{
- $query = "SELECT * FROM tbl_order";
- $result = mysqli_query($connect, $query);
- return mysqli_num_rows($result);
-}
-
-$output = array(
- "draw"    => intval($_POST["draw"]),
- "recordsTotal"  =>  get_all_data($connect),
- "recordsFiltered" => $number_filter_row,
- "data"    => $data
-);
-
-echo json_encode($output);
-
+/*if(isset($_POST["state_id"]) && !empty($_POST["state_id"])){
+    //Get all city data
+    $query = $conn->query("SELECT * FROM cities WHERE state_id = ".$_POST['state_id']." AND status = 1 ORDER BY city_name ASC");
+    
+    //Count total number of rows
+    $rowCount = $query->num_rows;
+    
+    //Display cities list
+    if($rowCount > 0){
+        echo '<option value="">Select city</option>';
+        while($row = $query->fetch_assoc()){ 
+            echo '<option value="'.$row['city_id'].'">'.$row['city_name'].'</option>';
+        }
+    }else{
+        echo '<option value="">City not available</option>';
+    }
+}*/
 ?>

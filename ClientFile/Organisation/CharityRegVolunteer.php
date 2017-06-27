@@ -4,6 +4,7 @@
 include '../header.php';
 include 'navbar.php';
 include '../dconfig.php';
+//include 'BookVolunteer_process.php';
 ?>
 <!-- Table Data -->
            
@@ -17,77 +18,102 @@ include '../dconfig.php';
 <body>
 	<!-- !PAGE CONTENT! -->
 	<div class="w3-main" style="margin-left:340px;margin-right:40px">
+		
 
 		<!-- Setting -->
 		<div class="w3-container" id="contact" style="margin-top:75px">
 			<h1 class="w3-xxxlarge w3-text-red"><b>Volunteers</b></h1>
 		    <hr style="width:50px;border:5px solid red" class="w3-round">
-			<?php
-				$result = $conn->query("SELECT * FROM acc_volunteer");
-				$count = $result->num_rows;
-			?>
 			<div class="w3-container">
-				<div class="input-daterange">
-					<!--<div class="col-md-3">
-						<select class="form-control">
-							<option>Organisation Name</option>
-						</select>
-					</div>-->
-					<div class="col-md-3">
-						<input type="text" name="start_date" id="start_date" class="form-control" />
-					</div>
-					<div class="col-md-3">
-						<input type="text" name="end_date" id="end_date" class="form-control" />
-					</div>
-				</div>
 				<div class="col-md-3">
-					<input type="button" name="search" id="search" value="Search" class="btn btn-danger" />
+					<?php
+
+					//Get all country data
+					$query = $conn->query("SELECT * FROM created_event ORDER BY event_name ASC");
+
+					//Count total number of rows
+					$rowCount = $query->num_rows;
+					?>
+					<select name="event" id="event" class="form-control">
+						<option value="">Select Event</option>
+						<?php
+						if($rowCount > 0){
+							while($rowi = $query->fetch_assoc()){ 
+								echo '<option value="'.$rowi['EID'].'">'.$rowi['event_name'].'</option>';
+							}
+						}else{
+							echo '<option value="">Event not available</option>';
+						}
+						?>
+					</select>
 				</div>
+			</div>
+			<hr>
+			<div class="table-responsive">
+				<table class="table table-striped table-bordered">
+					<thead>  
+                        <tr>
+							<td class="hidden">Volunteer ID</td>
+                            <td>Session Date</td>  
+                            <td>Session Start Time</td>  
+                            <td>Session End Time</td>
+							<td></td>
+                        </tr>  
+                    </thead>
+					<tbody id="session">
+					</tbody>
+				</table>
 			</div>
 			<hr>
 			<div class="table-responsive">
 				<table id="volunteer_data" class="table table-striped table-bordered">  
                     <thead>  
                         <tr>
-							<td class="hidden">Volunteer ID</td>
+							<td hidden>Volunter ID</td>
                             <td>Name</td>  
                             <td>Email</td>  
                             <td>NRIC</td>  
                             <td>Organisation Name</td>  
                             <td>UEN</td>
 							<td>Nationality</td>
+							<td>Book <input type="checkbox" class="pull-right" id="chk-all"></td>
                         </tr>  
                     </thead>  
 					<?php
+					
+						$result = $conn->query("SELECT * FROM acc_volunteer ORDER BY AID ASC");
+						$count = $result->num_rows;
 						
 						if($count > 0) {
-							while($row = mysqli_fetch_array($result))  
+							while($row = $result->fetch_array())  
 							{  
 								echo '  
-									<tr>
-										<td class="hidden">'.$row["AID"].'</td> 
+									<tr id="'.$row["AID"].'">
+										<td hidden>'.$row["AID"].'</td>
 										<td>'.$row["name"].'</td>  
 										<td>'.$row["email"].'</td>  
 										<td>'.$row["nric"].'</td>  
 										<td>'.$row["org_name"].'</td>  
 										<td>'.$row["uen"].'</td>
-										<td>'.$row["nationality"].'</td>	
-								   </tr>  
-								   ';  
+										<td>'.$row["nationality"].'</td>
+										<td><input type="checkbox" class="chk-box pull-left" name="chk[]" value="'.$row["unique_id"].'"></td>
+								    </tr>
+								   ';
 							}
 						}
 						else {
 							echo 'No event to be displayed!';
 						}
 						
-						//$conn->close();
+						$conn->close();
                     ?>
 					
                 </table>
 			</div>
 			<hr>
-			<button type="button" class="btn btn-danger" id="bookBtn" onclick="book()">Book Volunteer/s</button>
+			<button type="button" class="btn btn-danger" id="book" name="book" value="book" >Book Volunteer/s</button>
 		</div>
+
     <!-- End page content -->
     </div>
 
@@ -98,48 +124,86 @@ include '../dconfig.php';
 </html>
 <script>  
  $(document).ready(function(){  
-      $('#volunteer_data').DataTable();  
+      var oTable = $('#volunteer_data').dataTable({
+        stateSave: false
+		});
+
+		var allPages = oTable.fnGetNodes();
+
+		$('body').on('click', '#chk-all', function () {
+			if ($(this).hasClass('allChecked')) {
+				$('input[type="checkbox"]', allPages).prop('checked', false);
+			} else {
+				$('input[type="checkbox"]', allPages).prop('checked', true);
+			}
+			$(this).toggleClass('allChecked');
+		})
  });
- 
+
+function edit_records() 
+{
+	document.frm.action = "BookVolunteer_process.php";
+	document.frm.submit();		
+}
+
+$(document).ready(function(){
+    $('#event').on('change',function(){
+        var eventID = $(this).val();
+        if(eventID){
+            $.ajax({
+                type:'POST',
+                url:'fetch.php',
+                data:'EID='+eventID,
+                success:function(html){
+                    $('#session').html(html);
+                }
+            }); 
+        }
+    });
+});
+
 $(document).ready(function(){
  
- $('.input-daterange').datepicker({
-  todayBtn:'linked',
-  format: "yyyy-mm-dd",
-  autoclose: true
- });
-
- fetch_data('no');
-
- function fetch_data(is_date_search, start_date='', end_date='')
- {
-  var dataTable = $('#order_data').DataTable({
-   "processing" : true,
-   "serverSide" : true,
-   "order" : [],
-   "ajax" : {
-    url:"fetch.php",
-    type:"POST",
-    data:{
-     is_date_search:is_date_search, start_date:start_date, end_date:end_date
-    }
-   }
-  });
- }
-
- $('#search').click(function(){
-  var start_date = $('#start_date').val();
-  var end_date = $('#end_date').val();
-  if(start_date != '' && end_date !='')
+ $('#book').click(function(){
+  
+  if(confirm("Are you sure you want to book them?"))
   {
-   $('#order_data').DataTable().destroy();
-   fetch_data('yes', start_date, end_date);
+   var id = [];
+   
+   $(':checkbox:checked').each(function(i){
+    id[i] = $(this).val();
+   });
+   
+   if(id.length === 0) //tell you if the array is empty
+   {
+    alert("Please select at least one checkbox");
+   }
+   else
+   {
+    $.ajax({
+     url:'BookVolunteer_process.php',
+     method:'POST',
+     data:{id:id},
+     success:function()
+     {
+		 for(var i=0; i<id.length; i++)
+      {
+       $('tr#'+id[i]+'').css('background-color', '#ccc');
+       $('tr#'+id[i]+'').fadeOut('slow');
+      }
+     }
+     
+    });
+   }
+   
   }
   else
   {
-   alert("Both Date is Required");
+   return false;
   }
- }); 
+ });
  
 });
+
+
  </script>
