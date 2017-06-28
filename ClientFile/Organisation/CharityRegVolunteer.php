@@ -4,7 +4,6 @@
 include '../header.php';
 include 'navbar.php';
 include '../dconfig.php';
-//include 'BookVolunteer_process.php';
 ?>
 <!-- Table Data -->
            
@@ -19,7 +18,7 @@ include '../dconfig.php';
 	<!-- !PAGE CONTENT! -->
 	<div class="w3-main" style="margin-left:340px;margin-right:40px">
 		
-
+		<form action="BookVolunteer_process.php" method="POST" enctype="multipart/form-data">
 		<!-- Setting -->
 		<div class="w3-container" id="contact" style="margin-top:75px">
 			<h1 class="w3-xxxlarge w3-text-red"><b>Volunteers</b></h1>
@@ -70,6 +69,7 @@ include '../dconfig.php';
                     <thead>  
                         <tr>
 							<td hidden>Volunter ID</td>
+							<td hidden></td>
                             <td>Name</td>  
                             <td>Email</td>  
                             <td>NRIC</td>  
@@ -81,22 +81,23 @@ include '../dconfig.php';
                     </thead>  
 					<?php
 					
-						$result = $conn->query("SELECT * FROM acc_volunteer ORDER BY AID ASC");
+						$result = $conn->query("SELECT * FROM acc_volunteer");
 						$count = $result->num_rows;
 						
 						if($count > 0) {
 							while($row = $result->fetch_array())  
 							{  
 								echo '  
-									<tr id="'.$row["AID"].'">
-										<td hidden>'.$row["AID"].'</td>
+									<tr>
+										<td hidden><input type="text" value="'.$row["AID"].'"></td>
+										<td hidden><input type="text" value="'.$row["unique_id"].'"></td>
 										<td>'.$row["name"].'</td>  
 										<td>'.$row["email"].'</td>  
 										<td>'.$row["nric"].'</td>  
 										<td>'.$row["org_name"].'</td>  
 										<td>'.$row["uen"].'</td>
 										<td>'.$row["nationality"].'</td>
-										<td><input type="checkbox" class="chk-box pull-left" name="chk[]" value="'.$row["unique_id"].'"></td>
+										<td><input type="checkbox" class="chk-box pull-left" name="chk[]" value="'.$row["AID"].'"></td>
 								    </tr>
 								   ';
 							}
@@ -111,9 +112,9 @@ include '../dconfig.php';
                 </table>
 			</div>
 			<hr>
-			<button type="button" class="btn btn-danger" id="book" name="book" value="book" >Book Volunteer/s</button>
+			<button type="submit" class="btn btn-danger" id="book" name="book" value="book" >Book Volunteer/s</button>
 		</div>
-
+		</form>
     <!-- End page content -->
     </div>
 
@@ -123,7 +124,7 @@ include '../dconfig.php';
 </body>
 </html>
 <script>  
- $(document).ready(function(){  
+$(document).ready(function(){  
       var oTable = $('#volunteer_data').dataTable({
         stateSave: false
 		});
@@ -140,19 +141,13 @@ include '../dconfig.php';
 		})
  });
 
-function edit_records() 
-{
-	document.frm.action = "BookVolunteer_process.php";
-	document.frm.submit();		
-}
-
 $(document).ready(function(){
     $('#event').on('change',function(){
         var eventID = $(this).val();
         if(eventID){
             $.ajax({
                 type:'POST',
-                url:'fetch.php',
+                url:'CharitySessionRetrieve_process.php',
                 data:'EID='+eventID,
                 success:function(html){
                     $('#session').html(html);
@@ -161,49 +156,4 @@ $(document).ready(function(){
         }
     });
 });
-
-$(document).ready(function(){
- 
- $('#book').click(function(){
-  
-  if(confirm("Are you sure you want to book them?"))
-  {
-   var id = [];
-   
-   $(':checkbox:checked').each(function(i){
-    id[i] = $(this).val();
-   });
-   
-   if(id.length === 0) //tell you if the array is empty
-   {
-    alert("Please select at least one checkbox");
-   }
-   else
-   {
-    $.ajax({
-     url:'BookVolunteer_process.php',
-     method:'POST',
-     data:{id:id},
-     success:function()
-     {
-		 for(var i=0; i<id.length; i++)
-      {
-       $('tr#'+id[i]+'').css('background-color', '#ccc');
-       $('tr#'+id[i]+'').fadeOut('slow');
-      }
-     }
-     
-    });
-   }
-   
-  }
-  else
-  {
-   return false;
-  }
- });
- 
-});
-
-
  </script>
