@@ -7,11 +7,12 @@ include_once 'CharitySessionRetrieve_process.php';
 	$chkE = $_POST['chkEvent'];
 	$chkcountE = count($chkE);
 	
-	for($i=0; $i<$chkcountE; $i++){
-		$id = $chkE[$i];
-		$result=$conn->query("SELECT * FROM event_shift WHERE SID=".$id);
+	for($x=0; $x<$chkcountE; $x++){
+		$sid = $chkE[$x];
+		
+		$result=$conn->query("SELECT * FROM event_shift WHERE SID=".$sid);
 		while($row = $result->fetch_assoc()){
-			$sid = $row['SID'];
+			$sessionSid = $row['SID'];
 		}
 	}
 

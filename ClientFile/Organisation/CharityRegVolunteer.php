@@ -18,103 +18,163 @@ include '../dconfig.php';
 	<!-- !PAGE CONTENT! -->
 	<div class="w3-main" style="margin-left:340px;margin-right:40px">
 		
-		<form action="BookVolunteer_process.php" method="POST" enctype="multipart/form-data">
 		<!-- Setting -->
 		<div class="w3-container" id="contact" style="margin-top:75px">
 			<h1 class="w3-xxxlarge w3-text-red"><b>Volunteers</b></h1>
 		    <hr style="width:50px;border:5px solid red" class="w3-round">
-			<div class="w3-container">
-				<div class="col-md-3">
-					<?php
+			
+			<ul class="nav nav-tabs">
+			  <li class="active"><a data-toggle="tab" href="#home">Book Volunteer</a></li>
+			  <li><a data-toggle="tab" href="#menu1">View Volunteer</a></li>
+			  
+			</ul>
 
-					//Get all country data
-					$query = $conn->query("SELECT * FROM created_event ORDER BY event_name ASC");
+			<div class="tab-content">
+				<div id="home" class="tab-pane fade in active">
+				<h3>Book Here</h3>
+				<form action="BookVolunteer_process.php" method="POST" enctype="multipart/form-data">
+					<div class="w3-container">
+						<div class="col-md-3">
+							<select name="event" id="event" class="form-control">
+								<option value="">Select Event</option>
+								<?php
+								//Get all event data
+								$query = $conn->query("SELECT * FROM created_event ORDER BY event_name ASC");
 
-					//Count total number of rows
-					$rowCount = $query->num_rows;
-					?>
-					<select name="event" id="event" class="form-control">
-						<option value="">Select Event</option>
-						<?php
-						if($rowCount > 0){
-							while($rowi = $query->fetch_assoc()){ 
-								echo '<option value="'.$rowi['EID'].'">'.$rowi['event_name'].'</option>';
-							}
-						}else{
-							echo '<option value="">Event not available</option>';
-						}
-						?>
-					</select>
+								//Count total number of rows
+								$rowCount = $query->num_rows;
+								
+								if($rowCount > 0){
+									while($rowi = $query->fetch_assoc()){ 
+										echo '<option value="'.$rowi['EID'].'">'.$rowi['event_name'].'</option>';
+									}
+								}else{
+									echo '<option value="">Event not available</option>';
+								}
+								?>
+							</select>
+						</div>
+					</div>
+					<hr>
+					<div class="table-responsive">
+						<table class="table table-striped table-bordered">
+							<thead>  
+								<tr>
+									<td class="hidden">Volunteer ID</td>
+									<td>Session Date</td>  
+									<td>Session Start Time</td>  
+									<td>Session End Time</td>
+									<td></td>
+								</tr>  
+							</thead>
+							<tbody id="session">
+							</tbody>
+						</table>
+					</div>
+					<hr>
+					<div class="table-responsive">
+						<table id="volunteer_data" class="table table-striped table-bordered">  
+							<thead>  
+								<tr>
+									<td hidden>Volunter ID</td>
+									<td hidden></td>
+									<td>Name</td>  
+									<td>Email</td>  
+									<td>NRIC</td>  
+									<td>Organisation Name</td>  
+									<td>UEN</td>
+									<td>Nationality</td>
+									<td>Book <input type="checkbox" class="pull-right" id="chk-all"></td>
+								</tr>  
+							</thead>  
+							<?php
+							
+								$result = $conn->query("SELECT * FROM acc_volunteer");
+								$count = $result->num_rows;
+								
+								if($count > 0) {
+									while($row = $result->fetch_array())  
+									{  
+										echo '  
+											<tr>
+												<td hidden><input type="text" value="'.$row["AID"].'"></td>
+												<td hidden><input type="text" value="'.$row["unique_id"].'"></td>
+												<td>'.$row["name"].'</td>  
+												<td>'.$row["email"].'</td>  
+												<td>'.$row["nric"].'</td>  
+												<td>'.$row["org_name"].'</td>  
+												<td>'.$row["uen"].'</td>
+												<td>'.$row["nationality"].'</td>
+												<td><input type="checkbox" class="chk-box pull-left" name="chk[]" value="'.$row["AID"].'"></td>
+											</tr>
+										   ';
+									}
+								}
+								else {
+									echo 'No event to be displayed!';
+								}
+								
+								mysqli_free_result($result);
+								
+								//$conn->close();
+							?>
+							
+						</table>
+					</div>
+					<hr>
+					<button type="submit" class="btn btn-danger" id="book" name="book" value="book" >Book Volunteer/s</button>
+				</form>
+				</div>
+				<div id="menu1" class="tab-pane fade">
+					<h3>View Volunteers for Events</h3>
+					<div class="w3-container">
+						<div class="col-md-3">
+							<select name="eventV" id="eventV" class="form-control">
+								<option value="">Select Event</option>
+								<?php
+								//Get all event data
+								$volQuery = $conn->query("SELECT * FROM created_event ORDER BY event_name ASC");
+
+								//Count total number of rows
+								$volRowCount = $volQuery->num_rows;
+								
+								if($volRowCount > 0){
+									while($rowV = $volQuery->fetch_assoc()){ 
+										$eid = $rowV['EID'];
+										echo '<option value="'.$rowV['EID'].'">'.$rowV['event_name'].'</option>';
+									}
+								}else{
+									echo '<option value="">Event not available</option>';
+								}
+								
+								?>
+							</select>
+						</div>
+					</div>
+					<hr>
+					<div class="table-responsive">
+						<table class="table table-striped table-bordered">
+							<thead>  
+								<tr>
+									<td class="hidden">Volunteer ID</td>
+									<td>Name</td>  
+									<td>NRIC</td>  
+									<td>Email</td>
+									<td></td>
+								</tr>  
+							</thead>
+							<tbody id="sessionV">
+
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div id="menu2" class="tab-pane fade">
+					<h3>Menu 2</h3>
+					<p>Some content in menu 2.</p>
 				</div>
 			</div>
-			<hr>
-			<div class="table-responsive">
-				<table class="table table-striped table-bordered">
-					<thead>  
-                        <tr>
-							<td class="hidden">Volunteer ID</td>
-                            <td>Session Date</td>  
-                            <td>Session Start Time</td>  
-                            <td>Session End Time</td>
-							<td></td>
-                        </tr>  
-                    </thead>
-					<tbody id="session">
-					</tbody>
-				</table>
-			</div>
-			<hr>
-			<div class="table-responsive">
-				<table id="volunteer_data" class="table table-striped table-bordered">  
-                    <thead>  
-                        <tr>
-							<td hidden>Volunter ID</td>
-							<td hidden></td>
-                            <td>Name</td>  
-                            <td>Email</td>  
-                            <td>NRIC</td>  
-                            <td>Organisation Name</td>  
-                            <td>UEN</td>
-							<td>Nationality</td>
-							<td>Book <input type="checkbox" class="pull-right" id="chk-all"></td>
-                        </tr>  
-                    </thead>  
-					<?php
-					
-						$result = $conn->query("SELECT * FROM acc_volunteer");
-						$count = $result->num_rows;
-						
-						if($count > 0) {
-							while($row = $result->fetch_array())  
-							{  
-								echo '  
-									<tr>
-										<td hidden><input type="text" value="'.$row["AID"].'"></td>
-										<td hidden><input type="text" value="'.$row["unique_id"].'"></td>
-										<td>'.$row["name"].'</td>  
-										<td>'.$row["email"].'</td>  
-										<td>'.$row["nric"].'</td>  
-										<td>'.$row["org_name"].'</td>  
-										<td>'.$row["uen"].'</td>
-										<td>'.$row["nationality"].'</td>
-										<td><input type="checkbox" class="chk-box pull-left" name="chk[]" value="'.$row["AID"].'"></td>
-								    </tr>
-								   ';
-							}
-						}
-						else {
-							echo 'No event to be displayed!';
-						}
-						
-						$conn->close();
-                    ?>
-					
-                </table>
-			</div>
-			<hr>
-			<button type="submit" class="btn btn-danger" id="book" name="book" value="book" >Book Volunteer/s</button>
 		</div>
-		</form>
     <!-- End page content -->
     </div>
 
@@ -151,6 +211,22 @@ $(document).ready(function(){
                 data:'EID='+eventID,
                 success:function(html){
                     $('#session').html(html);
+                }
+            }); 
+        }
+    });
+});
+
+$(document).ready(function(){
+    $('#eventV').on('change',function(){
+        var eventVID = $(this).val();
+        if(eventVID){
+            $.ajax({
+                type:'POST',
+                url:'CharitySessionRetrieveV_process.php',
+                data:'EID='+eventVID,
+                success:function(html){
+                    $('#sessionV').html(html);
                 }
             }); 
         }

@@ -16,11 +16,11 @@ if(isset($_POST["EID"]) && !empty($_POST["EID"])){
 			$sid = $rowEvent['SID'];
 			echo '
 				<tr>
-					<td><input type="text" value="'.$rowEvent["SID"].'"></td>
+					
 					<td>'.$rowEvent['event_date'].'</td>
 					<td>'.$rowEvent['event_startTime'].'</td>
 					<td>'.$rowEvent['event_endTime'].'</td>
-					<td><input type="checkbox" name="chkEvent[]" value="'.$rowEvent["SID"].'"></td>
+					<td><input type="checkbox" name="chkEvent[]" value="'.$sid.'"></td>
 				</tr>';
         }
     }else{

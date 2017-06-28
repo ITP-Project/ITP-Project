@@ -16,7 +16,7 @@ include_once 'BookSession_process.php';
 		}
 		
 		$status = "registered";
-		$insert = $conn->query("INSERT INTO participation (sid, unique_id, status) VALUES ('$sid', '$uniqueID', '$status')");
+		$insert = $conn->query("INSERT INTO participation (sid, unique_id, status) VALUES ('$sessionSid', '$uniqueID', '$status')");
 	
 		if($insert){
 			echo '<script>';
