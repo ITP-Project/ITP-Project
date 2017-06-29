@@ -170,7 +170,7 @@ $(function() {
 				</div>
 			  </div>
 			  <br>
-			  <button type="submit" class="btn btn-default" id="create" name="create" value="create">Create</button>
+			  <button type="submit" class="btn btn-default btn-danger" id="create" name="create" value="create">Create</button>
 			</form>
 		  </div>
 

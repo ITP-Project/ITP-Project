@@ -26,7 +26,6 @@ include '../dconfig.php';
 			<ul class="nav nav-tabs">
 			  <li class="active"><a data-toggle="tab" href="#home">Book Volunteer</a></li>
 			  <li><a data-toggle="tab" href="#menu1">View Volunteer</a></li>
-			  
 			</ul>
 
 			<div class="tab-content">
@@ -153,14 +152,13 @@ include '../dconfig.php';
 					</div>
 					<hr>
 					<div class="table-responsive">
-						<table class="table table-striped table-bordered">
+						<table id="event_data" class="table table-striped table-bordered">
 							<thead>  
 								<tr>
 									<td class="hidden">Volunteer ID</td>
 									<td>Name</td>  
 									<td>NRIC</td>  
 									<td>Email</td>
-									<td></td>
 								</tr>  
 							</thead>
 							<tbody id="sessionV">
@@ -168,10 +166,6 @@ include '../dconfig.php';
 							</tbody>
 						</table>
 					</div>
-				</div>
-				<div id="menu2" class="tab-pane fade">
-					<h3>Menu 2</h3>
-					<p>Some content in menu 2.</p>
 				</div>
 			</div>
 		</div>

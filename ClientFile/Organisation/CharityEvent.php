@@ -65,7 +65,7 @@ function create(){
 										<td>'.$row["event_category"].'</td>
 										<td>
 											<a href="CharityEventUpdate.php?id=' . $row["EID"] . '"><span class="glyphicon glyphicon-pencil"></span></a>&nbsp;
-											<a id="remove_btn" href="CharityEventDelete_process.php?id=' . $row["EID"] . '"><span class="glyphicon glyphicon-remove"></span></a>&nbsp;
+											<a id="remove_btn" href="CharityEventDuplicate.php?id=' . $row["EID"] . '"><span class="glyphicon glyphicon-plus"></span></a>&nbsp;
 											<input type="checkbox" name="event_id[]" class="delete_customer" value="'.$row["EID"].'" />
 										</td>
 								   </tr>  
