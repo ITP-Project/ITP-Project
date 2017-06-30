@@ -57,7 +57,7 @@ $(function() {
     });
 
     $('.datepicker3').live('click', function() {
-        $(this).datepicker('destroy').datepicker({changeMonth: true,changeYear: true,dateFormat: "yy-mm-dd",showOn:'focus'}).focus();
+        $(this).datepicker('destroy').datepicker({dateFormat: "yy-mm-dd",showOn:'focus'}).focus();
     });
 
 	$(document).on('click','.btn_remove', function(e){
@@ -170,7 +170,7 @@ $(function() {
 				</div>
 			  </div>
 			  <br>
-			  <button type="submit" class="btn btn-default btn-danger" id="create" name="create" value="create">Create</button>
+			  <button type="submit" class="btn btn-default" id="create" name="create" value="create">Create</button>
 			</form>
 		  </div>
 

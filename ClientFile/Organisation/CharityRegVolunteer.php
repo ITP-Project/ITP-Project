@@ -83,6 +83,7 @@ include '../dconfig.php';
 									<td>Organisation Name</td>  
 									<td>UEN</td>
 									<td>Nationality</td>
+									<td>Contact Number</td>
 									<td>Book <input type="checkbox" class="pull-right" id="chk-all"></td>
 								</tr>  
 							</thead>  
@@ -104,6 +105,7 @@ include '../dconfig.php';
 												<td>'.$row["org_name"].'</td>  
 												<td>'.$row["uen"].'</td>
 												<td>'.$row["nationality"].'</td>
+												<td>'.$row["liason_contact"].'</td>
 												<td><input type="checkbox" class="chk-box pull-left" name="chk[]" value="'.$row["AID"].'"></td>
 											</tr>
 										   ';
@@ -151,21 +153,26 @@ include '../dconfig.php';
 						</div>
 					</div>
 					<hr>
-					<div class="table-responsive">
-						<table id="event_data" class="table table-striped table-bordered">
+					<div class="table-responsive" id="event_data">
+						<table class="table table-striped table-bordered">
 							<thead>  
 								<tr>
-									<td class="hidden">Volunteer ID</td>
 									<td>Name</td>  
+									<td>Email</td>  
 									<td>NRIC</td>  
-									<td>Email</td>
+									<td>Organisation Name</td>  
+									<td>UEN</td>
+									<td>Nationality</td>
+									<td>Contact Number</td>
 								</tr>  
 							</thead>
 							<tbody id="sessionV">
-
 							</tbody>
 						</table>
 					</div>
+					<hr>
+					<!--<input type="submit" name="create_excel" id="create_excel" class="btn btn-success" value="Export to Excel" />-->
+					<button type="submit" id="excel" name="excel" value="excel" class="btn btn-success" value="Export to Excel" />Export to Excel</button>
 				</div>
 			</div>
 		</div>
@@ -178,6 +185,14 @@ include '../dconfig.php';
 </body>
 </html>
 <script>  
+$(document).ready(function(){  
+      $('#excel').click(function(){  
+           var excel_data = $('#event_data').html();  
+           var page = "excel.php?data=" + excel_data;  
+           window.location = page;  
+      });  
+ }); 
+ 
 $(document).ready(function(){  
       var oTable = $('#volunteer_data').dataTable({
         stateSave: false
