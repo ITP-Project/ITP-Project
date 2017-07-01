@@ -6,10 +6,26 @@
 		<div class="w3-container">
 			<h3 class="w3-padding-64"><b>Match It!</b></h3>
 		</div>
+		<?php 
+
+		include_once '../dconfig.php';
+
+		?>
+
+
 		<div class="w3-bar-block">
 			<a href="CharityHome.php" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Home</a> 
 			<a href="CharityRegVolunteer.php" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Volunteers</a> 
 			<a href="CharityEvent.php" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Events Management</a> 
+
+<?php 
+if ($_SESSION["ADMIN_STATUS"] == "YES")
+{
+	echo "<a href='VerifyRegisteredAdmins.php' onclick='w3_close()'' class='w3-bar-item w3-button w3-hover-white'>Admin Management</a>";
+}
+
+?>
+
 			<a href="CharitySetting.php" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Setting</a><br>
 			<a href="../Login.php" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Log Out</a>
 		</div>

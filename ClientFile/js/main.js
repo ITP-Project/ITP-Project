@@ -5,6 +5,7 @@ function signedIn() {
 
 /* Sign out redirect */
 function signedOut() {
+	session_destroy();
 	location.href="Login.php";
 }
 

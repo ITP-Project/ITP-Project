@@ -138,7 +138,7 @@
 
 
   /*css for register*/
-    .register-box {
+  .register-box {
     background-color: white !important;
     max-width: 780px;
     margin: 0 auto !important;
@@ -211,6 +211,55 @@
     transition: 0.5s;
   }
 
+  /*css for forgetPassword*/
+
+  .forget-password-box button {
+    margin-top: 0px;
+    border: 0;
+    border-radius: 2px;
+    color: black;
+    padding: 10px;
+    text-transform: uppercase;
+    font-weight: 400;
+    font-size: 0.7em;
+    letter-spacing: 1px;
+    background-color: #ff4233;
+    cursor:pointer;
+    outline: none;
+    width: 100%;
+  }
+
+  .forget-password-box label {
+    font-weight: 700;
+    font-size: .8em;
+    color: black;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    width: inherit;
+    text-align: center;
+  }
+
+  .forget-password-box{
+    text-align: center;
+  }
+
+  .forget-password-box input{
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 2px;
+    font-size: .9em;
+    color: #888;
+    position: center;
+  }
+
+  .forget-password-box input:focus
+  {
+    outline: none;
+    border-color: #665851;
+    transition: 0.5s;
+    color: #665851;
+  }
+
 
   .selected {
     color: #665851!important;
@@ -240,129 +289,135 @@
     float: right;
   }
 
-.currentEvents p{
-  font-family: "Comic Sans MS", cursive, sans-serif;
-  text-align: center;
-  font-size: 50px;
-  font-size: 4vw;
-}
+  .currentEvents p{
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    text-align: center;
+    font-size: 50px;
+    font-size: 4vw;
+  }
 
-hr.cStyle {
-  border: 0; 
-  height: 1px; 
-  background-image: -webkit-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
-  background-image: -moz-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
-  background-image: -ms-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
-  background-image: -o-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
-}
+  hr.cStyle {
+    border: 0; 
+    height: 1px; 
+    background-image: -webkit-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
+    background-image: -moz-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
+    background-image: -ms-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
+    background-image: -o-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
+  }
 
-hr.uStyle {
-  border: 0; 
-  height: 1px; 
-  background-image: -webkit-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
-  background-image: -moz-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
-  background-image: -ms-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
-  background-image: -o-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
-}
+  hr.uStyle {
+    border: 0; 
+    height: 1px; 
+    background-image: -webkit-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
+    background-image: -moz-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
+    background-image: -ms-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
+    background-image: -o-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
+  }
 
-.upcomingEvents p{
-  font-family: "Comic Sans MS", cursive, sans-serif;
-  text-align: center;
-  font-size: 50px;
-  font-size: 4vw;
-}
+  .upcomingEvents p{
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    text-align: center;
+    font-size: 50px;
+    font-size: 4vw;
+  }
 
-.navbar-default {
-  background-color: #FA8072 !important;
-  font-family: "Comic Sans MS", cursive, sans-serif;
-  text-align: center;
-}
+  .navbar-default {
+    background-color: #FA8072 !important;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    text-align: center;
+  }
 
-.navbar-default .navbar-nav > li > a {
+  .navbar-default .navbar-nav > li > a {
     color: black !important;
-}
+  }
 
-.navbar-default .navbar-nav > .active > a {
+  .navbar-default .navbar-nav > .active > a {
     background-color: white !important;
     color: black !important;
-}
+  }
 
-.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+  .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
     background-color: white !important;
     color: black !important;
-}
+  }
 
-.navbar-default .navbar-header > a {
+  .navbar-default .navbar-header > a {
     color: black !important;
-}
+  }
 
-.navbar-default .navbar-header > button:hover {
-  background-color: white !important;
-}
+  .navbar-default .navbar-header > button:hover {
+    background-color: white !important;
+  }
 
   .navbar-default .navbar-header .icon-bar {
-  background-color: black !important;
-}
-
-/* XS, SM */
-@media (max-width: 991px) {
-
-  .upcomingEvents .col-xs-6 {
-    padding-top: 180%;
+    background-color: black !important;
   }
-}
 
-/* New Layout */
-body {
-  font-size:16px;
-}
+  /* XS, SM */
+  @media (max-width: 991px) {
 
-.w3-half img {
-  margin-bottom:-6px;margin-top:16px;opacity:0.8;cursor:pointer
-}
-.w3-half img:hover {
-  opacity:1
-}
+    .upcomingEvents .col-xs-6 {
+      padding-top: 180%;
+    }
+  }
 
-.w3-main {
-  margin-left:340px;margin-right:40px
-}
+  /* New Layout */
+  body {
+    font-size:16px;
+  }
 
-#statistics table {
-  overflow-y: auto;
-}
+  .w3-half img {
+    margin-bottom:-6px;margin-top:16px;opacity:0.8;cursor:pointer
+  }
+  .w3-half img:hover {
+    opacity:1
+  }
 
-#cipHour {
-  font-size: 50px;
-}
+  .w3-main {
+    margin-left:340px;margin-right:40px
+  }
 
-#ep {
-  text-align: center;
-}
+  #statistics table {
+    overflow-y: auto;
+  }
 
-#cp {
-  text-align: center;
-}
+  #cipHour {
+    font-size: 50px;
+  }
 
- /* Modal Header */
-.modal-header {
+  #ep {
+    text-align: center;
+  }
+
+  #cp {
+    text-align: center;
+  }
+
+  /* Modal Header */
+  .modal-header {
+    background-color: #ff4233;
+    color: black;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 0px;
+  }
+
+  .modal-backdrop.fade.in {
+    z-index: 0;
+  }
+
+  /* Modal Body */
+  .modal-body {padding: 2px 16px;}
+
+  /* Modal Footer */
+  .modal-footer {
     padding: 2px 16px;
     background-color: #5cb85c;
     color: white;
-}
+  }
 
-/* Modal Body */
-.modal-body {padding: 2px 16px;}
-
-/* Modal Footer */
-.modal-footer {
-    padding: 2px 16px;
-    background-color: #5cb85c;
-    color: white;
-}
-
-/* Modal Content */
-.modal-content {
+  /* Modal Content */
+  .modal-content {
     position: relative;
     background-color: #fefefe;
     margin: auto;
@@ -374,20 +429,20 @@ body {
     -webkit-animation-duration: 0.4s;
     animation-name: animatetop;
     animation-duration: 0.4s
-}
+  }
 
-/* Add Animation */
-@-webkit-keyframes animatetop {
+  /* Add Animation */
+  @-webkit-keyframes animatetop {
     from {top: -300px; opacity: 0}
     to {top: 0; opacity: 1}
-}
+  }
 
-@keyframes animatetop {
+  @keyframes animatetop {
     from {top: -300px; opacity: 0}
     to {top: 0; opacity: 1}
-} 
+  } 
 
-.error {color: #FF0000;}
+  .error {color: #FF0000;}
 
 
-/* New Layout */
+  /* New Layout */
