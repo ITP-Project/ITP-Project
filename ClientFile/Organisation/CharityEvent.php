@@ -6,7 +6,25 @@
 	include 'navbar.php';
 	include '../dconfig.php';
 	?>
+	<!-- Table Data -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>  
+    <script src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js"></script>            
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css" />
 </head>
+<script>
+function togglecheckboxes(master,group){
+	var cbarray = document.getElementsByClassName(group);
+	for(var i = 0; i < cbarray.length; i++){
+		var cb = document.getElementById(cbarray[i].id);
+		cb.checked = master.checked;
+	}
+}
+// Redirect to create
+function create(){
+	window.location.href = "CharityEventCreate.php";
+}
+</script>
 <body>
 	<!-- !PAGE CONTENT! -->
 	<div class="w3-main" style="margin-left:340px;margin-right:40px">
@@ -15,82 +33,56 @@
 		<div class="w3-container" id="contact" style="margin-top:75px">
 			<h1 class="w3-xxxlarge w3-text-red"><b>Events Management</b></h1>
 			<hr style="width:50px;border:5px solid red" class="w3-round">
-
-			<button type="button" class="btn btn-danger" id="createBtn" onclick="create()">Create</button>
 			
-			<div class="w3-section">
-				<?php
-								// number of results to show per page
-				$per_page = 5;
-				
-								// figure out the total pages in the database
-				$result = mysql_query("SELECT * FROM created_event");
-				$total_results = mysql_num_rows($result);
-				$total_pages = ceil($total_results / $per_page);
-
-								// check if the 'page' variable is set in the URL (ex: view-paginated.php?page=1)
-				if (isset($_GET['page']) && is_numeric($_GET['page']))
-				{
-					$show_page = $_GET['page'];
-					
-									// make sure the $show_page value is valid
-					if ($show_page > 0 && $show_page <= $total_pages)
-					{
-						$start = ($show_page -1) * $per_page;
-						$end = $start + $per_page; 
-					}
-					else
-					{
-										// error - show first set of results
-						$start = 0;
-						$end = $per_page; 
-					}		
-				}
-				else
-				{
-									// if page isn't set, show first set of results
-					$start = 0;
-					$end = $per_page; 
-				}
-				
-								// display pagination
-				
-				echo "<p><b>View Page:</b> ";
-				for ($i = 1; $i <= $total_pages; $i++)
-				{
-					echo "<a href='CharityEvent.php?page=$i'>$i</a> ";
-				}
-				echo "</p>";
-				
-								// display data in table
-				echo '<table class="table-striped">';
-				echo "<tr><th hidden></th><th>Event Name</th><th>Event Location</th><th>Event Date</th><th>Volunteer Number</th><th></th></tr>";
-
-								// loop through results of database query, displaying them in the table	
-				for ($i = $start; $i < $end; $i++)
-				{
-									// make sure that PHP doesn't try to show results that don't exist
-					if ($i == $total_results) { break; }
-					
-									// echo out the contents of each row into a table
-					echo "<tr>";
-					echo '<td hidden>' . mysql_result($result, $i, 'EID') . '</td>';
-					echo '<td style="width: 300px; height:50px;">' . mysql_result($result, $i, 'event_name') . '</td>';
-					echo '<td style="width: 300px;">' . mysql_result($result, $i, 'event_location') . '</td>';
-					//echo '<td style="width: 500px;">' . mysql_result($result, $i, 'eventSession1') . '</td>';
-					//echo '<td style="width: 400px;">' . mysql_result($result, $i, 'eventSession2') . '</td>';
-					echo '<td style="width: 200px;">' . mysql_result($result, $i, 'event_date') . '</td>';
-					echo '<td style="width: 200px;">' . mysql_result($result, $i, 'max_participants') . '</td>';
-					echo '<td style="width: 200px;">
-					<a class="btn btn-danger" href="CharityEventUpdate.php?id=' . mysql_result($result, $i, 'EID') . '">Update</a>
-					<a class="btn btn-danger" href="CharityEventDelete_process.php?id=' . mysql_result($result, $i, 'EID') . '">Delete</a>
-					</td>';
-					echo "</tr>"; 
-				}
-								// close table>
-				echo "</table>"; 
-				?>
+			<button type="button" class="btn btn-danger" id="createBtn" onclick="create()">Create</button><hr>
+			
+			<div class="table-responsive">
+				<table id="event_data" class="table table-striped table-bordered">  
+                    <thead>  
+                        <tr>
+							<td class="hidden">Event ID</td>
+                            <td>Event Name</td>  
+                            <td>Event Start Date</td>  
+                            <td>Event End Date</td>  
+                            <td>Event Location</td>  
+                            <td>Event Description</td>
+							<td>Event Category</td>
+							<td></td>
+                        </tr>  
+                    </thead>  
+					<?php  
+						if($result = $conn->query("SELECT * FROM created_event ORDER BY EID")) {
+							while($row = mysqli_fetch_array($result))  
+							{  
+								echo '  
+									<tr id="'.$row["EID"].'">
+										<td class="hidden">'.$row["EID"].'</td> 
+										<td>'.$row["event_name"].'</td>  
+										<td>'.$row["event_startDate"].'</td>  
+										<td>'.$row["event_endDate"].'</td>  
+										<td>'.$row["event_location"].'</td>  
+										<td>'.$row["event_desc"].'</td>
+										<td>'.$row["event_category"].'</td>
+										<td>
+											<a href="CharityEventUpdate.php?id=' . $row["EID"] . '"><span class="glyphicon glyphicon-pencil"></span></a>&nbsp;
+											<a id="duplicate_btn" href="CharityEventDuplicate.php?id=' . $row["EID"] . '"><span class="glyphicon glyphicon-plus"></span></a>&nbsp;
+											<a id="export_btn" href="CharityEventDuplicate.php?id=' . $row["EID"] . '"><span class="glyphicon glyphicon-plus"></span></a>&nbsp;
+											<input type="checkbox" name="event_id[]" class="delete_customer" value="'.$row["EID"].'" />
+										</td>
+								   </tr>  
+								   ';  
+							}
+						}
+						else {
+							echo 'No event to be displayed!';
+						}
+						
+						$conn->close();
+                    ?>  
+                </table>
 			</div>
+			<hr>
+			<button type="button" name="btn_delete" id="btn_delete" class="btn btn-danger">Delete</button>
 		</div>
 	  <!-- End page content -->
 	</div>
@@ -100,3 +92,52 @@
 
 </body>
 </html>
+
+<script>  
+ $(document).ready(function(){  
+      $('#event_data').DataTable();  
+ });  
+ 
+$(document).ready(function(){
+ 
+ $('#btn_delete').click(function(){
+  
+  if(confirm("Are you sure you want to delete this?"))
+  {
+   var id = [];
+   
+   $(':checkbox:checked').each(function(i){
+    id[i] = $(this).val();
+   });
+   
+   if(id.length === 0) //tell you if the array is empty
+   {
+    alert("Please Select atleast one checkbox");
+   }
+   else
+   {
+    $.ajax({
+     url:'CharityEventDelete_process.php',
+     method:'POST',
+     data:{id:id},
+     success:function()
+     {
+      for(var i=0; i<id.length; i++)
+      {
+       $('tr#'+id[i]+'').css('background-color', '#ccc');
+       $('tr#'+id[i]+'').fadeOut('slow');
+      }
+     }
+     
+    });
+   }
+   
+  }
+  else
+  {
+   return false;
+  }
+ });
+ 
+});
+ </script>

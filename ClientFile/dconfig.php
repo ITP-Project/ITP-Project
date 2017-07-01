@@ -1,4 +1,5 @@
 <?php
+
 $servername = "sql12.freemysqlhosting.net";
 $username = "sql12179354";  //your user name for php my admin if in local most probaly it will be "root"
 $password = "51brcjPTZ6";  //password probably it will be empty
