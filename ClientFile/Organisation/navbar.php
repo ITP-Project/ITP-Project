@@ -18,13 +18,13 @@
 			<a href="CharityRegVolunteer.php" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Volunteers</a> 
 			<a href="CharityEvent.php" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Events Management</a> 
 
-<?php 
-if ($_SESSION["ADMIN_STATUS"] == "YES")
-{
-	echo "<a href='VerifyRegisteredAdmins.php' onclick='w3_close()'' class='w3-bar-item w3-button w3-hover-white'>Admin Management</a>";
-}
+			<?php 
+			if ($_SESSION["ADMIN_STATUS"] == "YES")
+			{
+				echo "<a href='VerifyRegisteredAdmins.php' onclick='w3_close()'' class='w3-bar-item w3-button w3-hover-white'>Admin Management</a>";
+			}
 
-?>
+			?>
 
 			<a href="CharitySetting.php" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Setting</a><br>
 			<a href="../Login.php" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Log Out</a>
