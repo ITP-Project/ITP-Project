@@ -48,7 +48,7 @@ include_once 'dconfig.php';
 	if(!empty($_POST))
 	{
 		
-		$sqlInsert = "INSERT INTO acc_organization (name, email, encrypted_password, nric, uen) VALUES ('$name','$email','$encrypted_password','$nric','$uen')"; 
+		$sqlInsert = "INSERT INTO acc_organization (name, email, encrypted_password, nric, uen, check_verify, is_admin) VALUES ('$name','$email','$encrypted_password','$nric','$uen', 'NO', 'NO')"; 
 
 		if($conn ->query($sqlInsert) == TRUE){
 			$msg = "Account successfully created";

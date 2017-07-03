@@ -1,7 +1,6 @@
 
 <?php
 include_once 'dconfig.php';
-
 ?>
 
 <!DOCTYPE html>
@@ -35,31 +34,37 @@ include_once 'dconfig.php';
 
 	//define variables 
 	$adminUsername = $adminPass = $error = ""; 
-	if($_SERVER["REQUEST_METHOD"] == "POST")
-	{
+ if($_SERVER["REQUEST_METHOD"] == "POST"){
+	
 		$adminUsername = test_input($_POST["adminUsername"]);
 		$adminPass = test_input($_POST["adminPass"]); 
 		$admin_encryptedPass = sha1($adminPass);
 
-		$sql = "SELECT AID FROM acc_organization WHERE email = '$adminUsername' AND encrypted_password = '$admin_encryptedPass'"; 
+		$sql = "SELECT is_admin, uen FROM acc_organization WHERE email = '$adminUsername' AND encrypted_password = '$admin_encryptedPass'"; 
 
 		$result = mysqli_query($conn,$sql);
 		$row = mysqli_fetch_array($result, MYSQLI_ASSOC); 
-		$active = $row['active']; 
+		// $active = $row['active']; 
+
+		// mysqli_bind_result($result, $is_admin);
 
 		$count = mysqli_num_rows($result); 
 
 		if($count == 1)
 		{
+			$is_admin = $row['is_admin'];
 			$_SESSION['USERNAME'] = $adminUsername; 
+			$_SESSION['ADMIN_STATUS'] = $is_admin;		
+			$_SESSION['ADMIN_UEN'] = $row['uen'];	
+
 			header("location: Organisation/CharityHome.php");
 		} 
 		else{
 			$error = "Invalid Username and Password";
 		}
 
+		
 	}
-
 
 //method to test the input
 	function test_input($data)
@@ -70,9 +75,10 @@ include_once 'dconfig.php';
 		return $data;
 	}
 
-
 	?>
-	<form action ="" method="post" role="form" data-toggle= "validator" name="login" >
+
+
+	<form action ="Login.php" method="post" role="form" data-toggle= "validator" name="login" >
 		<div class="container">
 			<div class="login-box animated fadeInUp">
 				<div class="box-header">
@@ -93,9 +99,9 @@ include_once 'dconfig.php';
 					</div>
 				</div>
 				<?php echo $error; ?>
-				<a href="#" data-toggle="modal" data-target="#myModal"><p class="small">Forgot your password?</p></a>
+				<a href="ForgetPassword.php"><p class="small">Forgot your password?</p></a>
 				<br/>
-				<button type="submit" id="signIn" >Sign In</button>
+				<button type="submit" name="LOGIN" value="LOGIN" id="signIn" >Sign In</button>
 
 				<p class="small">Dont have an Account? <a href="Register.php">Register Here</a></p>
 
@@ -108,29 +114,93 @@ include_once 'dconfig.php';
 
 
 	<!-- Modal for password-->
-	<div id="myModal" class="modal fade" role="dialog">
-		<div class="modal-dialog">
+	<?php 
 
-			<!-- Modal content-->
-			<div class="modal-content">
-				<div class="modal-header">
-					<h4 class="modal-title">Forgot your password?</h4>
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-				</div>
-				<div class="modal-body">
-					<table>
-						<tr>
-							<td>Enter Email</td>
-							<td>&nbsp;<input type="text" id="username"></td>
-						</tr>
-					</table></br>
-					<button type="button" class="btn btn-primary" data-dismiss="modal" id="sendBtn">Send</button>
-				</div>
+// method to generate random password
+	function randomPassword() {
+		$alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
+    $pass = array(); //remember to declare $pass as an array
+    $alphaLength = strlen($alphabet) - 1; //put the length -1 in cache
+    for ($i = 0; $i < 8; $i++) {
+    	$n = rand(0, $alphaLength);
+    	$pass[] = $alphabet[$n];
+    }
+    return implode($pass); //turn the array into a string
+}
 
+$forgetEmail = $newPassword  = "";
+$forgetError = "Hi";
+
+// if(!empty($_POST['submit']) && ($_POST['submit'] == 'FORGETPASSWORD'))
+// {
+// 	$forgetEmail = test_input($_POST["forgetEmail"]);
+
+// 	$sqlForget = "SELECT * FROM acc_organization WHERE email = '$forgetEmail' "; 
+
+// 	$res = mysqli_query($conn, $sqlForget);
+// 	$count_forget = mysqli_num_rows($res);
+// 	if($count_forget == 1)
+// 	{
+// 		$r = mysqli_fetch_assoc($res);
+// 		$newPassword = randomPassword(); 
+// 			// $to = $r['email'];
+// 		$to = 'bloowhiteskies@gmail.com'; 
+// 		$subject = "Your New Passoword"; 
+// 		$message = "Please use this password to Login";
+// 		$headers = "From : bloowhiteskies@gmail.com"; 
+// 		if(mail($to, $subject, $message, $headers))
+// 		{
+// 			$forgetError = "Your Password has been sent to your email";
+// 		}
+// 		else{
+// 			$forgetError = "Failed to Recover your password, Please try again";
+// 		}
+
+// 	}
+// 	else
+// 	{
+// 		$forgetError = "This email does not exist";
+// 	}
+
+// }
+
+?>
+
+<div id="myModal" class="modal fade" role=" dialog">
+	<div class="modal-dialog">
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header ">
+				<h2>Forgot your password?</h2>
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+			</div>
+			<div class="modal-body forget-password-box ">
+
+				<form action ="" method="post" role="form" data-toggle= "validator" name="login" >
+					<div class="container">
+						
+						<div class="row">
+							<div class="col-sm-12 form-group">
+								<label>Email </label>
+								<input type="email" name="forgetEmail" id="forgetEmail" placeholder="Enter your Email Address">
+								<div class="help-block with-errors"></div>
+
+							</div>
+						</div>
+						<button type="submit" name="FORGETPASSWORD" value="FORGETPASSWORD" class="btn btn-primary"  id="sendBtn">Send</button>
+						<?php echo $forgetError; 
+						echo "HELLOO";
+
+						?>
+					</div>
+				</form>
+				
 			</div>
 
 		</div>
+
 	</div>
+</div>
 
 </body>
 </html>
