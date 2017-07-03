@@ -20,7 +20,7 @@ function createClick(){
     age:50,
     eyeColor:"blue"
   };
-const firebaseRef = firebase.database().ref().child('TestingObject').child('111').child('sessions').child('67').set(testingEvent);
+const firebaseRef = firebase.database().ref().child('Test').child('111').child('sessions').child('67').set(testingEvent);
 
   // const firebaseRef = firebase.database().ref().child('TestingObject').child('111').child('sessions').child('67').set('hello');
 

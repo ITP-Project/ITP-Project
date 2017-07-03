@@ -14,22 +14,7 @@
 	<link rel="stylesheet" href="http://code.jquery.com/ui/1.9.0/themes/base/jquery-ui.css" />
 	<script src="http://code.jquery.com/jquery-1.8.2.js"></script>
 	<script src="http://code.jquery.com/ui/1.9.0/jquery-ui.js"></script>
-	
-	<script src="https://www.gstatic.com/firebasejs/4.1.3/firebase.js"></script>
-	<script src="../js/firebase_insert.js"></script>
 <script>
-// Initialize Firebase
-  var config = {
-    apiKey: "AIzaSyBoSpzhFZLwPubJ6lgYjH50cEitXiMEXvU",
-    authDomain: "matchit-e3c39.firebaseapp.com",
-    databaseURL: "https://matchit-e3c39.firebaseio.com",
-    projectId: "matchit-e3c39",
-    storageBucket: "matchit-e3c39.appspot.com",
-    messagingSenderId: "1097349398020"
-  };
-  firebase.initializeApp(config);
-
-
 $(function() {
     $( "#datepicker" ).datepicker({
 		dateFormat: 'yy-mm-dd'
@@ -104,6 +89,7 @@ function modal(){
 							<label for="eventName">Event Name</label>
 							<div class="row">
 								<div class='col-md-6'>
+								<input type="text" class="form-control" name="eventName" id="eventName">
 									<input type="text" class="form-control" name="eventName" id="eventName">
 								</div>
 							</div>

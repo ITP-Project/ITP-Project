@@ -23,6 +23,11 @@
 			echo 'window.location.href="CharityEvent.php";';
 			echo '</script>';
 			die('Error : ('. $conn->errno .') '. $conn->error);
+		} else {
+			echo '<script>';
+			echo 'alert("Event Successfully created!");';
+			echo 'window.location.href="CharityEventDisplayCreated.php";';
+			echo '</script>';
 		}
 		
 		include 'CharityEventCreateSession_process.php';
