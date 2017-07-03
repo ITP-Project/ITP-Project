@@ -16,17 +16,13 @@
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
 	<link rel="stylesheet" type="text/css" href="../CSS/style.css">
 	<link rel="stylesheet" href="../bootstrap-3.3.7/dist/css/bootstrap.min.css">
-<<<<<<< HEAD
-	<script src="https://www.gstatic.com/firebasejs/4.1.3/firebase.js"></script>
-=======
-	<link href="//cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/e8bddc60e73c1ec2475f827be36e1957af72e2ea/build/css/bootstrap-datetimepicker.css" rel="stylesheet">
+
 	<script src="../bootstrap-3.3.7/dist/js/bootstrap.min.js"></script>
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 
 	<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script> -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.5/validator.min.js"></script>
->>>>>>> 7d8cd2bd7805aedecc5d9889836ae1ad05627738
 	<script src="../js/main.js"></script>
 	
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
