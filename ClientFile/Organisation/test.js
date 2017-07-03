@@ -11,5 +11,18 @@
   firebase.initializeApp(config);
 
   window.alert("OKAY");
+function createClick(){
 
-const firebaseRef = firebase.database().ref().child('object').set("well fuck you");
+  var testingEvent = 
+  {
+       firstName:"John",
+    lastName:"Doe",
+    age:50,
+    eyeColor:"blue"
+  };
+const firebaseRef = firebase.database().ref().child('TestingObject').child('111').child('sessions').child('67').set(testingEvent);
+
+  // const firebaseRef = firebase.database().ref().child('TestingObject').child('111').child('sessions').child('67').set('hello');
+
+}
+

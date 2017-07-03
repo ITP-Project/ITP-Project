@@ -40,7 +40,7 @@ include_once 'dconfig.php';
 		$adminPass = test_input($_POST["adminPass"]); 
 		$admin_encryptedPass = sha1($adminPass);
 
-		$sql = "SELECT is_admin FROM acc_organization WHERE email = '$adminUsername' AND encrypted_password = '$admin_encryptedPass'"; 
+		$sql = "SELECT is_admin, uen FROM acc_organization WHERE email = '$adminUsername' AND encrypted_password = '$admin_encryptedPass'"; 
 
 		$result = mysqli_query($conn,$sql);
 		$row = mysqli_fetch_array($result, MYSQLI_ASSOC); 
@@ -54,7 +54,8 @@ include_once 'dconfig.php';
 		{
 			$is_admin = $row['is_admin'];
 			$_SESSION['USERNAME'] = $adminUsername; 
-			$_SESSION['ADMIN_STATUS'] = $is_admin;			
+			$_SESSION['ADMIN_STATUS'] = $is_admin;		
+			$_SESSION['ADMIN_UEN'] = $row['uen'];	
 
 			header("location: Organisation/CharityHome.php");
 		} 

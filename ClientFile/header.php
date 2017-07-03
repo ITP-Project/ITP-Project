@@ -1,12 +1,12 @@
 <html>
 <head>
-<?php 				
-session_start();
-if(!isset($_SESSION['USERNAME']))
-{
-	header("Location: Login.php");
-}
-?>
+	<?php 				
+	session_start();
+	if(!isset($_SESSION['USERNAME']))
+	{
+		header("Location: ../Login.php");
+	}
+	?>
 	<title>Volunteer Scheduling Application</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -17,21 +17,23 @@ if(!isset($_SESSION['USERNAME']))
 	<link rel="stylesheet" type="text/css" href="../CSS/style.css">
 	<link rel="stylesheet" href="../bootstrap-3.3.7/dist/css/bootstrap.min.css">
 	<link href="//cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/e8bddc60e73c1ec2475f827be36e1957af72e2ea/build/css/bootstrap-datetimepicker.css" rel="stylesheet">
-		<script src="../bootstrap-3.3.7/dist/js/bootstrap.min.js"></script>
+	<script src="../bootstrap-3.3.7/dist/js/bootstrap.min.js"></script>
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 
 	<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script> -->
-
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.5/validator.min.js"></script>
 	<script src="../js/main.js"></script>
 	
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	
+
 	<!--<script src="jquery.js" type="text/javascript"></script>
 	<script src="js-script.js" type="text/javascript"></script>-->
 	<style>
-	body,h1,h2,h3,h4,h5 {font-family: "Poppins", sans-serif}
+		body,h1,h2,h3,h4,h5 {font-family: "Poppins", sans-serif}
 	</style>
 </head>
 </html>

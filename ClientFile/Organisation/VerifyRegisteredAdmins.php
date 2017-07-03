@@ -5,8 +5,8 @@
 	include '../header.php';
 	include 'navbar.php';
 	include '../dconfig.php';
-	include 'VerifyRegisteredAdmins_delete_process';
-	include 'VerifyRegisteredAdmins_verify_process';
+	// include 'VerifyRegisteredAdmins_delete_process.php';
+	// include 'VerifyRegisteredAdmins_verify_process.php';
 	?>
 
 
