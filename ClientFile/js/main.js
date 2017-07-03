@@ -1,11 +1,10 @@
-/* Sign in redirect */
-function signedIn() {
-	location.href="Volunteer/Home.php";
-}
-
 /* Sign out redirect */
 function signedOut() {
 	location.href="Login.php";
+}
+
+function eventPage() {
+	location.href="CharityEvent.php";
 }
 
 // Script to open and close sidebar

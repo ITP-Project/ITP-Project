@@ -16,14 +16,8 @@
 		$insert_rows = $conn->query("INSERT INTO created_event (event_name, event_desc, event_location, event_startDate, event_endDate, event_category) VALUES 
 		('$eventName','$eventDesc','$eventLocation','$eventStartDate','$eventEndDate','$eventCategory')");
 		
-		if($insert_rows)
-		{
-			echo '<script>';
-			echo 'alert("Event successfully created!");';
-			echo 'window.location.href="CharityEvent.php";';
-			echo '</script>';
-		}
-		else{
+		if(!$insert_rows)
+		{	
 			echo '<script>';
 			echo 'alert("Event already exist!");';
 			echo 'window.location.href="CharityEvent.php";';
