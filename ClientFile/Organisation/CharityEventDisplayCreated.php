@@ -134,7 +134,7 @@
 							}
 
 							// display data in table
-							echo '<table class="table table-striped table-bordered">';
+							echo '<table class="table table-striped table-bordered" id="myTab">';
 							echo "<tr><th hidden></th><th>Session Start Time</th><th>Session End Time</th><th>Event Date</th><th>Max Participation</th><th hidden></th></tr>";
 
 							// loop through results of database query, displaying them in the table
@@ -149,7 +149,7 @@
 
 							// echo out the contents of each row into a table
 							// $row[1] is the host column in database
-							echo "<tr>";
+							echo "<tr id='rowID'>";
 							echo '<td hidden><input type="text" id="sessionID" value="'. $row[0] .'">' . $row[0] . '</td>';
 							echo '<td><input hidden type="text" id="sessionStart" value="'. $row[3] .'">' . $row[3] . '</td>';
 							echo '<td><input hidden type="text" id="sessionEnd" value="'. $row[4] .'">' . $row[4] . '</td>';
@@ -181,25 +181,13 @@
 			
 			</div>
 			<hr>
-			<!--<button type="button" name="btn_back" id="btn_back" class="btn btn-danger" onclick="submitClick()">Back</button>-->
-			<button id="submitBtn" onclick="submitClick();">submit</button>
-			
-			<table>
-		<thead>
-			<tr>
-				<td>Name</td>
-				<td>Email</td>
-				<td>Actions</td>
-			</tr>
-		</thead>
-		<tbody id="table_body">
-
-		</tbody>
-	</table>
+			<a id="submitBtn" class="btn btn-danger" value="Back" onclick="submitClick();" href="CharityEvent.php" />Back</a>
 		</div>
 	  <!-- End page content -->
 	</div>
-
+	<?php
+		mysqli_close($conn);
+	?>
 <!-- W3.CSS Container -->
 <div class="w3-light-grey w3-container w3-padding-32" style="margin-top:75px;padding-right:58px"></div>
 

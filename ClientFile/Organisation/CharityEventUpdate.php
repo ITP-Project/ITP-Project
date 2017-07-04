@@ -12,7 +12,21 @@
 	<link rel="stylesheet" href="http://code.jquery.com/ui/1.9.0/themes/base/jquery-ui.css" />
 	<script src="http://code.jquery.com/jquery-1.8.2.js"></script>
 	<script src="http://code.jquery.com/ui/1.9.0/jquery-ui.js"></script>
+	
+	<script src="https://www.gstatic.com/firebasejs/4.1.3/firebase.js"></script>
+	<script src="firebase_insert.js"></script>
 <script>
+// Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyBoSpzhFZLwPubJ6lgYjH50cEitXiMEXvU",
+    authDomain: "matchit-e3c39.firebaseapp.com",
+    databaseURL: "https://matchit-e3c39.firebaseio.com",
+    projectId: "matchit-e3c39",
+    storageBucket: "matchit-e3c39.appspot.com",
+    messagingSenderId: "1097349398020"
+  };
+  firebase.initializeApp(config);
+
 $(function() {
     $( "#datepicker" ).datepicker({
 		dateFormat: 'yy-mm-dd'
@@ -31,16 +45,17 @@ $(function() {
 
     var options = '<div class="row" id="row'+i+'"><br>' +
 						'<div class="col-sm-3">' +
-							'<input type="text" class="form-control" name="sessionStart[]" placeholder="Eg. 0900 pm"/>' +
+							'<input type="text" class="form-control" name="sessionStart[]" placeholder="Eg. 0900 pm" />' +
 						'</div>' +
 						'<div class="col-sm-3">' +
-							'<input type="text" class="form-control" name="sessionEnd[]" placeholder="Eg. 1400 pm"/>' +
+							'<input type="text" class="form-control" name="sessionEnd[]" placeholder="Eg. 1400 pm" />' +
 						'</div>' +
 						'<div class="col-sm-3">' +
 							'<input type="text" class="datepicker3 form-control" name="eventDate[]" />' +
 						'</div>' +
 						'<div class="col-sm-2">' +
 							'<input type="text" class="form-control" name="maxPart[]" />' +
+							'<input type="text" class="form-control hidden" name="volPart[]" value="0" />' +
 						'</div>' +
 						'<div class="col-sm-1">' +
 							'<button name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button>' +
@@ -175,7 +190,7 @@ $(function() {
 
 					// display data in table
 					echo '<table class="table table-striped table-bordered">';
-					echo "<tr><th hidden></th><th>Session Start Time</th><th>Session End Time</th><th>Event Date</th><th>Max Participation</th><th></th></tr>";
+					echo "<tr><th hidden></th><th hidden></th><th>Session Start Time</th><th>Session End Time</th><th>Event Date</th><th>Max Participation</th><th></th></tr>";
 
 					// loop through results of database query, displaying them in the table
 					for ($i = $start; $i < $end; $i++)
@@ -189,8 +204,9 @@ $(function() {
 
 					// echo out the contents of each row into a table
 					// $row[1] is the host column in database
-					echo "<tr>";
-					echo '<td hidden>' . $row[1] . '</td>';
+					echo "<tr id='rowSID'>";
+					echo '<td hidden><input type="text" id="SID" value="'. $row[0] .'">' . $row[0] . '</td>';
+					echo '<td hidden><input type="text" id="EID" value="'. $row[1] .'">' . $row[1] . '</td>';
 					echo '<td>' . $row[3] . '</td>';
 					echo '<td>' . $row[4] . '</td>';
 					echo '<td>' . $row[2] . '</td>';
@@ -246,6 +262,7 @@ $(function() {
 					</div>
 					<div class="col-sm-2">
 						<input type="text" class="form-control" name="maxPart[]" />
+						<input type="text" class="form-control hidden" name="volPart[]" value="0" />
 					</div>
 				</div>
 				<div id="extender">
@@ -324,11 +341,13 @@ $(function() {
 				</div>
 			  </div>
 			  <br>
-			  <button type="submit" class="btn btn-default btn-danger" id="update" name="update" value="update">Edit</button>
+			  <!--<button type="submit" class="btn btn-default btn-danger" id="update" name="update" value="update" onclick="updateClick();">Edit</button>-->
+			  <input type="submit" class="btn btn-danger" id="update" name="update" value="Edit">
 			</form>
 		  </div>
 
 		<!-- End page content -->
+		
 		</div>
 		<?php
 		 mysqli_close($conn);

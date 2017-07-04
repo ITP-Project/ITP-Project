@@ -11,15 +11,29 @@
     <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>  
     <script src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js"></script>            
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css" />
+	
+	<script src="https://www.gstatic.com/firebasejs/4.1.3/firebase.js"></script>
+	<script src="firebase_insert.js"></script>
 </head>
 <script>
-function togglecheckboxes(master,group){
+// Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyBoSpzhFZLwPubJ6lgYjH50cEitXiMEXvU",
+    authDomain: "matchit-e3c39.firebaseapp.com",
+    databaseURL: "https://matchit-e3c39.firebaseio.com",
+    projectId: "matchit-e3c39",
+    storageBucket: "matchit-e3c39.appspot.com",
+    messagingSenderId: "1097349398020"
+  };
+  firebase.initializeApp(config);
+
+/*function togglecheckboxes(master,group){
 	var cbarray = document.getElementsByClassName(group);
 	for(var i = 0; i < cbarray.length; i++){
 		var cb = document.getElementById(cbarray[i].id);
 		cb.checked = master.checked;
 	}
-}
+}*/
 // Redirect to create
 function create(){
 	window.location.href = "CharityEventCreate.php";
@@ -125,6 +139,12 @@ $(document).ready(function(){
       {
        $('tr#'+id[i]+'').css('background-color', '#ccc');
        $('tr#'+id[i]+'').fadeOut('slow');
+	   var firebaseRef = firebase.database().ref(); //object for the database
+
+		var deletePost = firebaseRef.child("events/"+id[i]+""); //delete event based on checked checkbox
+
+		deletePost.remove();
+	   
       }
      }
      

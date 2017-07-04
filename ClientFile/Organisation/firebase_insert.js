@@ -1,14 +1,7 @@
-//real time data retrieve
-/*var firebaseHeadingRef = firebase.database().ref().child("Heading");
-
-firebaseHeadingRef.on('value', function(datasnapshot){
-	fireHeading.innerText = datasnapshot.val();
-});*/
-
 //write to database
 function submitClick(){
 	//get the html element
-	var x = document.getElementById("eventID").value;
+	var eventID = document.getElementById("eventID").value;
 	var eventName = document.getElementById("eventName");
 	var eventLocation = document.getElementById("eventLocation");
 	var eventStartDate = document.getElementById("eventStartDate");
@@ -16,21 +9,12 @@ function submitClick(){
 	var eventDesc = document.getElementById("eventDesc");
 	var eventCategory = document.getElementById("eventCategory");
 	var hostName = "SPD";
-	
-	//Session
-	var sessionID = document.getElementById("sessionID");
-	var sessionStart = document.getElementById("sessionStart");
-	var sessionEnd = document.getElementById("sessionEnd");
-	var sessionDate = document.getElementById("eventDate");
-	var maxPart = document.getElementById("maxPart");
-	var volPart = document.getElementById("volPart");
-
 
 	var firebaseRef = firebase.database().ref(); //object for the database
 
 	//Create event
-	var newPostRef = firebaseRef.child("events/"+x+"");
-	newPostRef.set({
+	var eventCreate = firebaseRef.child("events/"+eventID+"");
+	eventCreate.set({
 		//adding child value to event
 		name: eventName.value,
 		location: eventLocation.value,
@@ -38,37 +22,32 @@ function submitClick(){
 		endDate: eventEndDate.value,
 		category: eventCategory.value,
 		description: eventDesc.value,
-		eventID: x,
+		eventID: eventID,
 		hostName: hostName
 	});
 	
-	//Create sessions in event
-	var test1 = newPostRef.child("sessions/"+sessionID.value+"");
-	test1.set({
-		//adding child value to sessions
-		date: sessionDate.value,
-		sessionID: sessionID.value,
-		endTime: sessionStart.value,
-		startTime: sessionEnd.value,
-		volunteerMax: maxPart.value,
-		volunteerNo: volPart.value
+	$("tr#rowID").each(function(){
+		//get session elements
+		var sessionID = $(this).find("input#sessionID").val();
+		var sessionStart = $(this).find("input#sessionStart").val();
+		var sessionEnd = $(this).find("input#sessionEnd").val();
+		var sessionDate = $(this).find("input#eventDate").val();
+		var maxPart = $(this).find("input#maxPart").val();
+		var volPart = $(this).find("input#volPart").val();
+
+		//Create sessions in event
+		var sessionCreate = eventCreate.child("sessions/"+sessionID+"");
+		sessionCreate.set({
+			//adding child value to sessions
+			date: sessionDate,
+			sessionID: sessionID,
+			endTime: sessionEnd,
+			startTime: sessionStart,
+			volunteerMax: maxPart,
+			volunteerNo: volPart
+		});
 	});
 	
-	/*for(i=0; i<tableRow.length; i++){
-		//Create sessions in event
-		var test1 = newPostRef.child("sessions/"+i+"");
-		test1.set({
-			//adding child value to sessions
-			date: sessionDate[i].value
-		});
-	}*/
-
-	/*var messageText = mainText.value;
-	var messageText2 = mainText2.value;
-
-	firebaseRef.push().set(messageText); //manually set the data in firebase
-	firebaseRef.push().set(messageText2); //manually set the data in firebase*/
-
 }
 
 //Retrieve data from firebase
