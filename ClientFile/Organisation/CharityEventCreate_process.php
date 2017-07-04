@@ -10,11 +10,12 @@
 		$eventStartDate = trim($_POST["eventStartDate"]);
 		$eventEndDate = trim($_POST["eventEndDate"]);
 		$eventCategory = trim($_POST["eventCategory"]);
+		$eventAdmin = $_SESSION['USERNAME'];
 		//$sessionStart = trim($_POST["sessionStart"]);
 		
 		// Perform insert queries
-		$insert_rows = $conn->query("INSERT INTO created_event (event_name, event_desc, event_location, event_startDate, event_endDate, event_category) VALUES 
-		('$eventName','$eventDesc','$eventLocation','$eventStartDate','$eventEndDate','$eventCategory')");
+		$insert_rows = $conn->query("INSERT INTO created_event (event_name, event_desc, event_location, event_startDate, event_endDate, event_category, created_by) VALUES 
+		('$eventName','$eventDesc','$eventLocation','$eventStartDate','$eventEndDate','$eventCategory', '$eventAdmin')");
 		
 		if(!$insert_rows)
 		{	

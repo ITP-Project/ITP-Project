@@ -15,14 +15,25 @@ function createClick(){
 
   var testingEvent = 
   {
-       firstName:"John",
-    lastName:"Doe",
-    age:50,
+    firstName:"Jooohn",
+    lastName:"Doeooooo",
+    age:60,
     eyeColor:"blue"
   };
-const firebaseRef = firebase.database().ref().child('Test').child('111').child('sessions').child('67').set(testingEvent);
-
+// const firebaseRef = firebase.database().ref().child('Test').child('111').set(testingEvent);
+// 
   // const firebaseRef = firebase.database().ref().child('TestingObject').child('111').child('sessions').child('67').set('hello');
+
+ // Get a key fr new Post
+var newPostKey = firebase.database().ref().child('Test').push().key; 
+  window.alert(newPostKey);
+
+//Write new post's data 
+var updates={};
+updates['/Test/' + newPostKey] = testingEvent;
+updates['/user-posts/' + '999' + '/' + newPostKey] = testingEvent;
+
+return firebase.database.ref().update(updates);
 
 }
 

@@ -51,7 +51,8 @@ function create(){
                         </tr>  
                     </thead>  
 					<?php  
-						if($result = $conn->query("SELECT * FROM created_event ORDER BY EID")) {
+						$eventAdmin = $_SESSION['USERNAME']; 
+						if($result = $conn->query("SELECT * FROM created_event WHERE created_by = '$eventAdmin' ORDER BY EID  ")) {
 							while($row = mysqli_fetch_array($result))  
 							{  
 								echo '  
