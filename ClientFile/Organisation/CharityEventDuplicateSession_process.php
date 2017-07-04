@@ -2,7 +2,7 @@
 
 include '../dconfig.php';
 
-	$result = $conn->query("SELECT * FROM created_event WHERE EID=$eventID");
+	$result = $conn->query("SELECT * FROM created_event ORDER BY EID ASC");
 	while($row = $result->fetch_assoc()){
 		$eventID=$row['EID'];
 	}
@@ -13,11 +13,12 @@ include '../dconfig.php';
 		$sessionStart = mysqli_real_escape_string($conn, $_POST['sessionStart'][$i]);
 		$sessionEnd = mysqli_real_escape_string($conn, $_POST['sessionEnd'][$i]);
 		$max_part = mysqli_real_escape_string($conn, $_POST['maxPart'][$i]);
+		$vol_part = mysqli_real_escape_string($conn, $_POST['volPart'][$i]);
 
 		if (empty(trim($sessionStart))) continue;
 
-		$sql = "INSERT INTO event_shift(EID, event_date, event_startTime, event_endTime, max_participation)
-				VALUES('$eventID', '$eventDate', '$sessionStart', '$sessionEnd', '$max_part')";
+		$sql = "INSERT INTO event_shift(EID, event_date, event_startTime, event_endTime, max_participation, participation_count)
+				VALUES('$eventID', '$eventDate', '$sessionStart', '$sessionEnd', '$max_part', '$vol_part')";
 		mysqli_query($conn, $sql);
 	}
 

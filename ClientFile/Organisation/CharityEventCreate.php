@@ -89,7 +89,6 @@ function modal(){
 							<label for="eventName">Event Name</label>
 							<div class="row">
 								<div class='col-md-6'>
-								<input type="text" class="form-control" name="eventName" id="eventName">
 									<input type="text" class="form-control" name="eventName" id="eventName">
 								</div>
 							</div>
@@ -176,27 +175,11 @@ function modal(){
 							</div>
 						</div>
 					  <br>
-					  <!--<input type="button" name="btn" value="Submit" id="submitBtn" data-toggle="modal" data-target="#confirm-submit" class="btn btn-default" />-->
-					  <!--<input type="submit" class="btn btn-danger" id="create" name="create" value="Create" data-toggle="modal" data-target="#confirm-submit">-->
 					  <input type="submit" class="btn btn-danger" id="create" name="create" value="Create">
 					</form>
 				</div>
 			</div>
 		<!-- End page content -->
-		
-		<table>
-		<thead>
-			<tr>
-				<td>Name</td>
-				<td>Email</td>
-				<td>Actions</td>
-			</tr>
-		</thead>
-		<tbody id="table_body">
-
-		</tbody>
-	</table>
-		
 	</div>
 	
 	<?php

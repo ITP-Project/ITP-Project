@@ -19,7 +19,7 @@
 		{
 			echo '<script>';
 			echo 'alert("Event successfully duplicated!");';
-			echo 'window.location.href="CharityEvent.php";';
+			echo 'window.location.href="CharityEventDisplayCreated.php";';
 			echo '</script>';
 		}
 		else{

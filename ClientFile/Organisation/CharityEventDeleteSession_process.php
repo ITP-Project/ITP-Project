@@ -11,8 +11,7 @@
 	// delete the entry
 	$result = mysqli_query($conn, "DELETE FROM event_shift WHERE SID=$sid")
 	or die(mysql_error());
-	 
-	// redirect back to the view page
+	
 	header("Location:CharityEventUpdate.php?id=$id");
 	}
 	else

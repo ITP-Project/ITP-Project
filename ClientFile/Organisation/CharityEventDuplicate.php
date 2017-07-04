@@ -31,7 +31,7 @@ $(function() {
 
     var options = '<div class="row" id="row'+i+'"><br>' +
 						'<div class="col-sm-3">' +
-							'<input type="text" class="form-control" name="sessionStart[]" placeholder="Eg. 1300 pm"/>' +
+							'<input type="text" class="form-control" name="sessionStart[]" placeholder="Eg. 0900 pm"/>' +
 						'</div>' +
 						'<div class="col-sm-3">' +
 							'<input type="text" class="form-control" name="sessionEnd[]" placeholder="Eg. 1400 pm"/>' +
@@ -41,6 +41,7 @@ $(function() {
 						'</div>' +
 						'<div class="col-sm-2">' +
 							'<input type="text" class="form-control" name="maxPart[]" />' +
+							'<input type="text" class="form-control hidden" name="volPart[]" value="0" />' +
 						'</div>' +
 						'<div class="col-sm-1">' +
 							'<button name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button>' +
@@ -55,7 +56,7 @@ $(function() {
     });
 
     $('.datepicker3').live('click', function() {
-        $(this).datepicker('destroy').datepicker({changeMonth: true,changeYear: true,dateFormat: "yy-mm-dd",showOn:'focus'}).focus();
+        $(this).datepicker('destroy').datepicker({dateFormat: "yy-mm-dd",showOn:'focus'}).focus();
     });
 
 	$(document).on('click','.btn_remove', function(e){
@@ -141,7 +142,7 @@ $(function() {
 				</div>
 				<div class="row">
 					<div class="col-sm-3">
-						<input type="text" class="form-control" name="sessionStart[]" placeholder="Eg. 1300 pm" />
+						<input type="text" class="form-control" name="sessionStart[]" placeholder="Eg. 0900 pm" />
 					</div>
 					<div class="col-sm-3">
 						<input type="text" class="form-control" name="sessionEnd[]" placeholder="Eg. 1400 pm" />
@@ -151,6 +152,7 @@ $(function() {
 					</div>
 					<div class="col-sm-2">
 						<input type="text" class="form-control" name="maxPart[]" />
+						<input type="text" class="form-control hidden" name="volPart[]" value="0" />
 					</div>
 				</div>
 				<div id="extender">
@@ -229,7 +231,7 @@ $(function() {
 				</div>
 			  </div>
 			  <br>
-			  <button type="submit" class="btn btn-default btn-danger" id="duplicate" name="duplicate" value="duplicate">Duplicate</button>
+			  <input type="submit" class="btn btn-default btn-danger" id="duplicate" name="duplicate" value="Duplicate">
 			</form>
 		  </div>
 
