@@ -84,7 +84,7 @@ include '../dconfig.php';
 			<h1 class="w3-xxxlarge w3-text-red"><b>Own Events</b></h1>
 			<hr style="width:50px;border:5px solid red" class="w3-round">
 			<?php
-			$result = $conn->query("SELECT * FROM created_event WHERE created_by = '$eventAdmin'");
+			$result = $conn->query("SELECT * FROM created_event WHERE created_by = '$eventUSERNAME'");
 			while($row = $result->fetch_assoc()){
 				$eventID = $row['EID'];
 				$eventName = $row['event_name'];

@@ -8,7 +8,7 @@
 	}
 	else
 	{
-		$eventAdmin = $_SESSION['USERNAME'];
+		$eventUSERNAME = $_SESSION['USERNAME'];
 
 	}
 	?>
