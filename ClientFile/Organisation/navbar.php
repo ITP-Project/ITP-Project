@@ -17,6 +17,7 @@
 			<a href="CharityHome.php" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Home</a> 
 			<a href="CharityRegVolunteer.php" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Volunteers</a> 
 			<a href="CharityEvent.php" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Events Management</a> 
+			<a href="CharityStatistics.php" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Statistics</a> 
 
 			<?php 
 			if ($_SESSION["ADMIN_STATUS"] == "YES")

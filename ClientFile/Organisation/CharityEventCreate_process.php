@@ -10,7 +10,6 @@
 		$eventStartDate = trim($_POST["eventStartDate"]);
 		$eventEndDate = trim($_POST["eventEndDate"]);
 		$eventCategory = trim($_POST["eventCategory"]);
-		$eventAdmin = $_SESSION['USERNAME'];
 		//$sessionStart = trim($_POST["sessionStart"]);
 		
 		// Perform insert queries

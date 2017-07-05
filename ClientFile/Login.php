@@ -40,7 +40,7 @@ include_once 'dconfig.php';
 		$adminPass = test_input($_POST["adminPass"]); 
 		$admin_encryptedPass = sha1($adminPass);
 
-		$sql = "SELECT is_admin, uen FROM acc_organization WHERE email = '$adminUsername' AND encrypted_password = '$admin_encryptedPass'"; 
+		$sql = "SELECT is_admin, uen FROM acc_organization WHERE email = '$adminUsername' AND encrypted_password = '$admin_encryptedPass' AND check_verify = 'YES'"; 
 
 		$result = mysqli_query($conn,$sql);
 		$row = mysqli_fetch_array($result, MYSQLI_ASSOC); 

@@ -29,6 +29,7 @@ include '../dconfig.php';
 				$eventDesc = $row['event_desc'];
 				$eventCategory = $row['event_category'];
 				
+				
 			echo '<div class="col-lg-6 col-md-4">';
 			echo '<div class="thumbnail">';
 			echo '<div class="caption">';
@@ -44,13 +45,46 @@ include '../dconfig.php';
 		?>
 		</div>
 	</div>
+
+	<div class="w3-container ">
+		<div class="w3-row-padding">
+			<h1 class="w3-xxxlarge w3-text-red"><b>Company Events</b></h1>
+			<hr style="width:50px;border:5px solid red" class="w3-round">
+			<?php
+			$result = $conn->query("SELECT C.*, A.name FROM created_event C, acc_organization A WHERE A.email = C.created_by");
+			while($row = $result->fetch_assoc()){
+				$eventID = $row['EID'];
+				$eventName = $row['event_name'];
+				$eventLocation = $row['event_location'];
+				$eventStartDate = $row['event_startDate'];
+				$eventEndDate = $row['event_endDate'];
+				$eventDesc = $row['event_desc'];
+				$eventCategory = $row['event_category'];
+				$eventAdmin = $row['name'];
+				
+			echo '<div class="col-lg-6 col-md-4">';
+			echo '<div class="thumbnail">';
+			echo '<div class="caption">';
+			echo '<p><strong>Event Name: </strong>'.$eventName.'</p>';
+			echo '<p><strong>Event Category: </strong>'.$eventCategory.'</p>';
+			echo '<p><strong>Event Location: </strong>'.$eventLocation.'</p>';
+			echo '<p><strong>Event Date: </strong>'.$eventStartDate.' <strong>to</strong> '.$eventEndDate.'</p>';
+			echo '<p><strong>Event Description: </strong>'.$eventDesc.'</p>';
+			echo '<p><strong>Event Administrator: </strong>'.$eventAdmin.'</p>';
+			echo '</div>';
+			echo '</div>';
+			echo '</div>';
+			}
+		?>
+		</div>
+	</div>
 	
 	<div class="w3-container ">
 		<div class="w3-row-padding">
 			<h1 class="w3-xxxlarge w3-text-red"><b>Own Events</b></h1>
 			<hr style="width:50px;border:5px solid red" class="w3-round">
 			<?php
-			$result = $conn->query("SELECT * FROM created_event");
+			$result = $conn->query("SELECT * FROM created_event WHERE created_by = '$eventAdmin'");
 			while($row = $result->fetch_assoc()){
 				$eventID = $row['EID'];
 				$eventName = $row['event_name'];

@@ -6,6 +6,11 @@
 	{
 		header("Location: ../Login.php");
 	}
+	else
+	{
+		$eventAdmin = $_SESSION['USERNAME'];
+
+	}
 	?>
 	<title>Volunteer Scheduling Application</title>
 	<meta charset="UTF-8">
