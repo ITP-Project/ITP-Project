@@ -14,7 +14,7 @@
 		
 		// Perform insert queries
 		$insert_rows = $conn->query("INSERT INTO created_event (event_name, event_desc, event_location, event_startDate, event_endDate, event_category, created_by) VALUES 
-		('$eventName','$eventDesc','$eventLocation','$eventStartDate','$eventEndDate','$eventCategory', '$eventAdmin')");
+		('$eventName','$eventDesc','$eventLocation','$eventStartDate','$eventEndDate','$eventCategory', '$eventUSERNAME')");
 		
 		if(!$insert_rows)
 		{	
