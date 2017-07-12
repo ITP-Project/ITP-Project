@@ -11,9 +11,11 @@ function submitClick(){
 	var hostName = "SPD";
 
 	var firebaseRef = firebase.database().ref(); //object for the database
+	
+	var intEventID = parseInt(eventID);
 
 	//Create event
-	var eventCreate = firebaseRef.child("events/"+eventID+"");
+	var eventCreate = firebaseRef.child("events/"+intEventID+"");
 	eventCreate.set({
 		//adding child value to event
 		name: eventName.value,
@@ -22,7 +24,7 @@ function submitClick(){
 		endDate: eventEndDate.value,
 		category: eventCategory.value,
 		description: eventDesc.value,
-		eventID: eventID,
+		eventID: intEventID,
 		hostName: hostName
 	});
 	
@@ -34,17 +36,21 @@ function submitClick(){
 		var sessionDate = $(this).find("input#eventDate").val();
 		var maxPart = $(this).find("input#maxPart").val();
 		var volPart = $(this).find("input#volPart").val();
+		
+		var intSessionID = parseInt(sessionID);
+		var intMaxPart = parseInt(maxPart);
+		var intVolPart = parseInt(volPart);
 
 		//Create sessions in event
-		var sessionCreate = eventCreate.child("sessions/"+sessionID+"");
+		var sessionCreate = eventCreate.child("sessions/"+intSessionID+"");
 		sessionCreate.set({
 			//adding child value to sessions
 			date: sessionDate,
-			sessionID: sessionID,
+			sessionID: intSessionID,
 			endTime: sessionEnd,
 			startTime: sessionStart,
-			volunteerMax: maxPart,
-			volunteerNo: volPart
+			volunteerMax: intMaxPart,
+			volunteerNo: intVolPart
 		});
 	});
 	

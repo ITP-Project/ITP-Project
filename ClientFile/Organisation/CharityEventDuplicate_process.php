@@ -12,8 +12,8 @@
 		$eventCategory = trim($_POST["eventCategory"]);
 		
 		// Perform insert queries
-		$duplicate_rows = $conn->query("INSERT INTO created_event (event_name, event_desc, event_location, event_startDate, event_endDate, event_category) VALUES 
-		('$eventName','$eventDesc','$eventLocation','$eventStartDate','$eventEndDate','$eventCategory')");
+		$duplicate_rows = $conn->query("INSERT INTO created_event (event_name, event_desc, event_location, event_startDate, event_endDate, event_category, created_by) VALUES 
+		('$eventName','$eventDesc','$eventLocation','$eventStartDate','$eventEndDate','$eventCategory', '$eventUSERNAME')");
 		
 		if($duplicate_rows)
 		{

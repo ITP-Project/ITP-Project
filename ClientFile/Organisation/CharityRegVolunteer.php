@@ -32,7 +32,7 @@ include '../dconfig.php';
 				<form action="BookVolunteer_process.php" method="POST" enctype="multipart/form-data">
 					<div class="w3-container">
 						<div class="col-md-3">
-							<select name="event" id="event" class="form-control">
+							<select name="eventSelect" id="eventSelect" class="form-control action">
 								<option value="">Select Event</option>
 								<?php
 								//Get all event data
@@ -51,6 +51,12 @@ include '../dconfig.php';
 								?>
 							</select>
 						</div>
+						<div class="col-md-3">
+							<select name="dateS" id="dateS" class="form-control action">
+								<option value="">Select Session</option>
+								
+							</select>
+						</div>
 					</div>
 					<hr>
 					<div class="table-responsive">
@@ -59,9 +65,8 @@ include '../dconfig.php';
 								<tr>
 									<td class="hidden">Volunteer ID</td>
 									<td>Session Date</td>  
-									<td>Session Start Time</td>  
-									<td>Session End Time</td>
-									<td></td>
+									<td>Current Volunteer Count</td>  
+									<td>Max Volunteer Count</td>
 								</tr>  
 							</thead>
 							<tbody id="session">
@@ -85,50 +90,20 @@ include '../dconfig.php';
 									<td>Book <input type="checkbox" class="pull-right" id="chk-all"></td>
 								</tr>  
 							</thead>  
-							<?php
-							
-								$result = $conn->query("SELECT * FROM acc_volunteer");
-								$count = $result->num_rows;
-								
-								if($count > 0) {
-									while($row = $result->fetch_array())  
-									{  
-										echo '  
-											<tr>
-												<td hidden><input type="text" value="'.$row["AID"].'"></td>
-												<td hidden><input type="text" value="'.$row["unique_id"].'"></td>
-												<td>'.$row["name"].'</td>  
-												<td>'.$row["email"].'</td>  
-												<td>'.$row["nric"].'</td>  
-												<td>'.$row["org_name"].'</td>  
-												<td>'.$row["uen"].'</td>
-												<td>'.$row["nationality"].'</td>
-												<td>'.$row["liason_contact"].'</td>
-												<td><input type="checkbox" class="chk-box pull-left" name="chk[]" value="'.$row["AID"].'"></td>
-											</tr>
-										   ';
-									}
-								}
-								else {
-									echo 'No event to be displayed!';
-								}
-								
-								mysqli_free_result($result);
-								
-								//$conn->close();
-							?>
-							
+							<tbody id="volBtm">
+							</tbody>
 						</table>
 					</div>
 					<hr>
 					<button type="submit" class="btn btn-danger" id="book" name="book" value="book" >Book Volunteer/s</button>
 				</form>
 				</div>
+				<!--menu2-->
 				<div id="menu1" class="tab-pane fade">
 					<h3>View Volunteers for Events</h3>
 					<div class="w3-container">
 						<div class="col-md-3">
-							<select name="eventV" id="eventV" class="form-control">
+							<select name="eExport" id="eExport" class="form-control sAction">
 								<option value="">Select Event</option>
 								<?php
 								//Get all event data
@@ -149,6 +124,11 @@ include '../dconfig.php';
 								?>
 							</select>
 						</div>
+						<div class="col-md-3">
+							<select name="sExport" id="sExport" class="form-control sAction">
+								<option value="">Select Session</option>
+							</select>
+						</div>
 					</div>
 					<hr>
 					<div class="table-responsive" id="event_data">
@@ -164,12 +144,11 @@ include '../dconfig.php';
 									<td>Contact Number</td>
 								</tr>  
 							</thead>
-							<tbody id="sessionV">
+							<tbody id="sessionExport">
 							</tbody>
 						</table>
 					</div>
 					<hr>
-					<!--<input type="submit" name="create_excel" id="create_excel" class="btn btn-success" value="Export to Excel" />-->
 					<button type="submit" id="excel" name="excel" value="excel" class="btn btn-success" value="Export to Excel" />Export to Excel</button>
 				</div>
 			</div>
@@ -191,7 +170,7 @@ $(document).ready(function(){
       });  
  }); 
  
-$(document).ready(function(){  
+/*$(document).ready(function(){  
       var oTable = $('#volunteer_data').dataTable({
         stateSave: false
 		});
@@ -206,15 +185,15 @@ $(document).ready(function(){
 			}
 			$(this).toggleClass('allChecked');
 		})
- });
+ });*/
 
 $(document).ready(function(){
-    $('#event').on('change',function(){
+    $('#eventSelect').on('change',function(){
         var eventID = $(this).val();
         if(eventID){
             $.ajax({
                 type:'POST',
-                url:'CharitySessionRetrieve_process.php',
+                url:'RetrieveVolunteer.php',
                 data:'EID='+eventID,
                 success:function(html){
                     $('#session').html(html);
@@ -224,19 +203,98 @@ $(document).ready(function(){
     });
 });
 
+//Top retrieve first page
 $(document).ready(function(){
-    $('#eventV').on('change',function(){
+    $('#dateS').on('change',function(){
+        var eventID = $(this).val();
+        if(eventID){
+            $.ajax({
+                type:'POST',
+                url:'RetrieveVolunteerBtm.php',
+                data:'SID='+eventID,
+                success:function(html){
+                    $('#volBtm').html(html);
+					$.fn.dataTableExt.sErrMode = 'throw'
+					var oTable = $('#volunteer_data').dataTable({
+					stateSave: false
+					});
+
+					var allPages = oTable.fnGetNodes();
+
+					$('body').on('click', '#chk-all', function () {
+						if ($(this).hasClass('allChecked')) {
+							$('input[type="checkbox"]', allPages).prop('checked', false);
+						} else {
+							$('input[type="checkbox"]', allPages).prop('checked', true);
+						}
+						$(this).toggleClass('allChecked');
+					})
+                }
+            }); 
+        }
+    });
+});
+
+$(document).ready(function(){
+	$('.action').change(function(){
+		if($(this).val() != '')
+		{
+			var action = $(this).attr("id");
+			var query = $(this).val();
+			var result = '';
+			if(action == "eventSelect")
+			{
+				result = 'dateS';
+			}
+			$.ajax({
+				url:"CharitySessionRetrieve_process.php",
+				method:"POST",
+				data:{action:action, query:query},
+				success:function(data){
+					$('#'+result).html(data);
+				}
+			})
+		}
+	});
+});
+
+//Export page
+$(document).ready(function(){
+    $('#sExport').on('change',function(){
         var eventVID = $(this).val();
         if(eventVID){
             $.ajax({
                 type:'POST',
                 url:'CharitySessionRetrieveV_process.php',
-                data:'EID='+eventVID,
+                data:'SID='+eventVID,
                 success:function(html){
-                    $('#sessionV').html(html);
+                    $('#sessionExport').html(html);
                 }
             }); 
         }
     });
+});
+
+$(document).ready(function(){
+	$('.sAction').change(function(){
+		if($(this).val() != '')
+		{
+			var sAction = $(this).attr("id");
+			var squery = $(this).val();
+			var results = '';
+			if(sAction == "eExport")
+			{
+				results = 'sExport';
+			}
+			$.ajax({
+				url:"SessionRetrieve.php",
+				method:"POST",
+				data:{sAction:sAction, squery:squery},
+				success:function(data){
+					$('#'+results).html(data);
+				}
+			})
+		}
+	});
 });
  </script>
