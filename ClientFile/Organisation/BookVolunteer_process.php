@@ -40,7 +40,7 @@ include_once '../dconfig.php';
 		curl_setopt( $ch,CURLOPT_POSTFIELDS, json_encode( $fields ) );
 		$result = curl_exec($ch );
 		curl_close( $ch );
-		echo $result;
+		//echo $result;
 	};		
 	
 	$chk = $_POST['chk'];
@@ -67,9 +67,9 @@ include_once '../dconfig.php';
 			
 			$sendNotification($uniqueID,$eid);
 			
-			echo '<script>alert("Volunteer booked successfully!");
+			echo $chkcount;
+			echo '<script>alert("'.$chkcount.' Volunteer booked successfully!");
 						window.location.href="CharityRegVolunteer.php";</script>';
-			//header('Location:CharityRegVolunteer.php');
 
 		}
 	} else {

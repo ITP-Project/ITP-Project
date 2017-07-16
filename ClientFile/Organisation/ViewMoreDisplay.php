@@ -5,6 +5,7 @@
 	include '../header.php';
 	include 'navbar.php';
 	include '../dconfig.php';
+	include 'QRGenerator.php';
 	?>
 	<!-- Table Data -->
 	<link rel="stylesheet" href="http://code.jquery.com/ui/1.9.0/themes/base/jquery-ui.css" />
@@ -162,6 +163,32 @@
 							?>
 						</div>
 					</div>
+					<div class="row">
+						<div class="col-md-6">
+							<select class="form-control" name="sessionChoose" id="sessionChoose">
+							<option>Please select a session date</option>
+							<?php
+								//Get all event data
+								$sessionR = $conn->query("SELECT * FROM event_shift WHERE EID=".$_GET['id']."");
+
+								//Count total number of rows
+								$rowCount = $sessionR->num_rows;
+										
+								if($rowCount > 0){
+									while($row = $sessionR->fetch_assoc()){ 
+										echo '<option value="'.$row['SID'].'">'.$row['event_date'].'</option>';
+									}
+								}
+							?>
+							</select>
+						</div>
+					</div><br>
+					<div class="row">
+						<div class="col-md-6">
+							<div id="qrSession">
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 			
@@ -179,3 +206,21 @@
 
 </body>
 </html>
+
+<script>
+$(document).ready(function(){
+    $('#sessionChoose').on('change',function(){
+        var sessionID = $(this).val();
+        if(sessionID){
+            $.ajax({
+                type:'POST',
+                url:'QRGenerator_process.php',
+                data:'SID='+sessionID,
+                success:function(html){
+                    $('#qrSession').html(html);
+                }
+            }); 
+        }
+    });
+});
+</script>

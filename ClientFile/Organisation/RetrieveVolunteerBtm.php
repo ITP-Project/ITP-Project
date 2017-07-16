@@ -1,18 +1,19 @@
 <?php
 include '../dconfig.php';
 
-if(isset($_POST["SID"]))
+$eventDate = '';
+
+if(isset($_POST["event_date"]))
 {
+	$eventDate = trim($_POST['event_date']);
 	//Get all state data
-    $query = $conn->query("SELECT *
-							FROM
+    $query = $conn->query("SELECT * 
+							FROM 
 								acc_volunteer
 							INNER JOIN
-								volunteer_availability ON volunteer_availability.unique_id = acc_volunteer.unique_id
-							INNER JOIN
-								event_shift ON event_shift.event_date = volunteer_availability.start
+								volunteer_availability ON acc_volunteer.unique_id = volunteer_availability.unique_id
 							WHERE
-								event_shift.SID = ".$_POST['SID']." AND event_shift.event_date BETWEEN volunteer_availability.start AND volunteer_availability.end");
+								'$eventDate' BETWEEN DATE(volunteer_availability.start) AND DATE(volunteer_availability.end)");
     
     //Count total number of rows
     $row = $query->num_rows;

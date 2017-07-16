@@ -161,7 +161,8 @@ include '../dconfig.php';
 
 </body>
 </html>
-<script>  
+<script>
+
 $(document).ready(function(){  
       $('#excel').click(function(){  
            var excel_data = $('#event_data').html();  
@@ -206,12 +207,12 @@ $(document).ready(function(){
 //Top retrieve first page
 $(document).ready(function(){
     $('#dateS').on('change',function(){
-        var eventID = $(this).val();
-        if(eventID){
+        var event_date = $('#dateS :selected').text();
+        if(event_date){
             $.ajax({
                 type:'POST',
                 url:'RetrieveVolunteerBtm.php',
-                data:'SID='+eventID,
+                data:'event_date='+event_date,
                 success:function(html){
                     $('#volBtm').html(html);
 					$.fn.dataTableExt.sErrMode = 'throw'

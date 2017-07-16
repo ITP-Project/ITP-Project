@@ -21,7 +21,7 @@ if(isset($_POST["EID"]) && !empty($_POST["EID"])){
 				</tr>';
         }
     }else{
-        echo 'No volunteer is available!';
+        echo 'No session is available!';
     }
 	
 }
