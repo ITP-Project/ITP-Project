@@ -2,10 +2,10 @@
 //Include database configuration file
 include('../dconfig.php');
 
-if(isset($_POST["EID"]) && !empty($_POST["EID"])){
+if(isset($_POST["SID"])){
 	
     //Get all state data
-	$queryTest = $conn->query("SELECT AID, name, nric, email, nric, email, org_name, uen, nationality, liason_contact, event_name
+	$queryTest = $conn->query("SELECT AID, name, email, nric, org_name, uen, nationality, liason_contact
 							FROM
 								event_shift
 							INNER JOIN
@@ -14,8 +14,10 @@ if(isset($_POST["EID"]) && !empty($_POST["EID"])){
 								participation ON event_shift.SID = participation.SID
 							INNER JOIN
 								acc_volunteer ON acc_volunteer.unique_id = participation.unique_id
+							INNER JOIN
+								volunteer_availability ON volunteer_availability.unique_id = acc_volunteer.unique_id
 							WHERE
-								event_shift.EID = ".$_POST['EID']."");
+								event_shift.SID = ".$_POST['SID']."");
     
     //Count total number of rows
     $row = $queryTest->num_rows;

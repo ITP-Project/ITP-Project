@@ -128,10 +128,10 @@ $(function() {
 			  <div class="form-group input_fields_wrap">
 				<div class="row">
 					<div class="col-sm-3">
-						<label for="sessionStart">Session Start Date</label>
+						<label for="sessionStart">Session Start Time</label>
 					</div>
 					<div class="col-sm-3">
-						<label for="sessionEnd">Session End Date</label>
+						<label for="sessionEnd">Session End Time</label>
 					</div>
 					<div class="col-sm-3">
 						<label for="event">Event Date</label>

@@ -12,8 +12,6 @@
 	<script src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js"></script>            
 	<link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css" />
 	
-	<script src="https://www.gstatic.com/firebasejs/4.1.3/firebase.js"></script>
-	<script src="firebase_insert.js"></script>
 </head>
 <body>
 	<!-- !PAGE CONTENT! -->
@@ -67,26 +65,26 @@
 
 					<h3 class="w3-xxxmedium w3-text-red"><b>Top 5 Volunteer per Category</b></h3>
 
-					<select class="form-control" name="eventCategory" id="eventCategory">
-						<option value="select" selected="disabled">Please select category</option>
-						<option value="Animals">Animals</option>
-						<option value="Environmental">Environmental</option>
-						<option value="Disabled">Disabled</option>
-						<option value="Community">Community</option>
+					<select class="form-control" name="chooseEvent" id="chooseEvent">
+						<option value="select">Please select category</option>
+						<option value="57">Animals</option>
+						<option value="58">Environmental</option>
+						<option value="62">Disabled</option>
+						<option value="66">Community</option>
 						<option value="Educational">Educational</option>
 						<option value="Arts and Culture">Arts and Culture</option>
 					</select>
 					<br>
 					<div class="table-responsive">
-						<table id="event_data" class="table table-striped table-bordered">  
+						<table class="table table-striped table-bordered">  
 							<thead>  
 								<tr>
 									<td>No.</td>
 									<td>Volunteer Name</td>  
 									<td>Total Time</td>  
 								</tr>  
-							</thead>  
-						<tbody id="volunteerCat">
+							</thead>
+							<tbody id="displayCate">
 							</tbody>
 						</table>
 					</div>
@@ -178,25 +176,23 @@
 	<!-- W3.CSS Container -->
 	<div class="w3-light-grey w3-container w3-padding-32" style="margin-top:75px;padding-right:58px"></div>
 
-
-<script>
-	
-	$(document).ready(function(){
-    $('#eventCategory').on('change',function(){
-        var eventID = $(this).val();
-        if(eventID){
-            $.ajax({
-                type:"POST",
-                url:'CharityStatsRetrieve_process.php',
-                data: "eventCategory=" + eventID,
-                success:function(html){
-                    $('#volunteerCat').html(html);
-                }
-            }); 
-        }
-    });
-});
-</script>
 </body>
 </html>
 
+<script>	
+	$(document).ready(function(){
+		$('#chooseEvent').on('change',function(){
+			var event_category = $('#chooseEvent :selected').text();
+			if(event_category){
+				$.ajax({
+					type:"POST",
+					url:'CharityStatsRetrieve_process.php',
+					data: 'event_category='+event_category,
+					success:function(html){
+						$('#displayCate').html(html);
+					}
+				}); 
+			}
+		});
+	});
+</script>

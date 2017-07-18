@@ -5,6 +5,7 @@
 	include '../header.php';
 	include 'navbar.php';
 	include '../dconfig.php';
+	include 'QRGenerator.php';
 	?>
 	<!-- Table Data -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
@@ -72,15 +73,15 @@ function create(){
 								echo '  
 									<tr id="'.$row["EID"].'">
 										<td class="hidden">'.$row["EID"].'</td> 
-										<td>'.$row["event_name"].'</td>  
-										<td>'.$row["event_startDate"].'</td>  
-										<td>'.$row["event_endDate"].'</td>  
-										<td>'.$row["event_location"].'</td>  
-										<td>'.$row["event_desc"].'</td>
-										<td>'.$row["event_category"].'</td>
+										<td style="width:200px">'.$row["event_name"].'</td>  
+										<td style="width:200px">'.$row["event_startDate"].'</td>  
+										<td style="width:200px">'.$row["event_endDate"].'</td>  
+										<td style="width:200px">'.$row["event_location"].'</td>  
+										<td style="width:500px">'.$row["event_desc"].'</td>
+										<td style="width:200px">'.$row["event_category"].'</td>
 										<td>
 											<a href="CharityEventUpdate.php?id=' . $row["EID"] . '"><span class="glyphicon glyphicon-pencil"></span></a>&nbsp;
-											<a id="duplicate_btn" href="CharityEventDuplicate.php?id=' . $row["EID"] . '"><span class="glyphicon glyphicon-plus"></span></a>&nbsp;
+											<a id="duplicate_btn" href="CharityEventDuplicate.php?id=' . $row["EID"] . '"><span class="glyphicon glyphicon-duplicate"></span></a>&nbsp;
 											<input type="checkbox" name="event_id[]" class="delete_customer" value="'.$row["EID"].'" />
 										</td>
 								   </tr>  
@@ -91,12 +92,12 @@ function create(){
 							echo 'No event to be displayed!';
 						}
 						
-						$conn->close();
+						//$conn->close();
                     ?>  
                 </table>
 			</div>
 			<hr>
-			<button type="button" name="btn_delete" id="btn_delete" class="btn btn-danger">Delete</button>
+			<button type="button" name="btn_delete" id="btn_delete" class="btn btn-danger">Delete</button><br>
 		</div>
 	  <!-- End page content -->
 	</div>

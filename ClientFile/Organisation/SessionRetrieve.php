@@ -1,12 +1,14 @@
 <?php
-if(isset($_POST["action"]))
+include_once '../dconfig.php';
+
+if(isset($_POST["sAction"]))
 {
 	//Include database configuration file
 	include('../dconfig.php');
 	$output = '';
-	if($_POST["action"] == "eventSelect")
+	if($_POST["sAction"] == "eExport")
 	{
-		$query = "SELECT * FROM event_shift WHERE EID = '".$_POST["query"]."'";
+		$query = "SELECT * FROM event_shift WHERE EID = '".$_POST["squery"]."'";
 		$result = mysqli_query($conn, $query);
 		$output .= '<option value="">Select Session</option>';
 		while($row = mysqli_fetch_array($result))

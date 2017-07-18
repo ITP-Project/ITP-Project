@@ -85,7 +85,7 @@ function modal(){
 			<h1 class="w3-xxxlarge w3-text-red"><b>Events Management</b></h1>
 			<hr style="width:50px;border:5px solid red" class="w3-round">
 				<div class="w3-section">
-					<form id="formfield" action="<?php echo htmlentities($_SERVER["PHP_SELF"]); ?>" method="POST" enctype="multipart/form-data" data-toggle="validator">
+					<form id="formfield" action="<?php echo htmlentities($_SERVER["PHP_SELF"]); ?>" method="POST" enctype="multipart/form-data">
 						<div class="form-group">
 							<label for="eventName">Event Name</label>
 							<div class="row">
@@ -109,6 +109,7 @@ function modal(){
 								<div class="col-md-3">
 									<label for="eventDate">Event Start Date</label>
 									<input type = "text" id="datepicker" name="eventStartDate" class="form-control" >
+
 								</div>
 								<div class="col-md-3">
 									<label for="eventDate">Event End Date</label>
@@ -123,10 +124,10 @@ function modal(){
 						<div class="form-group input_fields_wrap">
 							<div class="row">
 								<div class="col-sm-3">
-									<label for="sessionStart">Session Start Date</label>
+									<label for="sessionStart">Session Start Time</label>
 								</div>
 								<div class="col-sm-3">
-									<label for="sessionEnd">Session End Date</label>
+									<label for="sessionEnd">Session End Time</label>
 								</div>
 								<div class="col-sm-3">
 									<label for="event">Event Date</label>
