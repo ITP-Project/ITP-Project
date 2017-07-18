@@ -350,9 +350,7 @@ $(function() {
 					<br>
 					<!--<button type="submit" class="btn btn-default btn-danger" id="update" name="update" value="update" onclick="updateClick();">Edit</button>-->
 					<input type="submit" class="btn btn-danger" id="update" name="update" value="Edit">
-					<?php echo $msg;
-					echo "<br>";
-					echo $Smsg; ?>
+					
 				</form>
 			</div>
 

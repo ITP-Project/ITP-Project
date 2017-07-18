@@ -45,7 +45,7 @@ if (isset($_POST['duplicate']) && !empty($_POST['duplicate'])) {
 		else
 		{
 			echo '<script>
-				alert("Please enter a valid Start and End Time");
+				alert("Please enter a valid Start and End Date");
 				window.location.href="CharityEventDuplicate.php?id='.$eventID.'";
 				</script>';
 			//header("Location:CharityEventDuplicate.php?id=$eventID");

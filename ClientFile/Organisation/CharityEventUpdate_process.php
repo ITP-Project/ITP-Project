@@ -46,19 +46,27 @@ if (isset($_POST['update']) && !empty($_POST['update'])) {
 			if(!$update_rows){
 				echo '<script>';
 				echo 'alert("Event cannot be updated!");';
-				echo 'window.location.href="CharityEvent.php?id='.$id.'";';
+				echo 'window.location.href="CharityEvent.php";';
 				echo '</script>';
 				die('Error : ('. $conn->errno .') '. $conn->error);
 			}
 		}
 		else
 		{
-			$msg = "PLease enter a valid Start and End Date";
+			echo '<script>
+				alert("PLease enter a valid Start and End Date");
+				window.location.href="CharityEventUpdate.php?id='.$eventID.'";
+				</script>';
+			//$msg = "PLease enter a valid Start and End Date";
 		}
 	}
 	else 
 	{
-		$msg = "Please enter a valid Date"; 
+		echo '<script>
+				alert("Please enter a valid Date");
+				window.location.href="CharityEventUpdate.php?id='.$eventID.'";
+				</script>';
+		//$msg = "Please enter a valid Date"; 
 	}
 
 

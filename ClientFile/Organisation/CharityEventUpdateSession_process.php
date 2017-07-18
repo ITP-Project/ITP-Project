@@ -50,12 +50,20 @@ for($i = 0; $i < count($_POST['sessionStart']); $i++)
 		}
 		else
 		{
-			$Smsg = "Please enter a valid Start and End Time";
+			echo '<script>
+				alert("Please enter a valid Start and End Time");
+				window.location.href="CharityEventUpdate.php?id='.$eventID.'";
+				</script>';
+			//$Smsg = "Please enter a valid Start and End Time";
 		}
 	}
 	else
 	{
-		$Smsg = "Please enter a session date within the Range";
+		echo '<script>
+				alert("Please enter a session date within the Range");
+				window.location.href="CharityEventUpdate.php?id='.$eventID.'";
+				</script>';
+		//$Smsg = "Please enter a session date within the Range";
 	}
 
 

@@ -56,16 +56,24 @@ for($i = 0; $i < count($_POST['sessionStart']); $i++)
 		}
 		else
 		{
-			$query = "DELETE FROM created_event WHERE EID=$eventID";
-			mysqli_query($conn, $query);
-			$Smsg = "Please enter a valid Start and End Time";
+			//$query = "DELETE FROM created_event WHERE EID=$eventID";
+			//mysqli_query($conn, $query);
+			echo '<script>
+				alert("Please enter a valid Start and End Time");
+				window.location.href="CharityEventDuplicate.php?id='.$eventID.'";
+				</script>';
+			//$Smsg = "Please enter a valid Start and End Time";
 		}
 	}
 	else
 	{
-		$query = "DELETE FROM created_event WHERE EID=$eventID";
-		mysqli_query($conn, $query);
-		$Smsg = "Please enter a session date within the Range";
+		//$query = "DELETE FROM created_event WHERE EID=$eventID";
+		//mysqli_query($conn, $query);
+		echo '<script>
+				alert("Please enter a session date within the Range");
+				window.location.href="CharityEventDuplicate.php?id='.$eventID.'";
+				</script>';
+		//$Smsg = "Please enter a session date within the Range";
 	}
 
 }
