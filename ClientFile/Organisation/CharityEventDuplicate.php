@@ -9,6 +9,7 @@
 	?>
 </head>
 <!-- Date -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.5/validator.min.js"></script>
 	<link rel="stylesheet" href="http://code.jquery.com/ui/1.9.0/themes/base/jquery-ui.css" />
 	<script src="http://code.jquery.com/jquery-1.8.2.js"></script>
 	<script src="http://code.jquery.com/ui/1.9.0/jquery-ui.js"></script>
@@ -98,6 +99,7 @@ $(function() {
 					<div class='col-md-6'>
 						<input type="text" class="hidden" name="eventID" value="<?php echo $eventID ?>" >
 						<input type="text" class="form-control" name="eventName" value="<?php echo $eventName ?>" required>
+						<div class="help-block with-errors"></div>
 					</div>
 				</div>
 			  </div>
@@ -106,6 +108,7 @@ $(function() {
 				<div class="row">
 					<div class="col-md-6">
 						<input type="text" class="form-control" name="eventLocation" value="<?php echo $eventLocation ?>" required>
+						<div class="help-block with-errors"></div>
 					</div>
 				</div>
 			  </div>
@@ -232,6 +235,10 @@ $(function() {
 			  </div>
 			  <br>
 			  <input type="submit" class="btn btn-default btn-danger" id="duplicate" name="duplicate" value="Duplicate">
+				<?php 
+					//echo $msg;
+					//echo $Smsg;
+				?>
 			</form>
 		  </div>
 
