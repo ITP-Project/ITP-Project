@@ -36,7 +36,7 @@ include '../dconfig.php';
 						echo '<div class="col-lg-6 col-md-4">';
 						echo '<div class="thumbnail">';
 						echo '<div class="caption">';
-						echo '<p><strong>Event Name: </strong>'.$eventID.'</p>';
+						echo '<p><strong>Event Name: </strong>'.$eventName.'</p>';
 						echo '<p><strong>Event Category: </strong>'.$eventCategory.'</p>';
 						echo '<p><strong>Event Location: </strong>'.$eventLocation.'</p>';
 						echo '<p><strong>Event Date: </strong>'.$eventStartDate.' <strong>to</strong> '.$eventEndDate.'</p>';

@@ -5,6 +5,7 @@
 	include '../header.php';
 	include 'navbar.php';
 	include '../dconfig.php';
+	include 'CharityEventUpdate_process.php';
 	?>
 	<!-- Table Data -->
 	<link rel="stylesheet" href="http://code.jquery.com/ui/1.9.0/themes/base/jquery-ui.css" />
@@ -35,7 +36,8 @@
 			<h1 class="w3-xxxlarge w3-text-red"><b>Events Management</b></h1>
 			<hr style="width:50px;border:5px solid red" class="w3-round">
 			<?php 
-				$result = $conn->query("SELECT * FROM created_event ORDER BY EID");
+				$id = $_GET['id'];
+				$result = $conn->query("SELECT * FROM created_event WHERE EID=$id");
 				while($row = $result->fetch_assoc()){
 					$eventID = $row['EID'];
 					$eventName = $row['event_name'];

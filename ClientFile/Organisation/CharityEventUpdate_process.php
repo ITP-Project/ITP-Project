@@ -20,7 +20,7 @@
 		{
 			echo '<script>';
 			echo 'alert("Event successfully updated!");';
-			echo 'window.location.href="CharityEventDisplayCreated.php";';
+			echo 'window.location.href="CharityEventDisplayCreated.php?id='.$eventID.'";';
 			echo '</script>';
 		}
 		else{
