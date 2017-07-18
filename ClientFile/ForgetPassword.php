@@ -50,10 +50,10 @@ include_once 'dconfig.php';
 
 		if($count == 1)
 		{
-
+			
 			$r = mysqli_fetch_assoc($result);
 			$newPassword = randomPassword(); 
-			$to = 'bloowhiteskies@gmail.com'; 
+			$to = $adminEmail; 
 			$subject = "Your New Passoword"; 
 			$message = "Please use this password to Login. Your New Password is " . $adminPassword ;
 			$headers = "MIME-Version: 1.0" . "\r\n";
