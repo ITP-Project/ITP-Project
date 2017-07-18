@@ -105,7 +105,7 @@ $(function() {
 					$eventDesc = $row['event_desc'];
 					$eventCategory = $row['event_category'];
 				}
-				
+
 			//session
 				$sessionResult = $conn->query("SELECT * FROM event_shift WHERE EID=$id");
 				while($sessionRow = $sessionResult->fetch_assoc()){
@@ -115,10 +115,10 @@ $(function() {
 					$sessionEndTime = $sessionRow['event_endTime'];
 					$maxPart = $sessionRow['max_participation'];
 				}
-				
+
 				?>
 				<div class="w3-section">
-					<form id="eventDetails" action="<?php echo htmlentities($_SERVER["PHP_SELF"]); ?>" method="POST" enctype="multipart/form-data">
+				<form id="eventDetails" action="<?php echo htmlentities($_SERVER["PHP_SELF"]); ?>" method="POST" enctype="multipart/form-data" data-toggle="validator">
 						<div class="form-group">
 							<label for="eventName">Event Name</label>
 							<div class="row">
@@ -233,7 +233,7 @@ $(function() {
 							{
 								echo "Error: " . $conn->error;
 							}
-							
+
 							?>
 						</div>
 					</div><br>
@@ -255,16 +255,16 @@ $(function() {
 						</div>
 						<div class="row">
 							<div class="col-sm-3">
-								<input type="text" class="form-control" name="sessionStart[]" placeholder="Eg. 0900 pm" />
+								<input type="number" class="form-control" min=0 max=2359 name="sessionStart[]" placeholder="Eg. 0900 " />
 							</div>
 							<div class="col-sm-3">
-								<input type="text" class="form-control" name="sessionEnd[]" placeholder="Eg. 1400 pm" />
+								<input type="number" class="form-control" min=0 max=2359 name="sessionEnd[]" placeholder="Eg. 1400 " />
 							</div>
 							<div class="col-sm-3">
 								<input class="form-control" id="datepicker2" type="text" name="eventDate[]" />
 							</div>
 							<div class="col-sm-2">
-								<input type="text" class="form-control" name="maxPart[]" />
+								<input type="number" min=0 class="form-control" name="maxPart[]" />
 								<input type="text" class="form-control hidden" name="volPart[]" value="0" />
 							</div>
 						</div>
@@ -350,7 +350,7 @@ $(function() {
 			</div>
 
 			<!-- End page content -->
-			
+
 		</div>
 		<?php
 		mysqli_close($conn);

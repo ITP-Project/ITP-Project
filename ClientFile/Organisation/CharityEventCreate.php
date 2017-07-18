@@ -85,7 +85,7 @@ function modal(){
 			<h1 class="w3-xxxlarge w3-text-red"><b>Events Management</b></h1>
 			<hr style="width:50px;border:5px solid red" class="w3-round">
 				<div class="w3-section">
-					<form id="formfield" action="<?php echo htmlentities($_SERVER["PHP_SELF"]); ?>" method="POST" enctype="multipart/form-data">
+					<form id="formfield" action="<?php echo htmlentities($_SERVER["PHP_SELF"]); ?>" method="POST" enctype="multipart/form-data" data-toggle="validator">
 						<div class="form-group">
 							<label for="eventName">Event Name</label>
 							<div class="row">

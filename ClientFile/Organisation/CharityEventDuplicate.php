@@ -31,16 +31,16 @@ $(function() {
 
     var options = '<div class="row" id="row'+i+'"><br>' +
 						'<div class="col-sm-3">' +
-							'<input type="text" class="form-control" name="sessionStart[]" placeholder="Eg. 0900 pm"/>' +
+							'<input type="number" class="form-control" min=0 max=2359 name="sessionStart[]" placeholder="Eg. 0900 "/>' +
 						'</div>' +
 						'<div class="col-sm-3">' +
-							'<input type="text" class="form-control" name="sessionEnd[]" placeholder="Eg. 1400 pm"/>' +
+							'<input type="number" class="form-control" min=0 max=2359 name="sessionEnd[]" placeholder="Eg. 1400 "/>' +
 						'</div>' +
 						'<div class="col-sm-3">' +
 							'<input type="text" class="datepicker3 form-control" name="eventDate[]" />' +
 						'</div>' +
 						'<div class="col-sm-2">' +
-							'<input type="text" class="form-control" name="maxPart[]" />' +
+							'<input type="number" min=0 class="form-control" name="maxPart[]" />' +
 							'<input type="text" class="form-control hidden" name="volPart[]" value="0" />' +
 						'</div>' +
 						'<div class="col-sm-1">' +
@@ -91,13 +91,13 @@ $(function() {
 			
 			?>
 			<div class="w3-section">
-			<form id="eventDetails" action="<?php echo htmlentities($_SERVER["PHP_SELF"]); ?>" method="POST" enctype="multipart/form-data">
+			<form id="eventDetails" action="<?php echo htmlentities($_SERVER["PHP_SELF"]); ?>" method="POST" enctype="multipart/form-data" data-toggle="validator">
 			  <div class="form-group">
 				<label for="eventName">Event Name</label>
 				<div class="row">
 					<div class='col-md-6'>
 						<input type="text" class="hidden" name="eventID" value="<?php echo $eventID ?>" >
-						<input type="text" class="form-control" name="eventName" value="<?php echo $eventName ?>">
+						<input type="text" class="form-control" name="eventName" value="<?php echo $eventName ?>" required>
 					</div>
 				</div>
 			  </div>
@@ -105,7 +105,7 @@ $(function() {
 				<label for="eventLocation">Event Location</label>
 				<div class="row">
 					<div class="col-md-6">
-						<input type="text" class="form-control" name="eventLocation" value="<?php echo $eventLocation ?>">
+						<input type="text" class="form-control" name="eventLocation" value="<?php echo $eventLocation ?>" required>
 					</div>
 				</div>
 			  </div>
@@ -142,16 +142,16 @@ $(function() {
 				</div>
 				<div class="row">
 					<div class="col-sm-3">
-						<input type="text" class="form-control" name="sessionStart[]" placeholder="Eg. 0900 pm" />
+						<input type="number" class="form-control" min=0 max=2359 name="sessionStart[]" placeholder="Eg. 0900 " />
 					</div>
 					<div class="col-sm-3">
-						<input type="text" class="form-control" name="sessionEnd[]" placeholder="Eg. 1400 pm" />
+						<input type="number" class="form-control" min=0 max=2359 name="sessionEnd[]" placeholder="Eg. 1400 " />
 					</div>
 					<div class="col-sm-3">
 						<input class="form-control" id="datepicker2" type="text" name="eventDate[]" />
 					</div>
 					<div class="col-sm-2">
-						<input type="text" class="form-control" name="maxPart[]" />
+						<input type="number" class="form-control" min=0 name="maxPart[]" />
 						<input type="text" class="form-control hidden" name="volPart[]" value="0" />
 					</div>
 				</div>
