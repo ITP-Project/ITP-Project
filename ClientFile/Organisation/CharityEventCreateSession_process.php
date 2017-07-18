@@ -29,14 +29,15 @@ for($i = 0; $i < count($_POST['sessionStart']); $i++)
 			if($eventDate < $eventStartDate)
 			{
 				$Smsg = check_time($sessionStart);
+				if (empty(trim($sessionStart))) continue;
+
+				$sql = "INSERT INTO event_shift(EID, event_date, event_startTime, event_endTime, max_participation, participation_count)
+				VALUES('$eventID', '$eventDate', '$sessionStart', '$sessionEnd', '$max_part', '$part_count')";
+				mysqli_query($conn, $sql);
+
 
 			}
 
-		// if (empty(trim($sessionStart))) continue;
-
-		// $sql = "INSERT INTO event_shift(EID, event_date, event_startTime, event_endTime, max_participation, participation_count)
-		// 		VALUES('$eventID', '$eventDate', '$sessionStart', '$sessionEnd', '$max_part', '$part_count')";
-		// mysqli_query($conn, $sql);
 
 		}
 

@@ -14,7 +14,7 @@ if (isset($_POST['create']) && !empty($_POST['create'])) {
 	$currentDate = date("Y-m-d" , time() + 259200);
 
 	function validateDate($start, $end){
-		if($end <= $start)
+		if($end < $start)
 		{
 			return FALSE;
 		}
@@ -41,10 +41,10 @@ if (isset($_POST['create']) && !empty($_POST['create'])) {
 				die('Error : ('. $conn->errno .') '. $conn->error);
 			} else {
 				$msg = "YEA";
-				// echo '<script>';
-				// echo 'alert("Event Successfully created!");';
-				// echo 'window.location.href="CharityEventDisplayCreated.php";';
-				// echo '</script>';
+				echo '<script>';
+				echo 'alert("Event Successfully created!");';
+				echo 'window.location.href="CharityEventDisplayCreate.php";';
+				echo '</script>';
 			}
 		}
 		else

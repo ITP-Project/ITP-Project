@@ -4,6 +4,7 @@
 	
 	if (isset($_POST['duplicate']) && !empty($_POST['duplicate'])) {
 		// get the form data
+		$eventID = trim($_POST['eventID']); 
 		$eventName = trim($_POST["eventName"]);
 		$eventLocation = trim($_POST["eventLocation"]);
 		$eventDesc = trim($_POST["eventDesc"]);
@@ -19,7 +20,7 @@
 		{
 			echo '<script>';
 			echo 'alert("Event successfully duplicated!");';
-			echo 'window.location.href="CharityEventDisplayCreated.php";';
+			echo 'window.location.href="CharityEventDisplayCreate.php";';
 			echo '</script>';
 		}
 		else{

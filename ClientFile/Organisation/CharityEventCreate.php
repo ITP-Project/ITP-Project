@@ -108,6 +108,7 @@ function modal(){
 							<div class="row">
 								<div class="col-md-3">
 									<label for="eventDate">Event Start Date</label>
+
 									<input type = "text" id="datepicker" name="eventStartDate" class="form-control" >
 
 								</div>

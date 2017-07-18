@@ -31,7 +31,7 @@ include_once 'dconfig.php';
 
 	<?php
 	//start sessoin 
-
+	
 	//define variables 
 	$adminNRIC = $adminEmail = $adminPassword = $error = ""; 
 	if($_SERVER["REQUEST_METHOD"] == "POST"){
