@@ -11,6 +11,7 @@
 		.error {color: #FF0000;}
 	</style>
 	<!-- Date -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.5/validator.min.js"></script>
 	<link rel="stylesheet" href="http://code.jquery.com/ui/1.9.0/themes/base/jquery-ui.css" />
 	<script src="http://code.jquery.com/jquery-1.8.2.js"></script>
 	<script src="http://code.jquery.com/ui/1.9.0/jquery-ui.js"></script>
@@ -33,16 +34,16 @@ $(function() {
 
     var options = '<div class="row" id="row'+i+'"><br>' +
 						'<div class="col-sm-3">' +
-							'<input type="text" class="form-control" name="sessionStart[]" placeholder="Eg. 0900 pm"/>' +
+							'<input type="number" class="form-control"  min=0000 max=2359 name="sessionStart[]" placeholder="Eg. 0900 "/>' +
 						'</div>' +
 						'<div class="col-sm-3">' +
-							'<input type="text" class="form-control" name="sessionEnd[]" placeholder="Eg. 1400 pm"/>' +
+							'<input type="number" class="form-control"  min=0000 max=2359 name="sessionEnd[]" placeholder="Eg. 1400 "/>' +
 						'</div>' +
 						'<div class="col-sm-3">' +
 							'<input type="text" class="datepicker3 form-control eventDate" name="eventDate[]" />' +
 						'</div>' +
 						'<div class="col-sm-2">' +
-							'<input type="text" class="form-control" name="maxPart[]" />' +
+							'<input type="number" class="form-control" min=0 name="maxPart[]" />' +
 							'<input type="text" class="hidden form-control" name="partCount[]" value="0"/>' +
 						'</div>' +
 						'<div class="col-sm-1">' +
@@ -89,7 +90,8 @@ function modal(){
 							<label for="eventName">Event Name</label>
 							<div class="row">
 								<div class='col-md-6'>
-									<input type="text" class="form-control" name="eventName" id="eventName">
+									<input type="text" class="form-control" name="eventName" id="eventName" required>
+									<div class="help-block with-errors"></div>
 								</div>
 							</div>
 						</div>
@@ -97,7 +99,8 @@ function modal(){
 							<label for="eventLocation">Event Location</label>
 							<div class="row">
 								<div class="col-md-6">
-									<input type="text" class="form-control" name="eventLocation" id="eventLocation">
+									<input type="text" class="form-control" name="eventLocation" id="eventLocation" required>
+									<div class="help-block with-errors"></div>
 								</div>
 							</div>
 						</div>
@@ -105,11 +108,11 @@ function modal(){
 							<div class="row">
 								<div class="col-md-3">
 									<label for="eventDate">Event Start Date</label>
-									<input type = "date" name="eventStartDate" class="form-control">
+									<input type = "text" id="datepicker" name="eventStartDate" class="form-control" >
 								</div>
 								<div class="col-md-3">
 									<label for="eventDate">Event End Date</label>
-									<input type = "text" id = "datepicker1" name="eventEndDate" class="form-control">
+									<input type = "text" id = "datepicker1" name="eventEndDate" class="form-control" >
 								</div>
 							</div>
 						</div>
@@ -134,16 +137,16 @@ function modal(){
 							</div>
 							<div class="row">
 								<div class="col-sm-3">
-									<input type="text" class="form-control" name="sessionStart[]" placeholder="Eg. 0900 pm"/>
+									<input type="number" class="form-control" min=0000 max=2359 name="sessionStart[]" placeholder="Eg. 0900 "/>
 								</div>
 								<div class="col-sm-3">
-									<input type="text" class="form-control" name="sessionEnd[]" placeholder="Eg. 1400 pm"/>
+									<input type="number" class="form-control" min=0000 max=2359 name="sessionEnd[]" placeholder="Eg. 1400 "/>
 								</div>
 								<div class="col-sm-3">
 									<input class="form-control" id="datepicker2" type="text" name="eventDate[]"/>
 								</div>
 								<div class="col-sm-2">
-									<input type="text" class="form-control" name="maxPart[]"/>
+									<input type="number" min=0 class="form-control" name="maxPart[]"/>
 									<input type="hidden" class="form-control" name="partCount[]" value="0"/>
 								</div>
 							</div>
@@ -176,6 +179,9 @@ function modal(){
 						</div>
 					  <br>
 					  <input type="submit" class="btn btn-danger" id="create" name="create" value="Create">
+					  <?php echo $msg;
+					  echo $Smsg;
+					  ?>
 					</form>
 				</div>
 			</div>

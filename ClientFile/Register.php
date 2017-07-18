@@ -77,7 +77,7 @@ include_once 'dconfig.php';
 					<div class="row">
 						<div class="col-sm-4 form-group">
 							<label>Full Name : </label>
-							<input class="form-control" pattern="[a-zA-Z][a-zA-Z ]{2,}" data-pattern-error="Please enter a valid name" id="name" name="name" placeholder="Enter your full name here" required>
+							<input class="form-control" pattern="[a-zA-Z][a-zA-Z ]{2,}" data-pattern-error="Please enter a valid name" id="name" name="name" max=255 placeholder="Enter your full name here" required>
 							<div class="help-block with-errors"></div>
 
 						</div>	
@@ -108,7 +108,7 @@ include_once 'dconfig.php';
 					<div class="row">
 						<div class="col-sm-12 form-group">
 							<label>Email Address : </label>
-							<input class="form-control" type="email" id="email" name="email" placeholder="Enter your Email Address here" required>
+							<input class="form-control" type="email" id="email" name="email" max=255 placeholder="Enter your Email Address here" required>
 							<div class="help-block with-errors"></div>
 						</div>		
 					</div>
