@@ -94,6 +94,7 @@ $(function() {
 			<hr style="width:50px;border:5px solid red" class="w3-round">
 			<div class="w3-section">
 				<?php
+	
 				$id=$_GET['id'];
 				$result = $conn->query("SELECT * FROM created_event WHERE EID=$id");
 				while($row = $result->fetch_assoc()){
@@ -118,13 +119,14 @@ $(function() {
 
 				?>
 				<div class="w3-section">
-				<form id="eventDetails" action="<?php echo htmlentities($_SERVER["PHP_SELF"]); ?>" method="POST" enctype="multipart/form-data" data-toggle="validator">
+					<form id="eventDetails" action="<?php echo htmlentities($_SERVER["PHP_SELF"]); ?>" method="POST" enctype="multipart/form-data" data-toggle="validator">
 						<div class="form-group">
 							<label for="eventName">Event Name</label>
 							<div class="row">
 								<div class='col-md-6'>
 									<input type="text" class="hidden" name="eventID" value="<?php echo $eventID ?>" >
 									<input type="text" class="form-control" name="eventName" value="<?php echo $eventName ?>" required>
+									<div class="help-block with-errors"></div>
 								</div>
 							</div>
 						</div>
@@ -133,6 +135,7 @@ $(function() {
 							<div class="row">
 								<div class="col-md-6">
 									<input type="text" class="form-control" name="eventLocation" value="<?php echo $eventLocation ?>" required>
+									<div class="help-block with-errors"></div>
 								</div>
 							</div>
 						</div>
@@ -237,7 +240,7 @@ $(function() {
 							?>
 						</div>
 					</div><br>
-					<button class="add_field_button btn btn-danger" id="add">Add More Fields</button>
+					<button class="add_field_button btn btn-danger" id="add">Add More Sessions</button>
 					<div class="form-group input_fields_wrap">
 						<div class="row">
 							<div class="col-sm-3">
@@ -275,8 +278,8 @@ $(function() {
 						<label for="eventDesc">Event Category</label>
 						<div class="row">
 							<div class="col-md-3">
-								<select class="form-control" name="eventCategory">
-									<option value="select" selected="disabled">Please select category</option>
+								<select class="form-control" name="eventCategory" required>
+									<option value="" selected="disabled">Please select category</option>
 									<?php
 									$sqli = mysqli_query($conn, "SELECT event_category FROM created_event WHERE EID=$id");
 									$rowi = mysqli_num_rows($sqli);
@@ -332,6 +335,7 @@ $(function() {
 									}
 									?>
 								</select>
+								<div class="help-block with-errors"></div>
 							</div>
 						</div>
 					</div>
@@ -346,6 +350,9 @@ $(function() {
 					<br>
 					<!--<button type="submit" class="btn btn-default btn-danger" id="update" name="update" value="update" onclick="updateClick();">Edit</button>-->
 					<input type="submit" class="btn btn-danger" id="update" name="update" value="Edit">
+					<?php echo $msg;
+					echo "<br>";
+					echo $Smsg; ?>
 				</form>
 			</div>
 

@@ -46,13 +46,6 @@ for($i = 0; $i < count($_POST['sessionStart']); $i++)
 					
 				}
 			}
-			// if($sql)
-			// {
-			// 	echo '<script>';
-			// 	echo 'alert("Event Successfully created!");';
-			// 	echo 'window.location.href="CharityEventDisplayCreate.php";';
-			// 	echo '</script>';
-			// }
 		}
 		else
 		{
