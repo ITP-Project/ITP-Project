@@ -39,13 +39,7 @@ if (isset($_POST['create']) && !empty($_POST['create'])) {
 				echo 'window.location.href="CharityEvent.php";';
 				echo '</script>';
 				die('Error : ('. $conn->errno .') '. $conn->error);
-			} else {
-				$msg = "YEA";
-				echo '<script>';
-				echo 'alert("Event Successfully created!");';
-				echo 'window.location.href="CharityEventDisplayCreate.php";';
-				echo '</script>';
-			}
+			} 
 		}
 		else
 		{
