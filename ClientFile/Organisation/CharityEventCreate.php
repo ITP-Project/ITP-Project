@@ -92,6 +92,16 @@
 							<div class='col-md-6'>
 								<input type="text" class="form-control" name="eventName" id="eventName" required>
 								<div class="help-block with-errors"></div>
+				<div class="w3-section">
+					<form id="formfield" action="<?php echo htmlentities($_SERVER["PHP_SELF"]); ?>" method="POST" enctype="multipart/form-data" data-toggle="validator">
+						<div class="form-group">
+							<label for="eventName">Event Name</label>
+							<div class="row">
+								<div class='col-md-6'>
+									<input type="text" class="form-control" name="eventName" id="eventName" required>
+									<div class="help-block with-errors"></div>
+								</div>
+
 							</div>
 						</div>
 					</div>
