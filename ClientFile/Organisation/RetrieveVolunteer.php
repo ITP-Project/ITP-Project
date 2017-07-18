@@ -16,8 +16,8 @@ if(isset($_POST["EID"]) && !empty($_POST["EID"])){
 			echo '
 				<tr>
 					<td>'.$rowEvent['event_date'].'</td>
-					<td>'.$rowEvent['max_participation'].'</td>
 					<td>'.$rowEvent['participation_count'].'</td>
+					<td>'.$rowEvent['max_participation'].'</td>
 				</tr>';
         }
     }else{
