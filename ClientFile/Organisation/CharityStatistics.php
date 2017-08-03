@@ -41,7 +41,8 @@
 							</thead>  
 							<?php  
 							$countVol = 1; 
-							if($resultVol = $conn->query("SELECT v.name, COUNT(ce.EID) AS 'Number Of Events' FROM acc_volunteer v, participation p, event_shift s, created_event ce WHERE v.unique_id = p.unique_id AND s.SID = p.SID AND p.status = 'registered' AND s.EID = ce.EID GROUP BY v.name LIMIT 5"))
+							$eventHost = $_SESSION['ADMIN_UEN'];
+							if($resultVol = $conn->query("SELECT v.name, COUNT(ce.EID) AS 'Number Of Events' FROM acc_volunteer v, participation p, event_shift s, created_event ce WHERE v.unique_id = p.unique_id AND s.SID = p.SID AND p.status = 'registered' AND s.EID = ce.EID AND ce.host = '$eventHost' GROUP BY v.name ORDER BY COUNT(ce.EID) DESC LIMIT 5"))
 
 							{
 								while($rowVol = mysqli_fetch_array($resultVol))  
@@ -101,7 +102,7 @@
 							</thead>  
 							<?php  
 							$countVol = 1; 
-							if($resultVol = $conn->query("SELECT v.name, SUM(((s.event_endTime - s.event_startTime)/100)) AS 'total Time' FROM acc_volunteer v, participation p, event_shift s WHERE v.unique_id = p.unique_id AND s.SID = p.SID AND p.status = 'registered'"))
+							if($resultVol = $conn->query("SELECT v.name, SUM(((s.event_endTime - s.event_startTime)/100)) AS 'total Time' FROM acc_volunteer v, participation p, event_shift s, created_event ce WHERE v.unique_id = p.unique_id AND s.SID = p.SID AND p.status = 'registered' AND ce.EID = s.EID AND ce.host = '$eventHost'"))
 
 							{
 								while($rowVol = mysqli_fetch_array($resultVol))  
@@ -122,9 +123,6 @@
 						</table>
 					</div>
 
-
-
-
 				</div>
 
 				<div id="menu1" class="tab-pane fade">
@@ -140,7 +138,7 @@
 							</thead>  
 							<?php  
 							$countEve = 1; 
-							if($resultEve = $conn->query("SELECT ce.event_name, SUM(es.participation_count) AS 'total participation' FROM created_event ce, event_shift es WHERE ce.EID = es.EID GROUP BY ce.EID ORDER BY SUM(es.participation_count)  DESC LIMIT 5"))
+							if($resultEve = $conn->query("SELECT ce.event_name, SUM(es.participation_count) AS 'total participation' FROM created_event ce, event_shift es WHERE ce.EID = es.EID AND ce.host = '$eventHost' GROUP BY ce.EID ORDER BY SUM(es.participation_count)  DESC LIMIT 5"))
 
 							{
 								while($rowEve = mysqli_fetch_array($resultEve))  

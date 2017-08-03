@@ -62,7 +62,6 @@ include_once 'dconfig.php';
 		else{
 			$error = "Invalid Username and Password";
 		}
-
 		
 	}
 

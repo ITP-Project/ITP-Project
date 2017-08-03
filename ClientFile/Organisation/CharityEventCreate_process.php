@@ -10,9 +10,8 @@ if (isset($_POST['create']) && !empty($_POST['create'])) {
 	$eventStartDate = trim($_POST["eventStartDate"]);
 	$eventEndDate = trim($_POST["eventEndDate"]);
 	$eventCategory = trim($_POST["eventCategory"]);
-		//$sessionStart = trim($_POST["sessionStart"]);
 	$currentDate = date("Y-m-d" , time() + 259200);
-
+	$eventHost = $_SESSION['ADMIN_UEN']; 
 	function validateDate($start, $end){
 		if($end < $start)
 		{
@@ -29,8 +28,8 @@ if (isset($_POST['create']) && !empty($_POST['create'])) {
 		if(validateDate($eventStartDate, $eventEndDate) == TRUE)
 		{
 			// Perform insert queries
-			$insert_rows = $conn->query("INSERT INTO created_event (event_name, event_desc, event_location, event_startDate, event_endDate, event_category, created_by) VALUES 
-				('$eventName','$eventDesc','$eventLocation','$eventStartDate','$eventEndDate','$eventCategory', '$eventUSERNAME')");
+			$insert_rows = $conn->query("INSERT INTO created_event (event_name, event_desc, event_location, event_startDate, event_endDate, event_category, created_by, host) VALUES 
+				('$eventName','$eventDesc','$eventLocation','$eventStartDate','$eventEndDate','$eventCategory', '$eventUSERNAME', '$eventHost')");
 
 			if(!$insert_rows)	
 			{	

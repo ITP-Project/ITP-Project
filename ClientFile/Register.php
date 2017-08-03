@@ -23,14 +23,14 @@ include_once 'dconfig.php';
 	<?php 
 
 //define variables 
-	$name = $email = $nric = $password = $uen = $msg = "";
+	$name = $email = $nric = $password = $com_name = $msg = "";
 
 	if($_SERVER["REQUEST_METHOD"]== "POST")
 	{
 		$name = test_input($_POST["name"]); 
 		$email = test_input($_POST["email"]); 
 		$nric = test_input($_POST["nric"]); 
-		$uen = test_input($_POST["uen"]); 
+		$com_name = test_input($_POST["com_name"]); 
 		$password = test_input($_POST["password"]); 
 		$encrypted_password = SHA1($password); 
 	}
@@ -48,7 +48,7 @@ include_once 'dconfig.php';
 	if(!empty($_POST))
 	{
 		
-		$sqlInsert = "INSERT INTO acc_organization (name, email, encrypted_password, nric, uen, check_verify, is_admin) VALUES ('$name','$email','$encrypted_password','$nric','$uen', 'NO', 'NO')"; 
+		$sqlInsert = "INSERT INTO acc_organization (name, email, encrypted_password, nric, uen, check_verify, is_admin) VALUES ('$name','$email','$encrypted_password','$nric','$com_name', 'NO', 'NO')"; 
 
 		if($conn ->query($sqlInsert) == TRUE){
 			$msg = "Account successfully created";
@@ -87,8 +87,8 @@ include_once 'dconfig.php';
 							<div class="help-block with-errors"></div>
 						</div>	
 						<div class="col-sm-4 form-group">
-							<label>Company UEN : </label>
-							<input class="form-control" type="text" id="uen" name="uen" placeholder="Enter your company UEN" required>
+							<label>Company Name : </label>
+							<input class="form-control" type="text" id="com_name" name="com_name" placeholder="Enter your company name" required>
 							<div class="help-block with-errors"></div>
 						</div>	
 					</div>
