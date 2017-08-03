@@ -32,8 +32,6 @@ if(isset($_POST["SID"])){
 					<td>'.$row["email"].'</td>  
 					<td>'.$row["nric"].'</td>  
 					<td>'.$row["org_name"].'</td>  
-					<td>'.$row["uen"].'</td>
-					<td>'.$row["nationality"].'</td>
 					<td>'.$row["liason_contact"].'</td>
 				</tr>';
         }

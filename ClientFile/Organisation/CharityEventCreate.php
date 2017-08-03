@@ -86,12 +86,6 @@
 			<hr style="width:50px;border:5px solid red" class="w3-round">
 			<div class="w3-section">
 				<form id="formfield" action="<?php echo htmlentities($_SERVER["PHP_SELF"]); ?>" method="POST" enctype="multipart/form-data" data-toggle="validator">
-					<div class="form-group">
-						<label for="eventName">Event Name</label>
-						<div class="row">
-							<div class='col-md-6'>
-								<input type="text" class="form-control" name="eventName" id="eventName" required>
-								<div class="help-block with-errors"></div>
 				<div class="w3-section">
 					<form id="formfield" action="<?php echo htmlentities($_SERVER["PHP_SELF"]); ?>" method="POST" enctype="multipart/form-data" data-toggle="validator">
 						<div class="form-group">
@@ -173,7 +167,7 @@
 									<option value="" selected="disabled">Please select category</option>
 									<option value="Animals">Animals</option>
 									<option value="Environmental">Environmental</option>
-									<option value="Disabled">Disabled</option>
+									<option value="Disabled">Disability</option>
 									<option value="Community">Community</option>
 									<option value="Educational">Educational</option>
 									<option value="Arts and Culture">Arts and Culture</option>

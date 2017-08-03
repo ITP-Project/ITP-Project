@@ -1,5 +1,6 @@
 
 <?php
+//connecting to the database
 include_once 'dconfig.php';
 
 ?>
@@ -104,6 +105,7 @@ include_once 'dconfig.php';
 }
 
 ?>
+<!-- Form to retrieve new password -->
 <form action ="ForgetPassword.php" method="post" role="form" data-toggle= "validator" name="forgetpassword" >
 	<div class="container">
 		<div class="login-box animated fadeInUp">

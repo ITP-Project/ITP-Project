@@ -84,8 +84,6 @@ include '../dconfig.php';
 									<td>Email</td>  
 									<td>NRIC</td>  
 									<td>Organisation Name</td>  
-									<td>UEN</td>
-									<td>Nationality</td>
 									<td>Contact Number</td>
 									<td>Book <input type="checkbox" class="pull-right" id="chk-all"></td>
 								</tr>  
@@ -139,8 +137,6 @@ include '../dconfig.php';
 									<td>Email</td>  
 									<td>NRIC</td>  
 									<td>Organisation Name</td>  
-									<td>UEN</td>
-									<td>Nationality</td>
 									<td>Contact Number</td>
 								</tr>  
 							</thead>

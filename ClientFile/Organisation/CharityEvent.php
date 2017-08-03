@@ -84,7 +84,7 @@ function create(){
 											<a id="duplicate_btn" href="CharityEventDuplicate.php?id=' . $row["EID"] . '"><span class="glyphicon glyphicon-duplicate"></span></a>&nbsp;
 											<input type="checkbox" name="event_id[]" class="delete_customer" value="'.$row["EID"].'" />
 										</td>
-								   </tr>  
+								   </tr>
 								   ';  
 							}
 						}

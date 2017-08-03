@@ -1,6 +1,7 @@
 <html>
 <head>
-	<?php 				
+	<?php
+	//this is to get username using session
 	session_start();
 	if(!isset($_SESSION['USERNAME']))
 	{
