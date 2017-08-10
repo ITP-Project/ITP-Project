@@ -3,15 +3,16 @@ include '../dconfig.php';
 
 $AdminEmail = $_SESSION['USERNAME']; 
 $password = $newPass = $msg = $cPassword = $inDPassword = "";
-$meg = "test message";
+$meg = " ";
 
+//get the password 
 if($_SERVER["REQUEST_METHOD"]== "POST")
 {
 	$cPassword = trim($_POST["cPassword"]);
 	$password = trim($_POST["nPassword"]);
 	$newPass = sha1($password);
 
-	$sql = "SELECT encrypted_password FROM acc_organization WHERE email = '$AdminEmail'"; 
+	$sql = "SELECT encrypted_password FROM acc_organization WHERE email = '$AdminEmail'"; //query to check the password
 
 	$result = mysqli_query($conn,$sql);
 	$row = mysqli_fetch_array($result, MYSQLI_ASSOC);
@@ -24,12 +25,11 @@ if($_SERVER["REQUEST_METHOD"]== "POST")
 }
 
 
-
-if(!empty($_POST))
+if(!empty($_POST)) //check if it is empty
 {
-	if($inDPassword == sha1($cPassword))
+	if($inDPassword == sha1($cPassword)) //check current password 
 	{
-		$sql = "UPDATE acc_organization SET encrypted_password = '$newPass' WHERE email = '$AdminEmail'";
+		$sql = "UPDATE acc_organization SET encrypted_password = '$newPass' WHERE email = '$AdminEmail'"; //query to update
 
 		if($conn ->query($sql) == TRUE)
 		{

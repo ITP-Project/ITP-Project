@@ -42,7 +42,7 @@
 							<?php  
 							$countVol = 1; 
 							$eventHost = $_SESSION['ADMIN_UEN'];
-							if($resultVol = $conn->query("SELECT v.name, COUNT(ce.EID) AS 'Number Of Events' FROM acc_volunteer v, participation p, event_shift s, created_event ce WHERE v.unique_id = p.unique_id AND s.SID = p.SID AND p.status = 'registered' AND s.EID = ce.EID AND ce.host = '$eventHost' GROUP BY v.name ORDER BY COUNT(ce.EID) DESC LIMIT 5"))
+							if($resultVol = $conn->query("SELECT v.name, COUNT(ce.EID) AS 'Number Of Events' FROM acc_volunteer v, participation p, event_shift s, created_event ce WHERE v.unique_id = p.unique_id AND s.SID = p.SID AND p.status = 'registered' AND s.EID = ce.EID AND ce.host = '$eventHost' GROUP BY v.name ORDER BY COUNT(ce.EID) DESC LIMIT 5")) //query to retrieve top 5 volunteers 
 
 							{
 								while($rowVol = mysqli_fetch_array($resultVol))  
@@ -102,7 +102,7 @@
 							</thead>  
 							<?php  
 							$countVol = 1; 
-							if($resultVol = $conn->query("SELECT v.name, SUM(((s.event_endTime - s.event_startTime)/100)) AS 'total Time' FROM acc_volunteer v, participation p, event_shift s, created_event ce WHERE v.unique_id = p.unique_id AND s.SID = p.SID AND p.status = 'registered' AND ce.EID = s.EID AND ce.host = '$eventHost'"))
+							if($resultVol = $conn->query("SELECT v.name, SUM(((s.event_endTime - s.event_startTime)/100)) AS 'total Time' FROM acc_volunteer v, participation p, event_shift s, created_event ce WHERE v.unique_id = p.unique_id AND s.SID = p.SID AND p.status = 'registered' AND ce.EID = s.EID AND ce.host = '$eventHost'")) //query to get the top 5 volunteers based on hours committed 
 
 							{
 								while($rowVol = mysqli_fetch_array($resultVol))  
@@ -138,7 +138,7 @@
 							</thead>  
 							<?php  
 							$countEve = 1; 
-							if($resultEve = $conn->query("SELECT ce.event_name, SUM(es.participation_count) AS 'total participation' FROM created_event ce, event_shift es WHERE ce.EID = es.EID AND ce.host = '$eventHost' GROUP BY ce.EID ORDER BY SUM(es.participation_count)  DESC LIMIT 5"))
+							if($resultEve = $conn->query("SELECT ce.event_name, SUM(es.participation_count) AS 'total participation' FROM created_event ce, event_shift es WHERE ce.EID = es.EID AND ce.host = '$eventHost' GROUP BY ce.EID ORDER BY SUM(es.participation_count)  DESC LIMIT 5")) //query to get event with the highest sign up rate 
 
 							{
 								while($rowEve = mysqli_fetch_array($resultEve))  
@@ -176,7 +176,7 @@
 
 </body>
 </html>
-
+<!-- ajax to retrieve the data based on the event category  -->
 <script>	
 	$(document).ready(function(){
 		$('#chooseEvent').on('change',function(){

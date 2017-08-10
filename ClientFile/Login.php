@@ -44,10 +44,6 @@ include_once 'dconfig.php';
 
 		$result = mysqli_query($conn,$sql);
 		$row = mysqli_fetch_array($result, MYSQLI_ASSOC); 
-		// $active = $row['active']; 
-
-		// mysqli_bind_result($result, $is_admin);
-
 		$count = mysqli_num_rows($result); 
 
 		if($count == 1)
@@ -75,7 +71,6 @@ include_once 'dconfig.php';
 	}
 
 	?>
-
 
 	<form action ="Login.php" method="post" role="form" data-toggle= "validator" name="login" >
 		<div class="container">
@@ -128,78 +123,7 @@ include_once 'dconfig.php';
 }
 
 $forgetEmail = $newPassword  = "";
-$forgetError = "Hi";
-
-// if(!empty($_POST['submit']) && ($_POST['submit'] == 'FORGETPASSWORD'))
-// {
-// 	$forgetEmail = test_input($_POST["forgetEmail"]);
-
-// 	$sqlForget = "SELECT * FROM acc_organization WHERE email = '$forgetEmail' "; 
-
-// 	$res = mysqli_query($conn, $sqlForget);
-// 	$count_forget = mysqli_num_rows($res);
-// 	if($count_forget == 1)
-// 	{
-// 		$r = mysqli_fetch_assoc($res);
-// 		$newPassword = randomPassword(); 
-// 			// $to = $r['email'];
-// 		$to = 'bloowhiteskies@gmail.com'; 
-// 		$subject = "Your New Passoword"; 
-// 		$message = "Please use this password to Login";
-// 		$headers = "From : bloowhiteskies@gmail.com"; 
-// 		if(mail($to, $subject, $message, $headers))
-// 		{
-// 			$forgetError = "Your Password has been sent to your email";
-// 		}
-// 		else{
-// 			$forgetError = "Failed to Recover your password, Please try again";
-// 		}
-
-// 	}
-// 	else
-// 	{
-// 		$forgetError = "This email does not exist";
-// 	}
-
-// }
-
 ?>
-
-<div id="myModal" class="modal fade" role=" dialog">
-	<div class="modal-dialog">
-		<!-- Modal content-->
-		<div class="modal-content">
-			<div class="modal-header ">
-				<h2>Forgot your password?</h2>
-				<button type="button" class="close" data-dismiss="modal">&times;</button>
-			</div>
-			<div class="modal-body forget-password-box ">
-
-				<form action ="" method="post" role="form" data-toggle= "validator" name="login" >
-					<div class="container">
-						
-						<div class="row">
-							<div class="col-sm-12 form-group">
-								<label>Email </label>
-								<input type="email" name="forgetEmail" id="forgetEmail" placeholder="Enter your Email Address">
-								<div class="help-block with-errors"></div>
-
-							</div>
-						</div>
-						<button type="submit" name="FORGETPASSWORD" value="FORGETPASSWORD" class="btn btn-primary"  id="sendBtn">Send</button>
-						<?php echo $forgetError; 
-						echo "HELLOO";
-
-						?>
-					</div>
-				</form>
-				
-			</div>
-
-		</div>
-
-	</div>
-</div>
 
 </body>
 </html>

@@ -113,7 +113,6 @@ include_once 'dconfig.php';
 						</div>		
 					</div>
 				</div>
-				<!-- 	<button type="submit" name="submit" class="btn btn-primary" id="signUpBtn" data-dismiss="modal" data-toggle="modal" data-target="#myModalSuccess">Sign Up</button> -->
 				<?php echo $msg; ?>
 				<button type="submit" name="submit">Register</button>
 			</form>
@@ -121,25 +120,5 @@ include_once 'dconfig.php';
 			<br/>
 		</div>
 	</div>
-
-	<!-- Modal for success message -->
-	<div id="myModalSuccess" class="modal fade" role="dialog">
-		<div class="modal-dialog">
-
-			<!-- Modal content-->
-			<div class="modal-content">
-				<div class="modal-header">
-					<h4 class="modal-title">Sign Up Success</h4>
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-				</div>
-				<div class="modal-body">
-					<p>You have successfully register an account</p>
-					<br>
-					<button type="button" class="btn btn-primary" id="signUpBtn" data-dismiss="modal" onclick="signedIn();">Close</button>
-				</div>
-			</div>
-		</div>
-	</div>
-
 </body>
 </html>

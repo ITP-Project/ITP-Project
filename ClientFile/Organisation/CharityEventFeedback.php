@@ -57,7 +57,7 @@
 									<tr >
 										<td> '.$countVol++.' </td>
 										<td>'.$rowVol["event_name"].'</td> 
-										<td><a href="CharityEventFeedbackDetailed.php?EID='.$rowVol["EID"].'">'.$rowVol["NUM"].'</a></td> 
+										<td><a href="CharityEventFeedbackDetailed-Remarks.php?EID='.$rowVol["EID"].'">'.$rowVol["NUM"].'</a></td> 
 									</tr>  
 									';  
 								}
@@ -96,7 +96,7 @@
 									<tr >
 										<td> '.$countVol++.' </td>
 										<td>'.$rowVol["event_name"].'</td>  
-										<td><a href="CharityEventFeedbackDetailed.php?EID='.$rowVol["EID"].'"> '.$rowVol["NUM"].'</a></td> 			
+										<td><a href="CharityEventFeedbackDetailed-Remarks.php?EID='.$rowVol["EID"].'"> '.$rowVol["NUM"].'</a></td> 			
 									</tr>  
 									';  
 								}
