@@ -1,6 +1,6 @@
 <?php
-
-$servername = "sql12.freemysqlhosting.net";
+//This is to connect to phpmyadmin database
+$servername = "sql12.freemysqlhosting.net"; //this is the server name
 $username = "sql12179354";  //your user name for php my admin if in local most probaly it will be "root"
 $password = "51brcjPTZ6";  //password probably it will be empty
 $databasename = "sql12179354"; //Your db nane

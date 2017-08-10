@@ -2,6 +2,7 @@
 <html>
 <head>
 	<?php 
+	//include file for header, navbar and conenction to database
 	include '../header.php';
 	include 'navbar.php';
 	include '../dconfig.php';

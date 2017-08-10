@@ -2,9 +2,12 @@
 <html>
 <head>
 	<?php 
+	//include all header file and navbar file
+	//include file to connect to database
 	include '../header.php';
 	include 'navbar.php';
 	include '../dconfig.php';
+	//this is to call all the update function in the process file
 	include 'CharityEventUpdate_process.php';
 	?>
 	<!-- Table Data -->
@@ -36,7 +39,9 @@
 			<h1 class="w3-xxxlarge w3-text-red"><b>Events Management</b></h1>
 			<hr style="width:50px;border:5px solid red" class="w3-round">
 			<?php 
+				//get id from previous page
 				$id = $_GET['id'];
+				//retrieve everything from created_event table
 				$result = $conn->query("SELECT * FROM created_event WHERE EID=$id");
 				while($row = $result->fetch_assoc()){
 					$eventID = $row['EID'];
@@ -48,7 +53,7 @@
 					$eventCategory = $row['event_category'];
 				}
 				
-				//session
+				//retrieve everything from event_shift table
 				$sessionResult = $conn->query("SELECT * FROM event_shift WHERE EID=$eventID");
 				while($sessionRow = $sessionResult->fetch_assoc()){
 					$sessionID = $sessionRow['SID'];

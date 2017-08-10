@@ -1,5 +1,6 @@
 
 <?php
+//this is to connect to database
 include_once 'dconfig.php';
 ?>
 

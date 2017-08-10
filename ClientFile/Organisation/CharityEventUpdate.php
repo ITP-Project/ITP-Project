@@ -287,7 +287,7 @@ $(function() {
 										if($rowi['event_category'] == "Animals"){
 											echo '<option value="Animals" selected>Animals</option>
 											<option value="Environmental">Environmental</option>
-											<option value="Disabled">Disabled</option>
+											<option value="Disablity">Disablity</option>
 											<option value="Community">Community</option>
 											<option value="Educational">Educational</option>
 											<option value="Arts and Culture">Arts and Culture</option>';
@@ -295,15 +295,15 @@ $(function() {
 										else if($rowi['event_category'] == "Environmental"){
 											echo '<option value="Animals">Animals</option>
 											<option value="Environmental" selected>Environmental</option>
-											<option value="Disabled">Disabled</option>
+											<option value="Disablity">Disablity</option>
 											<option value="Community">Community</option>
 											<option value="Educational">Educational</option>
 											<option value="Arts and Culture">Arts and Culture</option>';
 										}
-										else if($rowi['event_category'] == "Disabled"){
+										else if($rowi['event_category'] == "Disablity"){
 											echo '<option value="Animals">Animals</option>
 											<option value="Environmental">Environmental</option>
-											<option value="Disabled" selected>Disabled</option>
+											<option value="Disablity" selected>Disablity</option>
 											<option value="Community">Community</option>
 											<option value="Educational">Educational</option>
 											<option value="Arts and Culture">Arts and Culture</option>';
@@ -311,7 +311,7 @@ $(function() {
 										else if($rowi['event_category'] == "Community"){
 											echo '<option value="Animals">Animals</option>
 											<option value="Environmental">Environmental</option>
-											<option value="Disabled">Disabled</option>
+											<option value="Disablity">Disablity</option>
 											<option value="Community" selected>Community</option>
 											<option value="Educational">Educational</option>
 											<option value="Arts and Culture">Arts and Culture</option>';
@@ -319,7 +319,7 @@ $(function() {
 										else if($rowi['event_category'] == "Educational"){
 											echo '<option value="Animals">Animals</option>
 											<option value="Environmental">Environmental</option>
-											<option value="Disabled">Disabled</option>
+											<option value="Disablity">Disablity</option>
 											<option value="Community">Community</option>
 											<option value="Educational" selected>Educational</option>
 											<option value="Arts and Culture">Arts and Culture</option>';
@@ -327,7 +327,7 @@ $(function() {
 										else if($rowi['event_category'] == "Arts and Culture"){
 											echo '<option value="Animals">Animals</option>
 											<option value="Environmental">Environmental</option>
-											<option value="Disabled">Disabled</option>
+											<option value="Disablity">Disablity</option>
 											<option value="Community">Community</option>
 											<option value="Educational">Educational</option>
 											<option value="Arts and Culture" selected>Arts and Culture</option>';

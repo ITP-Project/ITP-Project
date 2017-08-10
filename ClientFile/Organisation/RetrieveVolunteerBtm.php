@@ -31,8 +31,6 @@ if(isset($_POST["event_date"]))
 					<td>'.$row["email"].'</td>  
 					<td>'.$row["nric"].'</td>  
 					<td>'.$row["org_name"].'</td>  
-					<td>'.$row["uen"].'</td>
-					<td>'.$row["nationality"].'</td>
 					<td>'.$row["liason_contact"].'</td>
 					<td><input type="checkbox" class="chk-box pull-left" name="chk[]" value="'.$row["AID"].'"></td>
 				</tr>';

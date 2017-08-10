@@ -70,7 +70,7 @@
 						<option value="select">Please select category</option>
 						<option value="57">Animals</option>
 						<option value="58">Environmental</option>
-						<option value="62">Disabled</option>
+						<option value="62">Disablity</option>
 						<option value="66">Community</option>
 						<option value="Educational">Educational</option>
 						<option value="Arts and Culture">Arts and Culture</option>

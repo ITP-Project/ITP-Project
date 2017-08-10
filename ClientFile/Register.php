@@ -1,4 +1,5 @@
 <?php
+//this is to connect to the database
 include_once 'dconfig.php';
 ?> 
 <!DOCTYPE html>
